@@ -66,11 +66,6 @@ public class LoginFrame extends JFrame
         lblIconLogoBank.setIcon(new ImageIcon(img_logo_bank));
         contentPaneRight.add(lblIconLogoBank);
 
-        Default.lblLoginMessage.setForeground(new Color(128, 0, 0));
-        Default.lblLoginMessage.setFont(new Font("Arial", Font.PLAIN, 12));
-        Default.lblLoginMessage.setBounds(20, 269, 250, 18);
-        setLocationRelativeTo(null);
-        contentPaneRight.add(Default.lblLoginMessage);
 
         JPanel panelUsername = new JPanel();
         panelUsername.setBackground(Default.color);
@@ -175,6 +170,13 @@ public class LoginFrame extends JFrame
         panelPassword.add(lblIconPassword);
 
         // Button Login
+        JLabel lblLoginMessage = new JLabel("");
+        lblLoginMessage.setForeground(new Color(128, 0, 0));
+        lblLoginMessage.setFont(new Font("Arial", Font.PLAIN, 12));
+        lblLoginMessage.setBounds(20, 269, 250, 18);
+        setLocationRelativeTo(null);
+        contentPaneRight.add(lblLoginMessage);
+
         JPanel pnlBtnLogin = new JPanel();
         pnlBtnLogin.addMouseListener(new MouseAdapter()
         {
@@ -183,13 +185,11 @@ public class LoginFrame extends JFrame
             {
                 if (new Login().CheckLogin(txtUsername.getText(), txtPassword.getText()))
                 {
-                    Default.lblLoginMessage.setText("");
+                    lblLoginMessage.setText("");
                     JOptionPane.showMessageDialog(null, "Login Successful");
-                } else if (txtUsername.getText().equals("") || txtPassword.getText().equals(""))
-                    Default.lblLoginMessage.setText("Please input all requirements!");
-                else if (txtUsername.getText().equals("Username") && txtPassword.getText().equals("Password"))
-                    Default.lblLoginMessage.setText("Username and Password didn't match!");
-                else Default.lblLoginMessage.setText("Username and Password didn't match!");
+                } else if (txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password"))
+                    lblLoginMessage.setText("Please input all requirements!");
+                else lblLoginMessage.setText("Username and Password didn't match!");
             }
 
             @Override
