@@ -55,30 +55,85 @@ public class Login
         return accountNumber;
     }
 
-    public boolean CheckSignUp(String cmnd, String fullname, String phoneNumber, String birthDay, String address, String userName, String password)
+    public boolean CheckSignUp(String accountNumber, String userName)
     {
-        String SQL = "use QLNH select * form Customers where CMND = ? and accountNumber = ? and fullName = ? and phoneNumber = ? and birthday = ? and address = ? and userName = ? and password = ?";
-        String accountNumber = random(0,9,10);
+        String SQL = "use QLNH select * from TAIKHOAN where SoTK = ? or TenTK = ?";
         try
         {
             preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, cmnd);
-            preparedStatement.setString(2, accountNumber);
-            preparedStatement.setString(3, fullname);
-            preparedStatement.setString(4, phoneNumber);
-            preparedStatement.setString(5,birthDay);
-            preparedStatement.setString(6, address);
-            preparedStatement.setString(7, userName);
-            preparedStatement.setString(8, password);
+            preparedStatement.setString(1, accountNumber);
+            preparedStatement.setString(2, userName);
             resultSet = preparedStatement.executeQuery();
             if (!resultSet.next())
                 return false;
         } catch (Exception exception)
         {
-            System.err.println("Login.java.CheckLogin: " + exception.getMessage());
+            System.err.println("Login.java.CheckSignUp: " + exception.getMessage());
         }
         return true;
     }
 
+    public boolean CheckCMND(String cmnd)
+    {
+        String SQL = "use QLNH select CMND from KHACHHANG where CMND = ?";
+        try
+        {
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, cmnd);
+            resultSet = preparedStatement.executeQuery();
+            if (!resultSet.next())
+                return false;
+        } catch (Exception exception)
+        {
+            System.err.println("Login.java.CheckCMND: " + exception.getMessage());
+        }
+        return true;
+    }
+
+    public void InsertDataKHACHHANG(String cmnd, String fullname, String phoneNumber, String gender, String birthDay, String address)
+    {
+        int genderLast = -1;
+        String SQL;
+        if (gender.equalsIgnoreCase("nam"))
+            genderLast = 1;
+        else if (gender.equalsIgnoreCase("nu") || gender.equalsIgnoreCase("nữ"))
+            genderLast = 0;
+        SQL = "use QLNH " +
+                "insert into KHACHHANG(CMND, TenKH, NgaySinh, GioiTinh, DiaChi, SoDienThoai)" +
+                "values(?,?,?,?,?,?)";
+        try
+        {
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, cmnd);
+            preparedStatement.setString(2, fullname);
+            preparedStatement.setString(3, birthDay);
+            preparedStatement.setInt(4, genderLast);
+            preparedStatement.setString(5, address);
+            preparedStatement.setString(6, phoneNumber);
+            preparedStatement.executeQuery();
+        } catch (Exception exception)
+        {
+            System.err.println("Login.java.InsertDataKHACHHANG: " + exception.getMessage());
+        }
+    }
+
+    public void InsertDataTAIKHOAN(String accountNumber, String username, String password, String CMND)
+    {
+        String SQL = "use QLNH" +
+                "insert into TAIKHOAN(SoTK, TenTK, MatKhau, CMND)" +
+                "values(?,?,?,?)";
+        try
+        {
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, accountNumber);
+            preparedStatement.setString(2, username);
+            preparedStatement.setString(3, password);
+            preparedStatement.setString(4, CMND);
+            preparedStatement.executeQuery();
+        } catch (Exception exception)
+        {
+            System.err.println("Login.java.InsertDataTAIKHOAN: " + exception.getMessage());
+        }
+    }
 }
 
