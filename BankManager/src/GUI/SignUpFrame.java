@@ -31,7 +31,7 @@ public class SignUpFrame extends JFrame
     private Image img_Address = new ImageIcon(SignUpFrame.class.getResource("/Res/address.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     private Image img_Username = new ImageIcon(SignUpFrame.class.getResource("/Res/businessman.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     private Image img_Password = new ImageIcon(SignUpFrame.class.getResource("/Res/padlock.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-    private Image img_logo_bank = new ImageIcon(LoginFrame.class.getResource("/Res/logobank.png")).getImage().getScaledInstance(240,240,Image.SCALE_SMOOTH);
+    private Image img_logo_bank = new ImageIcon(LoginFrame.class.getResource("/Res/logobank.png")).getImage().getScaledInstance(240, 240, Image.SCALE_SMOOTH);
 
     public SignUpFrame()
     {
@@ -92,7 +92,7 @@ public class SignUpFrame extends JFrame
 
         JSeparator sptCMND = new JSeparator();
         sptCMND.setForeground(Color.black);
-        sptCMND.setBounds(10,35,210,1);
+        sptCMND.setBounds(10, 35, 210, 1);
         panelCMND.add(sptCMND);
 
         JLabel lblIconCMND = new JLabel("");
@@ -141,7 +141,7 @@ public class SignUpFrame extends JFrame
 
         JSeparator sptFullname = new JSeparator();
         sptFullname.setForeground(Color.black);
-        sptFullname.setBounds(10,35,210,1);
+        sptFullname.setBounds(10, 35, 210, 1);
         panelFullname.add(sptFullname);
 
         JLabel lblIconFullname = new JLabel("");
@@ -190,7 +190,7 @@ public class SignUpFrame extends JFrame
 
         JSeparator sptGender = new JSeparator();
         sptGender.setForeground(Color.black);
-        sptGender.setBounds(10,35,210,1);
+        sptGender.setBounds(10, 35, 210, 1);
         panelGender.add(sptGender);
 
         JLabel lblIconGender = new JLabel("");
@@ -239,7 +239,7 @@ public class SignUpFrame extends JFrame
 
         JSeparator sptPhoneNumber = new JSeparator();
         sptPhoneNumber.setForeground(Color.black);
-        sptPhoneNumber.setBounds(10,35,210,1);
+        sptPhoneNumber.setBounds(10, 35, 210, 1);
         panelPhoneNumber.add(sptPhoneNumber);
 
         JLabel lblIconPhoneNumber = new JLabel("");
@@ -288,7 +288,7 @@ public class SignUpFrame extends JFrame
 
         JSeparator sptBirthDay = new JSeparator();
         sptBirthDay.setForeground(Color.black);
-        sptBirthDay.setBounds(10,35,210,1);
+        sptBirthDay.setBounds(10, 35, 210, 1);
         panelBirthDay.add(sptBirthDay);
 
         JLabel lblIconBirthDay = new JLabel("");
@@ -337,7 +337,7 @@ public class SignUpFrame extends JFrame
 
         JSeparator sptAddress = new JSeparator();
         sptAddress.setForeground(Color.black);
-        sptAddress.setBounds(10,35,210,1);
+        sptAddress.setBounds(10, 35, 210, 1);
         panelAddress.add(sptAddress);
 
         JLabel lblIconAddress = new JLabel("");
@@ -386,7 +386,7 @@ public class SignUpFrame extends JFrame
 
         JSeparator sptUsername = new JSeparator();
         sptUsername.setForeground(Color.black);
-        sptUsername.setBounds(10,35,210,1);
+        sptUsername.setBounds(10, 35, 210, 1);
         panelUsername.add(sptUsername);
 
         JLabel lblIconUsername = new JLabel("");
@@ -437,7 +437,7 @@ public class SignUpFrame extends JFrame
 
         JSeparator sptPassword = new JSeparator();
         sptPassword.setForeground(Color.black);
-        sptPassword.setBounds(10,35,210,1);
+        sptPassword.setBounds(10, 35, 210, 1);
         panelPassword.add(sptPassword);
 
         JLabel lblIconPassword = new JLabel("");
@@ -488,7 +488,7 @@ public class SignUpFrame extends JFrame
 
         JSeparator sptPasswordConfirm = new JSeparator();
         sptPasswordConfirm.setForeground(Color.black);
-        sptPasswordConfirm.setBounds(10,35,210,1);
+        sptPasswordConfirm.setBounds(10, 35, 210, 1);
         panelPasswordConfirm.add(sptPasswordConfirm);
 
         JLabel lblIconPasswordConfirm = new JLabel("");
@@ -504,8 +504,8 @@ public class SignUpFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                    SignUpFrame.this.dispose();
-                    new LoginFrame().setVisible(true);
+                SignUpFrame.this.dispose();
+                new LoginFrame().setVisible(true);
             }
 
             @Override
@@ -566,16 +566,44 @@ public class SignUpFrame extends JFrame
         JPanel pnlBtnSignUp = new JPanel();
         pnlBtnSignUp.addMouseListener(new MouseAdapter()
         {
+            Login login = new Login();
+            String accountNumber = login.Random(0, 9, 10);
+
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                if(txtCMND.getText().equals("") || txtFullname.getText().equals("") || txtGender.getText().equals("") || txtPhoneNumber.getText().equals("") || txtBirthDay.getText().equals("") || txtAddress.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtPasswordConfirm.getText().equals("")
-                || txtCMND.getText().equals("Citizen identification number") || txtFullname.getText().equals("Full Name") || txtGender.getText().equals("Gender") || txtPhoneNumber.getText().equals("Phone number") || txtBirthDay.getText().equals("Birth day") || txtAddress.getText().equals("Address") || txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password") || txtPasswordConfirm.getText().equals("Password confirm"))
+                if (txtCMND.getText().equals("") || txtFullname.getText().equals("") || txtGender.getText().equals("") || txtPhoneNumber.getText().equals("") || txtBirthDay.getText().equals("") || txtAddress.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtPasswordConfirm.getText().equals("")
+                        || txtCMND.getText().equals("Citizen identification number") || txtFullname.getText().equals("Full Name") || txtGender.getText().equals("Gender") || txtPhoneNumber.getText().equals("Phone number") || txtBirthDay.getText().equals("Birth day") || txtAddress.getText().equals("Address") || txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password") || txtPasswordConfirm.getText().equals("Password confirm"))
                     lblLoginMessage.setText("Please input all requirements!");
-                else
+                else if(!txtPassword.getText().equals(txtPasswordConfirm.getText()))
+                    lblLoginMessage.setText("Password confirm is not correct!");
+                else if (login.CheckCMND(txtCMND.getText()))
                 {
-                    lblLoginMessage.setText("");
-                    JOptionPane.showMessageDialog(null, "SignUp Successful");
+                    while (login.CheckSignUpSoTK(accountNumber))
+                        accountNumber = login.Random(0, 9, 10);
+                    if (!login.CheckSignUpTenTK(txtUsername.getText()))
+                    {
+                        login.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
+                        lblLoginMessage.setText("");
+                        JOptionPane.showMessageDialog(null, "SignUp Successful");
+                        SignUpFrame.this.dispose();
+                        new LoginFrame().setVisible(true);
+                    } else
+                        lblLoginMessage.setText("Username already exists, please enter another name!");
+                } else
+                {
+                    login.InsertDataKHACHHANG(txtCMND.getText(), txtFullname.getText(), txtPhoneNumber.getText(), txtGender.getText(), txtBirthDay.getText(), txtAddress.getText());
+                    while (login.CheckSignUpSoTK(accountNumber))
+                        accountNumber = login.Random(0, 9, 10);
+                    if (!login.CheckSignUpTenTK(txtUsername.getText()))
+                    {
+                        login.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
+                        lblLoginMessage.setText("");
+                        JOptionPane.showMessageDialog(null, "SignUp Successful");
+                        SignUpFrame.this.dispose();
+                        new LoginFrame().setVisible(true);
+                    } else
+                        lblLoginMessage.setText("Username already exists, please enter another name!");
                 }
             }
 
@@ -605,7 +633,7 @@ public class SignUpFrame extends JFrame
         });
         pnlBtnSignUp.setBackground(Default.color);
         pnlBtnSignUp.setBounds(165, 380, 250, 50);
-        pnlBtnSignUp.setBorder(new LineBorder(Color.BLACK, 2,true));
+        pnlBtnSignUp.setBorder(new LineBorder(Color.BLACK, 2, true));
         pnlBtnSignUp.setLayout(null);
         contentPane.add(pnlBtnSignUp);
 

@@ -1,9 +1,8 @@
 package DAO;
 
-import DAO.*;
+
 
 import java.sql.*;
-import java.util.Arrays;
 import java.util.Random;
 
 
@@ -43,7 +42,7 @@ public class Login
         return true;
     }
 
-    public String random(int start, int end, int limit)
+    public String Random(int start, int end, int limit)
     {
         String accountNumber = "";
         Random r = new Random();
@@ -55,20 +54,36 @@ public class Login
         return accountNumber;
     }
 
-    public boolean CheckSignUp(String accountNumber, String userName)
+    public boolean CheckSignUpSoTK(String accountNumber)
     {
-        String SQL = "use QLNH select * from TAIKHOAN where SoTK = ? or TenTK = ?";
+        String SQL = "use QLNH select SoTK from TAIKHOAN where SoTK = ?";
         try
         {
             preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setString(1, accountNumber);
-            preparedStatement.setString(2, userName);
             resultSet = preparedStatement.executeQuery();
             if (!resultSet.next())
                 return false;
         } catch (Exception exception)
         {
-            System.err.println("Login.java.CheckSignUp: " + exception.getMessage());
+            System.err.println("Login.java.CheckSignUpSoTK: " + exception.getMessage());
+        }
+        return true;
+    }
+
+    public boolean CheckSignUpTenTK(String username)
+    {
+        String SQL = "use QLNH select TenTK from TAIKHOAN where TenTK = ?";
+        try
+        {
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, username);
+            resultSet = preparedStatement.executeQuery();
+            if (!resultSet.next())
+                return false;
+        } catch (Exception exception)
+        {
+            System.err.println("Login.java.CheckSignUpTenTK: " + exception.getMessage());
         }
         return true;
     }
@@ -120,7 +135,7 @@ public class Login
     public void InsertDataTAIKHOAN(String accountNumber, String username, String password, String CMND)
     {
         String SQL = "use QLNH" +
-                "insert into TAIKHOAN(SoTK, TenTK, MatKhau, CMND)" +
+                " insert into TAIKHOAN(SoTK, TenTK, MatKhau, CMND)" +
                 "values(?,?,?,?)";
         try
         {
