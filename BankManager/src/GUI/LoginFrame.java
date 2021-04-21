@@ -185,8 +185,10 @@ public class LoginFrame extends JFrame
             {
                 if (new Login().CheckLogin(txtUsername.getText(), txtPassword.getText()))
                 {
-                    lblLoginMessage.setText("");
-                    JOptionPane.showMessageDialog(null, "Login Successful");
+                    LoginFrame.this.dispose();
+                    MainFrame mainFrame = new MainFrame();
+                    mainFrame.setLocationRelativeTo(null); // vẫn giữ vị trí đó khi chuyển sang new Frame
+                    mainFrame.setVisible(true);
                 } else if (txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password"))
                     lblLoginMessage.setText("Please input all requirements!");
                 else lblLoginMessage.setText("Username and Password didn't match!");
