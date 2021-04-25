@@ -130,8 +130,8 @@ public class MainFrame extends JFrame
         lblIconOrders.setIcon(new ImageIcon(img_orders));
         panelOrders.add(lblIconOrders);
 
-        JPanel panelCustomers = new JPanel();
-        panelCustomers.addMouseListener(new PanelButtonMouseAdapter(panelCustomers)
+        JPanel panelService = new JPanel();
+        panelService.addMouseListener(new PanelButtonMouseAdapter(panelService)
         {
                 @Override
                 public void mouseClicked(MouseEvent e)
@@ -139,22 +139,22 @@ public class MainFrame extends JFrame
                     MenuClicked(service);
                 }
         });
-        panelCustomers.setBackground(new Color(47,79,79));
-        panelCustomers.setBounds(0,260,249,40);
-        panelCustomers.setLayout(null);
-        panelMenu.add(panelCustomers);
+        panelService.setBackground(new Color(47,79,79));
+        panelService.setBounds(0,260,249,40);
+        panelService.setLayout(null);
+        panelMenu.add(panelService);
 
-        JLabel lblCustomers = new JLabel("SERVICE");
-        lblCustomers.setForeground(Color.WHITE);
-        lblCustomers.setFont(new Font("Dialog", Font.BOLD, 14));
-        lblCustomers.setBounds(76,11,163,18);
-        panelCustomers.add(lblCustomers);
+        JLabel lblService = new JLabel("SERVICE");
+        lblService.setForeground(Color.WHITE);
+        lblService.setFont(new Font("Dialog", Font.BOLD, 14));
+        lblService.setBounds(76,11,163,18);
+        panelService.add(lblService);
 
-        JLabel lblIconCustomers = new JLabel("");
-        lblIconCustomers.setHorizontalAlignment(SwingConstants.CENTER);
-        lblIconCustomers.setBounds(20,0,40,40);
-        lblIconCustomers.setIcon(new ImageIcon(img_service));
-        panelCustomers.add(lblIconCustomers);
+        JLabel lblIconService = new JLabel("");
+        lblIconService.setHorizontalAlignment(SwingConstants.CENTER);
+        lblIconService.setBounds(20,0,40,40);
+        lblIconService.setIcon(new ImageIcon(img_service));
+        panelService.add(lblIconService);
 
         JPanel panelSetting = new JPanel();
         panelSetting.addMouseListener(new PanelButtonMouseAdapter(panelSetting)
