@@ -31,7 +31,6 @@ public class LoginFrame extends JFrame
     {
         // GUI login
         setUndecorated(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 600, 400);
         mainPane = new JPanel();
 //        mainPane.setBackground(new Color(0, 139, 139));
@@ -185,10 +184,8 @@ public class LoginFrame extends JFrame
             {
                 if (new Login().CheckLogin(txtUsername.getText(), txtPassword.getText()))
                 {
+                    new MainFrame().setVisible(true);
                     LoginFrame.this.dispose();
-                    MainFrame mainFrame = new MainFrame();
-                    mainFrame.setLocationRelativeTo(null); // vẫn giữ vị trí đó khi chuyển sang new Frame
-                    mainFrame.setVisible(true);
                 } else if (txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password"))
                     lblLoginMessage.setText("Please input all requirements!");
                 else lblLoginMessage.setText("Username and Password didn't match!");
@@ -243,9 +240,7 @@ public class LoginFrame extends JFrame
             public void mouseClicked(MouseEvent e)
             {
                 if (JOptionPane.showConfirmDialog(null, "Are you sure you want to close this application?", "Confirmation", JOptionPane.YES_NO_OPTION) == 0)
-                {
                     LoginFrame.this.dispose();
-                }
             }
 
             @Override
@@ -274,10 +269,8 @@ public class LoginFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                        LoginFrame.this.dispose(); // tắt Frame cũ
-                        SignUpFrame signUpFrame = new SignUpFrame();
-                        signUpFrame.setLocationRelativeTo(null); // vẫn giữ vị trí đó khi chuyển sang new Frame
-                        signUpFrame.setVisible(true);
+                new SignUpFrame().setVisible(true);
+                LoginFrame.this.dispose(); // tắt Frame cũ
             }
 
             @Override

@@ -36,8 +36,8 @@ public class SignUpFrame extends JFrame
     public SignUpFrame()
     {
         setUndecorated(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 600, 450);
+        setLocationRelativeTo(null);
         contentPane = new JPanel();
 
         contentPane.setBackground(Default.color);
@@ -504,8 +504,8 @@ public class SignUpFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                SignUpFrame.this.dispose();
                 new LoginFrame().setVisible(true);
+                SignUpFrame.this.dispose();
             }
 
             @Override
@@ -533,9 +533,7 @@ public class SignUpFrame extends JFrame
             public void mouseClicked(MouseEvent e)
             {
                 if (JOptionPane.showConfirmDialog(null, "Are you sure you want to close this application?", "Confirmation", JOptionPane.YES_NO_OPTION) == 0)
-                {
                     SignUpFrame.this.dispose();
-                }
             }
 
             @Override
@@ -586,8 +584,8 @@ public class SignUpFrame extends JFrame
                         login.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
                         lblLoginMessage.setText("");
                         JOptionPane.showMessageDialog(null, "SignUp Successful");
-                        SignUpFrame.this.dispose();
                         new LoginFrame().setVisible(true);
+                        SignUpFrame.this.dispose();
                     } else
                         lblLoginMessage.setText("Username already exists, please enter another name!");
                 } else
@@ -600,8 +598,8 @@ public class SignUpFrame extends JFrame
                         login.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
                         lblLoginMessage.setText("");
                         JOptionPane.showMessageDialog(null, "SignUp Successful");
-                        SignUpFrame.this.dispose();
                         new LoginFrame().setVisible(true);
+                        SignUpFrame.this.dispose();
                     } else
                         lblLoginMessage.setText("Username already exists, please enter another name!");
                 }
