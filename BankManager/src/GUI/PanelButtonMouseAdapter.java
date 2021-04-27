@@ -5,31 +5,117 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class PanelButtonMouseAdapter extends MouseAdapter
+
+public class PanelButtonMouseAdapter
 {
-    JPanel panel;
-    public PanelButtonMouseAdapter(JPanel panel)
+    public static class PBMainFrame extends MouseAdapter
     {
-        this.panel = panel;
+        private JPanel panel1;
+        private JPanel panel2;
+
+        //private JPanel check;
+        private int i = 0;
+
+
+        public PBMainFrame(JPanel panel1, JPanel panel2)
+        {
+            this.panel1 = panel1;
+            this.panel2 = panel2;
+
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e)
+        {
+            i++;
+            MainFrame.Clicked(this.panel1);
+            MainFrame.MenuClicked(this.panel2);
+            //check = this.panel;
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e)
+        {
+
+////            if (i == 0)
+////            {
+//            if (check == panel)
+//            {
+//                if (i != 0)
+//                {
+//                    this.panel.setBackground(new Color(60, 179, 113));
+//                    System.out.println("sad");
+//                    i++;
+//                } else
+//                {
+//                    this.panel.setBackground(new Color(112, 128, 144));
+//                    System.out.println("das");
+//                }
+//            } else
+//                this.panel.setBackground(new Color(112, 128, 144));
+//            System.out.println(i);
+////            }
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e)
+        {
+////            if (i == 0)
+////            {
+//            if (check == panel)
+//                if (i != 0)
+//                {
+//                    this.panel.setBackground(new Color(60, 179, 113));
+//                    i = 0;
+//                }
+//                else this.panel.setBackground(new Color(47, 79, 79));
+//
+//            else
+//                this.panel.setBackground(new Color(47, 79, 79));
+////            } else
+////            {
+////                check.setBackground(new Color(60, 179, 113));
+////                i = 0;
+////            }
+        }
     }
-    @Override
-    public void mouseEntered(MouseEvent e)
+
+    public static class PBService extends MouseAdapter
     {
-        this.panel.setBackground(new Color(112,128,144));
-    }
-    @Override
-    public void mouseExited(MouseEvent e)
-    {
-        this.panel.setBackground(new Color(47,79,79));
-    }
-    @Override
-    public void mousePressed(MouseEvent e)
-    {
-        this.panel.setBackground(new Color(60,179,113));
-    }
-    @Override
-    public void mouseReleased(MouseEvent e)
-    {
-        this.panel.setBackground(new Color(112,128,144));
+        JPanel panel;
+        int x, y, z;
+
+
+        public PBService(JPanel panel, int x, int y, int z)
+        {
+            this.panel = panel;
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e)
+        {
+            this.panel.setBackground(new Color(17, 44, 148, 80));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e)
+        {
+            this.panel.setBackground(new Color(x, y, z));
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e)
+        {
+            this.panel.setBackground(new Color(216, 53, 65));
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e)
+        {
+            this.panel.setBackground(new Color(x, y, z));
+        }
     }
 }

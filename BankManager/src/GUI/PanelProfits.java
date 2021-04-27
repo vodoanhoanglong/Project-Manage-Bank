@@ -7,7 +7,7 @@ public class PanelProfits extends JPanel
 {
     public PanelProfits()
     {
-        setBounds(0,0,538,396);
+        setBounds(0, 0, 558, 420);
         setLayout(null);
 
 
