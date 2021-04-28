@@ -8,75 +8,46 @@ import java.awt.event.MouseEvent;
 
 public class PanelButtonMouseAdapter
 {
+    public static JPanel flag = MainFrame.panelHome;
+
     public static class PBMainFrame extends MouseAdapter
     {
         private JPanel panel1;
         private JPanel panel2;
-
-        //private JPanel check;
-        private int i = 0;
-
-
+        // nếu đặt Flag trong đây thì mỗi lần sẽ khởi tạo sẽ trỏ tới vùng nhớ khác nên k khả thi
         public PBMainFrame(JPanel panel1, JPanel panel2)
         {
             this.panel1 = panel1;
             this.panel2 = panel2;
-
         }
 
         @Override
         public void mouseClicked(MouseEvent e)
         {
-            i++;
             MainFrame.Clicked(this.panel1);
             MainFrame.MenuClicked(this.panel2);
-            //check = this.panel;
+            flag = panel1;
         }
 
         @Override
         public void mouseEntered(MouseEvent e)
         {
-
-////            if (i == 0)
-////            {
-//            if (check == panel)
-//            {
-//                if (i != 0)
-//                {
-//                    this.panel.setBackground(new Color(60, 179, 113));
-//                    System.out.println("sad");
-//                    i++;
-//                } else
-//                {
-//                    this.panel.setBackground(new Color(112, 128, 144));
-//                    System.out.println("das");
-//                }
-//            } else
-//                this.panel.setBackground(new Color(112, 128, 144));
-//            System.out.println(i);
-////            }
+            if (flag == panel1)
+            {
+                this.panel1.setBackground(new Color(60, 179, 113));
+            } else
+                this.panel1.setBackground(new Color(112, 128, 144));
         }
 
         @Override
         public void mouseExited(MouseEvent e)
         {
-////            if (i == 0)
-////            {
-//            if (check == panel)
-//                if (i != 0)
-//                {
-//                    this.panel.setBackground(new Color(60, 179, 113));
-//                    i = 0;
-//                }
-//                else this.panel.setBackground(new Color(47, 79, 79));
-//
-//            else
-//                this.panel.setBackground(new Color(47, 79, 79));
-////            } else
-////            {
-////                check.setBackground(new Color(60, 179, 113));
-////                i = 0;
-////            }
+
+            if (flag == panel1)
+            {
+                this.panel1.setBackground(new Color(60, 179, 113));
+            } else
+                this.panel1.setBackground(new Color(47, 79, 79));
         }
     }
 

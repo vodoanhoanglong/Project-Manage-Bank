@@ -27,7 +27,6 @@ public class MainFrame extends JFrame
 
     public static JPanel panelHome, panelProfits, panelOrders, panelService, panelSetting, panelSignOut;
 
-
     public static void main(String[] args)
     {
         EventQueue.invokeLater(new Runnable()
@@ -187,8 +186,11 @@ public class MainFrame extends JFrame
             @Override
             public void mouseExited(MouseEvent e)
             {
-
                 panelSignOut.setBackground(new Color(47, 79, 79));
+                if (PanelButtonMouseAdapter.flag == panelHome || PanelButtonMouseAdapter.flag == panelProfits || PanelButtonMouseAdapter.flag == panelOrders || PanelButtonMouseAdapter.flag == panelService || PanelButtonMouseAdapter.flag == panelSetting)
+                {
+                    PanelButtonMouseAdapter.flag.setBackground(new Color(60, 179, 113));
+                }
             }
         });
         panelSignOut.setBackground(new Color(47, 79, 79));
@@ -286,6 +288,5 @@ public class MainFrame extends JFrame
         else panelSignOut.setBackground(new Color(47, 79, 79));
 
     }
-
 }
 
