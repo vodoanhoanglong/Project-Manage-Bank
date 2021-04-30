@@ -7,10 +7,15 @@ import java.awt.event.MouseEvent;
 
 public class PanelTransfer extends JPanel
 {
+    private FlowLayout flowLayout = new FlowLayout();
+
     public PanelTransfer()
     {
-        setBounds(0, 0, 558, 420);
-        setLayout(null);
+        flowLayout.setAlignment(FlowLayout.CENTER);
+        flowLayout.setHgap(80);
+        flowLayout.setVgap(40);
+        this.setLayout(flowLayout);
+        this.setBackground(Color.WHITE);
 
         JPanel panel = new RoundedPanel(10, Color.RED);
         panel.add(new JLabel("Ngu")); // do có khởi tạo ở đây nên k setLayout(null)
@@ -24,7 +29,7 @@ public class PanelTransfer extends JPanel
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                PanelService.panelMainContent.setVisible(true);
+//                PanelService.panelMainContent.setVisible(true);
                 PanelTransfer.this.setVisible(false);
             }
 

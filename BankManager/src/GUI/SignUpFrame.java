@@ -1,6 +1,8 @@
 package GUI;
 
 import DAO.Login;
+import com.microsoft.sqlserver.jdbc.StringUtils;
+
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -557,7 +559,7 @@ public class SignUpFrame extends JFrame
         JLabel lblLoginMessage = new JLabel("");
         lblLoginMessage.setForeground(new Color(128, 0, 0));
         lblLoginMessage.setFont(new Font("Arial", Font.PLAIN, 12));
-        lblLoginMessage.setBounds(165, 350, 250, 18);
+        lblLoginMessage.setBounds(165, 350, 300, 18);
         setLocationRelativeTo(null);
         contentPane.add(lblLoginMessage);
 
@@ -570,10 +572,40 @@ public class SignUpFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
+                // obj.replaceAll("\\s+","") xóa tất cả các khoảng trắng và các ký tự không nhìn thấy (ví dụ: tab, \n).
+                // obj.replaceAll("[^a-zA-Z0-9]", "") xóa tất cả ký tự đặc biệt và thay bằng khoảng trắng
+                txtCMND.setText(txtCMND.getText().replaceAll("\\s+", ""));
+                txtCMND.setText(txtCMND.getText().replaceAll("[^Z0-9]", ""));
+
+                // [^\p{L}\s] xóa các ký tự đặc biệt trừ dấu tiếng Việt
+                txtFullname.setText(txtFullname.getText().replaceAll("[^\\p{L}\\s]", " "));
+                txtFullname.setText(txtFullname.getText().replaceAll("\\s+", " "));
+
+                txtGender.setText(txtGender.getText().replaceAll("\\s+", ""));
+                txtGender.setText(txtGender.getText().replaceAll("[^\\p{L}\\s]", ""));
+
+                txtPhoneNumber.setText(txtPhoneNumber.getText().replaceAll("\\s+", ""));
+                txtPhoneNumber.setText(txtPhoneNumber.getText().replaceAll("[^Z0-9]", ""));
+
+                txtBirthDay.setText(txtBirthDay.getText().replaceAll("\\s+", ""));
+                txtBirthDay.setText(txtBirthDay.getText().replaceAll("[^a-zA-Z0-9 -]", ""));
+
+                txtUsername.getText().replaceAll("\\s+", "");
+                txtUsername.getText().replaceAll("[^a-zA-Z0-9]", "");
+
+                txtPassword.getText().replaceAll("\\s+", "");
+                txtPassword.getText().replaceAll("[^a-zA-Z0-9]", "");
+
+                txtPasswordConfirm.getText().replaceAll("\\s+", "");
+                txtPasswordConfirm.getText().replaceAll("[^a-zA-Z0-9]", "");
+
+
                 if (txtCMND.getText().equals("") || txtFullname.getText().equals("") || txtGender.getText().equals("") || txtPhoneNumber.getText().equals("") || txtBirthDay.getText().equals("") || txtAddress.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtPasswordConfirm.getText().equals("")
                         || txtCMND.getText().equals("Citizen identification number") || txtFullname.getText().equals("Full Name") || txtGender.getText().equals("Gender") || txtPhoneNumber.getText().equals("Phone number") || txtBirthDay.getText().equals("Birth day") || txtAddress.getText().equals("Address") || txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password") || txtPasswordConfirm.getText().equals("Password confirm"))
                     lblLoginMessage.setText("Please input all requirements!");
-                else if(!txtPassword.getText().equals(txtPasswordConfirm.getText()))
+                else if (!StringUtils.isNumeric(txtCMND.getText()))
+                    lblLoginMessage.setText("Citizen identification number must be numeric");
+                else if (!txtPassword.getText().equals(txtPasswordConfirm.getText()))
                     lblLoginMessage.setText("Password confirm is not correct!");
                 else if (login.CheckCMND(txtCMND.getText()))
                 {

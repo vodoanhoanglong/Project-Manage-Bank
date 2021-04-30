@@ -49,6 +49,7 @@ public class PanelButtonMouseAdapter
             } else
                 this.panel1.setBackground(new Color(47, 79, 79));
         }
+
     }
 
     public static class PBService extends MouseAdapter
