@@ -12,7 +12,7 @@ public class PanelTransfer extends JPanel
         JPanel containAccountNumber = new JPanel();
         containAccountNumber.setLayout(new FlowLayout(FlowLayout.RIGHT, 20, 10));
 
-        JPanel accountNumber = new TestDropShadowBorder.RoundedPane();
+        JPanel accountNumber = new RoundedPane();
         accountNumber.setBackground(Color.WHITE);
         accountNumber.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 8));
         containAccountNumber.add(accountNumber);
@@ -27,7 +27,7 @@ public class PanelTransfer extends JPanel
         JPanel containAmount = new JPanel();
         containAmount.setLayout(new FlowLayout(FlowLayout.RIGHT, 20, 10));
 
-        JPanel amount = new TestDropShadowBorder.RoundedPane();
+        JPanel amount = new RoundedPane();
         amount.setBackground(Color.WHITE);
         amount.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 8));
         containAmount.add(amount);
@@ -42,7 +42,7 @@ public class PanelTransfer extends JPanel
         JPanel containContent = new JPanel();
         containContent.setLayout(new FlowLayout(FlowLayout.RIGHT, 20, 10));
 
-        JPanel content = new TestDropShadowBorder.RoundedPane();
+        JPanel content = new RoundedPane();
         content.setBackground(Color.WHITE);
         content.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 8));
         containContent.add(content);

@@ -51,7 +51,7 @@ public class PanelService extends JPanel
         panelFooter.add(footer, "Center");
 
 
-        JPanel panelCancel = new TestDropShadowBorder.RoundedPane();
+        JPanel panelCancel = new RoundedPane();
         panelCancel.setBackground(new Color(86, 109, 184));
         panelCancel.add(new JLabel("Cancel"));
         panelCancel.setOpaque(false);
@@ -68,7 +68,7 @@ public class PanelService extends JPanel
         panelCancel.setPreferredSize(new Dimension(170, 50));
         footer.add(panelCancel);
 
-        JPanel panelConfirm = new TestDropShadowBorder.RoundedPane();
+        JPanel panelConfirm = new RoundedPane();
         panelConfirm.setBackground(new Color(55, 119, 34));
         panelConfirm.add(new JLabel("Confirm"));
         panelConfirm.setOpaque(false);
@@ -85,7 +85,7 @@ public class PanelService extends JPanel
         footer.add(panelConfirm);
 
 
-        JPanel panelTransfer = new TestDropShadowBorder.RoundedPane();
+        JPanel panelTransfer = new RoundedPane();
         panelTransfer.setBackground(new Color(222, 123, 77));
         panelTransfer.add(new JLabel("Transfer"));
 //        panelTransfer.setOpaque(false);
@@ -103,7 +103,7 @@ public class PanelService extends JPanel
         panelTransfer.setPreferredSize(new Dimension(170, 80));
         panelHeader.add(panelTransfer);
 
-        JPanel panelRecharge = new TestDropShadowBorder.RoundedPane();
+        JPanel panelRecharge = new RoundedPane();
         panelRecharge.setBackground(new Color(58, 206, 132));
         panelRecharge.add(new JLabel("Recharge"));
         panelRecharge.setOpaque(false);
@@ -119,7 +119,7 @@ public class PanelService extends JPanel
         panelRecharge.setPreferredSize(new Dimension(170, 80));
         panelHeader.add(panelRecharge);
 
-        JPanel panelWithdraw = new TestDropShadowBorder.RoundedPane();
+        JPanel panelWithdraw = new RoundedPane();
         panelWithdraw.setBackground(new Color(217, 77, 131));
         panelWithdraw.add(new JLabel("Withdraw"));
         panelWithdraw.setOpaque(false);
