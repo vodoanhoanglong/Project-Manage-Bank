@@ -1,7 +1,7 @@
 package Main;
 
-import DAO.Login;
-import GUI.LoginFrame;
+
+import Views.LoginFrame;
 
 import java.awt.*;
 
@@ -17,6 +17,5 @@ public class main
                 new LoginFrame().setVisible(true);
             }
         });
-        // Code here
     }
 }
