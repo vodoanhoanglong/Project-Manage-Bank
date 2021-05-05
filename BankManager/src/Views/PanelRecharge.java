@@ -3,13 +3,10 @@ package Views;
 import javax.swing.*;
 import java.awt.*;
 
-
-public class PanelTransfer extends JPanel
+public class PanelRecharge extends JPanel
 {
-
-    public PanelTransfer()
+    public PanelRecharge()
     {
-//        JPanel accountNumber2 = new RadiusAndShadow();
 
         JPanel containAccountNumber = new JPanel();
         containAccountNumber.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
@@ -19,32 +16,15 @@ public class PanelTransfer extends JPanel
         accountNumber.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
         containAccountNumber.add(accountNumber);
 
-//        JTextField txtAccountNumber2 = new JTextField();
-//        txtAccountNumber2.setBackground(Color.WHITE);
-//        txtAccountNumber2.setBorder(null);
-//        txtAccountNumber2.setColumns(25);
-//        txtAccountNumber2.setFont(new Font("Arial", Font.PLAIN, 12));
 
         JTextField txtAccountNumber = new JTextField();
+        txtAccountNumber.setFocusable(false);
+        txtAccountNumber.setForeground(Color.GRAY);
+        txtAccountNumber.setText("Số tài khoản nạp tiền");
         txtAccountNumber.setBackground(Color.WHITE);
         txtAccountNumber.setBorder(null);
         txtAccountNumber.setColumns(25);
         txtAccountNumber.setFont(new Font("Arial", Font.PLAIN, 12));
-//        txtAccountNumber.addFocusListener(new FocusAdapter()
-//        {
-//            @Override
-//            public void focusGained(FocusEvent e)
-//            {
-//                accountNumber2.add(txtAccountNumber2);
-//                accountNumber2.setBackground(Color.WHITE);
-//                accountNumber2.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 8));
-//                containAccountNumber.removeAll();
-//                containAccountNumber.revalidate();
-//                containAccountNumber.repaint();
-//                containAccountNumber.add(accountNumber2);
-//                txtAccountNumber2.requestFocus();
-//            }
-//        });
         accountNumber.add(txtAccountNumber);
 
 
