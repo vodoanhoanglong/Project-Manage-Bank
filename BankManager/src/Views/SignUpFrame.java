@@ -40,7 +40,7 @@ public class SignUpFrame extends JFrame
         setLocationRelativeTo(null);
         contentPane = new JPanel();
 
-        contentPane.setBackground(new Color(21, 140, 180));
+        contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new LineBorder(new Color(0, 0, 128), 2));
         contentPane.setLayout(null);
         contentPane.setFocusable(true);
@@ -52,9 +52,9 @@ public class SignUpFrame extends JFrame
         lblIconLogoBank.setIcon(new ImageIcon(img_logo_bank));
         contentPane.add(lblIconLogoBank);
 
-        JPanel panelCMND = new JPanel();
-        panelCMND.setBackground(new Color(21, 140, 180));
-        panelCMND.setBounds(20, 50, 250, 40);
+        JPanel panelCMND = new RadiusAndShadow();
+        panelCMND.setBackground(Color.WHITE);
+        panelCMND.setBounds(20, 50, 260, 55);
         panelCMND.setLayout(null);
         contentPane.add(panelCMND);
 
@@ -82,7 +82,7 @@ public class SignUpFrame extends JFrame
                 }
             }
         });
-        txtCMND.setBackground(new Color(21, 140, 180));
+        txtCMND.setBackground(Color.WHITE);
         txtCMND.setBorder(null);
         txtCMND.setFont(new Font("Arial", Font.PLAIN, 12));
         txtCMND.setText("Citizen identification number");
@@ -101,9 +101,9 @@ public class SignUpFrame extends JFrame
         lblIconCMND.setIcon(new ImageIcon(img_CMND));
         panelCMND.add(lblIconCMND);
 
-        JPanel panelFullname = new JPanel();
-        panelFullname.setBackground(new Color(21, 140, 180));
-        panelFullname.setBounds(20, 100, 250, 40);
+        JPanel panelFullname = new RadiusAndShadow();
+        panelFullname.setBackground(Color.WHITE);
+        panelFullname.setBounds(20, 100, 260, 55);
         panelFullname.setLayout(null);
         contentPane.add(panelFullname);
 
@@ -131,7 +131,7 @@ public class SignUpFrame extends JFrame
                 }
             }
         });
-        txtFullname.setBackground(new Color(21, 140, 180));
+        txtFullname.setBackground(Color.WHITE);
         txtFullname.setBorder(null);
         txtFullname.setFont(new Font("Arial", Font.PLAIN, 12));
         txtFullname.setText("Full Name");
@@ -150,9 +150,9 @@ public class SignUpFrame extends JFrame
         lblIconFullname.setIcon(new ImageIcon(img_Fullname));
         panelFullname.add(lblIconFullname);
 
-        JPanel panelGender = new JPanel();
-        panelGender.setBackground(new Color(21, 140, 180));
-        panelGender.setBounds(20, 150, 250, 40);
+        JPanel panelGender = new RadiusAndShadow();
+        panelGender.setBackground(Color.WHITE);
+        panelGender.setBounds(20, 150, 260, 55);
         panelGender.setLayout(null);
         contentPane.add(panelGender);
 
@@ -180,7 +180,7 @@ public class SignUpFrame extends JFrame
                 }
             }
         });
-        txtGender.setBackground(new Color(21, 140, 180));
+        txtGender.setBackground(Color.WHITE);
         txtGender.setBorder(null);
         txtGender.setFont(new Font("Arial", Font.PLAIN, 12));
         txtGender.setText("Gender");
@@ -199,9 +199,9 @@ public class SignUpFrame extends JFrame
         lblIconGender.setIcon(new ImageIcon(img_Gender));
         panelGender.add(lblIconGender);
 
-        JPanel panelPhoneNumber = new JPanel();
-        panelPhoneNumber.setBackground(new Color(21, 140, 180));
-        panelPhoneNumber.setBounds(20, 200, 250, 40);
+        JPanel panelPhoneNumber = new RadiusAndShadow();
+        panelPhoneNumber.setBackground(Color.WHITE);
+        panelPhoneNumber.setBounds(20, 200, 260, 55);
         panelPhoneNumber.setLayout(null);
         contentPane.add(panelPhoneNumber);
 
@@ -229,7 +229,7 @@ public class SignUpFrame extends JFrame
                 }
             }
         });
-        txtPhoneNumber.setBackground(new Color(21, 140, 180));
+        txtPhoneNumber.setBackground(Color.WHITE);
         txtPhoneNumber.setBorder(null);
         txtPhoneNumber.setFont(new Font("Arial", Font.PLAIN, 12));
         txtPhoneNumber.setText("Phone number");
@@ -248,10 +248,12 @@ public class SignUpFrame extends JFrame
         lblIconPhoneNumber.setIcon(new ImageIcon(img_Phone_Number));
         panelPhoneNumber.add(lblIconPhoneNumber);
 
-        JPanel panelBirthDay = new JPanel();
-        panelBirthDay.setBackground(new Color(21, 140, 180));
-        panelBirthDay.setBounds(20, 250, 250, 40);
+        JPanel panelBirthDay = new RadiusAndShadow();
+        panelBirthDay.setBackground(Color.WHITE);
+        panelBirthDay.setBounds(20, 250, 260, 55);
         panelBirthDay.setLayout(null);
+
+
         contentPane.add(panelBirthDay);
 
         txtBirthDay = new JTextField();
@@ -278,7 +280,7 @@ public class SignUpFrame extends JFrame
                 }
             }
         });
-        txtBirthDay.setBackground(new Color(21, 140, 180));
+        txtBirthDay.setBackground(Color.WHITE);
         txtBirthDay.setBorder(null);
         txtBirthDay.setFont(new Font("Arial", Font.PLAIN, 12));
         txtBirthDay.setText("Birth day");
@@ -297,9 +299,9 @@ public class SignUpFrame extends JFrame
         lblIconBirthDay.setIcon(new ImageIcon(img_Birth_Day));
         panelBirthDay.add(lblIconBirthDay);
 
-        JPanel panelAddress = new JPanel();
-        panelAddress.setBackground(new Color(21, 140, 180));
-        panelAddress.setBounds(20, 300, 250, 40);
+        JPanel panelAddress = new RadiusAndShadow();
+        panelAddress.setBackground(Color.WHITE);
+        panelAddress.setBounds(20, 300, 260, 55);
         panelAddress.setLayout(null);
         contentPane.add(panelAddress);
 
@@ -327,7 +329,7 @@ public class SignUpFrame extends JFrame
                 }
             }
         });
-        txtAddress.setBackground(new Color(21, 140, 180));
+        txtAddress.setBackground(Color.WHITE);
         txtAddress.setBorder(null);
         txtAddress.setFont(new Font("Arial", Font.PLAIN, 12));
         txtAddress.setText("Address");
@@ -346,9 +348,9 @@ public class SignUpFrame extends JFrame
         lblIconAddress.setIcon(new ImageIcon(img_Address));
         panelAddress.add(lblIconAddress);
 
-        JPanel panelUsername = new JPanel();
-        panelUsername.setBackground(new Color(21, 140, 180));
-        panelUsername.setBounds(300, 200, 250, 40);
+        JPanel panelUsername = new RadiusAndShadow();
+        panelUsername.setBackground(Color.WHITE);
+        panelUsername.setBounds(300, 200, 260, 55);
         panelUsername.setLayout(null);
         contentPane.add(panelUsername);
 
@@ -376,7 +378,7 @@ public class SignUpFrame extends JFrame
                 }
             }
         });
-        txtUsername.setBackground(new Color(21, 140, 180));
+        txtUsername.setBackground(Color.WHITE);
         txtUsername.setBorder(null);
         txtUsername.setFont(new Font("Arial", Font.PLAIN, 12));
         txtUsername.setText("Username");
@@ -395,9 +397,9 @@ public class SignUpFrame extends JFrame
         lblIconUsername.setIcon(new ImageIcon(img_Username));
         panelUsername.add(lblIconUsername);
 
-        JPanel panelPassword = new JPanel();
-        panelPassword.setBackground(new Color(21, 140, 180));
-        panelPassword.setBounds(300, 250, 250, 40);
+        JPanel panelPassword = new RadiusAndShadow();
+        panelPassword.setBackground(Color.WHITE);
+        panelPassword.setBounds(300, 250, 260, 55);
         panelPassword.setLayout(null);
         contentPane.add(panelPassword);
 
@@ -427,7 +429,7 @@ public class SignUpFrame extends JFrame
                 }
             }
         });
-        txtPassword.setBackground(new Color(21, 140, 180));
+        txtPassword.setBackground(Color.WHITE);
         txtPassword.setBorder(null);
         txtPassword.setEchoChar((char) 0);
         txtPassword.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -446,9 +448,9 @@ public class SignUpFrame extends JFrame
         lblIconPassword.setIcon(new ImageIcon(img_Password));
         panelPassword.add(lblIconPassword);
 
-        JPanel panelPasswordConfirm = new JPanel();
-        panelPasswordConfirm.setBackground(new Color(21, 140, 180));
-        panelPasswordConfirm.setBounds(300, 300, 250, 40);
+        JPanel panelPasswordConfirm = new RadiusAndShadow();
+        panelPasswordConfirm.setBackground(Color.WHITE);
+        panelPasswordConfirm.setBounds(300, 300, 260, 55);
         panelPasswordConfirm.setLayout(null);
         contentPane.add(panelPasswordConfirm);
 
@@ -478,7 +480,7 @@ public class SignUpFrame extends JFrame
                 }
             }
         });
-        txtPasswordConfirm.setBackground(new Color(21, 140, 180));
+        txtPasswordConfirm.setBackground(Color.WHITE);
         txtPasswordConfirm.setBorder(null);
         txtPasswordConfirm.setEchoChar((char) 0);
         txtPasswordConfirm.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -517,10 +519,10 @@ public class SignUpFrame extends JFrame
             @Override
             public void mouseExited(MouseEvent event)
             {
-                lblBack.setForeground(Color.WHITE);
+                lblBack.setForeground(Color.BLACK);
             }
         });
-        lblBack.setForeground(Color.WHITE);
+        lblBack.setForeground(Color.black);
         lblBack.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
         lblBack.setHorizontalAlignment(SwingConstants.CENTER);
         lblBack.setBounds(2, 0, 20, 20);
@@ -545,23 +547,23 @@ public class SignUpFrame extends JFrame
             @Override
             public void mouseExited(MouseEvent event)
             {
-                lblX.setForeground(Color.WHITE);
+                lblX.setForeground(Color.BLACK);
             }
         });
-        lblX.setForeground(Color.WHITE);
+        lblX.setForeground(Color.BLACK);
         lblX.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
         lblX.setHorizontalAlignment(SwingConstants.CENTER);
         lblX.setBounds(580, 0, 20, 20);
         contentPane.add(lblX);
 
         JLabel lblLoginMessage = new JLabel("");
-        lblLoginMessage.setForeground(new Color(128, 0, 0));
-        lblLoginMessage.setFont(new Font("Arial", Font.PLAIN, 12));
+        lblLoginMessage.setForeground(Color.RED);
+        lblLoginMessage.setFont(new Font("Arial", Font.BOLD, 12));
         lblLoginMessage.setBounds(165, 350, 250, 18);
         setLocationRelativeTo(null);
         contentPane.add(lblLoginMessage);
 
-        JPanel pnlBtnSignUp = new JPanel();
+        JPanel pnlBtnSignUp = new RadiusAndShadow();
         pnlBtnSignUp.addMouseListener(new MouseAdapter()
         {
             Login login = new Login();
@@ -637,13 +639,13 @@ public class SignUpFrame extends JFrame
             @Override
             public void mouseEntered(MouseEvent mouseEvent)
             {
-                pnlBtnSignUp.setBackground(Color.WHITE);
+                pnlBtnSignUp.setBackground(new Color(21, 140, 180));
             }
 
             @Override
             public void mouseExited(MouseEvent mouseEvent)
             {
-                pnlBtnSignUp.setBackground(new Color(21, 140, 180));
+                pnlBtnSignUp.setBackground(Color.WHITE);
             }
 
             @Override
@@ -658,16 +660,15 @@ public class SignUpFrame extends JFrame
                 pnlBtnSignUp.setBackground(Color.WHITE);
             }
         });
-        pnlBtnSignUp.setBackground(new Color(21, 140, 180));
+        pnlBtnSignUp.setBackground(Color.WHITE);
         pnlBtnSignUp.setBounds(165, 380, 250, 50);
-        pnlBtnSignUp.setBorder(new LineBorder(Color.BLACK, 2, true));
         pnlBtnSignUp.setLayout(null);
         contentPane.add(pnlBtnSignUp);
 
-        JLabel lblSignUp = new JLabel("SIGN UP");
+        JLabel lblSignUp = new JLabel("Register");
         lblSignUp.setForeground(Color.BLACK);
-        lblSignUp.setFont(new Font("Arial", Font.BOLD, 14));
-        lblSignUp.setBounds(100, 11, 64, 28);
+        lblSignUp.setFont(new Font("Arial", Font.BOLD, 15));
+        lblSignUp.setBounds(90, 6, 64, 28);
         pnlBtnSignUp.add(lblSignUp);
 
     }

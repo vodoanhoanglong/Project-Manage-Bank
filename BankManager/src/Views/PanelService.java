@@ -9,16 +9,16 @@ public class PanelService extends JPanel
 {
     private FlowLayout flowLayout = new FlowLayout();
     private CardLayout cardLayout = new CardLayout();
-    private Image img_service = new ImageIcon(PanelService.class.getResource("/Res/img_service.png")).getImage().getScaledInstance(640, 390, Image.SCALE_SMOOTH);
 
     public PanelService()
     {
-        this.setLayout(new BorderLayout(0, 0));
+        this.setLayout(new BorderLayout(20, 0));
 
-        JLabel lblImgService = new JLabel("");
-        lblImgService.setHorizontalAlignment(SwingConstants.CENTER);
-        lblImgService.setIcon(new ImageIcon(img_service));
-        this.add(lblImgService, "Center");
+
+
+
+        this.add(new ScaleImg("/Res/img_service.png"), "East");
+
 
         flowLayout.setAlignment(FlowLayout.CENTER);
         flowLayout.setHgap(80);
@@ -29,7 +29,6 @@ public class PanelService extends JPanel
         this.add(panelHeader, "North");
 
         JPanel panelFooter = new JPanel();
-        panelFooter.setBackground(Color.BLACK);
         panelFooter.setLayout(new BorderLayout(0,0));
         panelFooter.setVisible(false);
         this.add(panelFooter, "South");
@@ -44,7 +43,7 @@ public class PanelService extends JPanel
         panelForm.add(recharge, "2");
         panelForm.add(withdraw, "3");
         panelForm.setVisible(false);
-        this.add(panelForm, "West");
+        this.add(panelForm, "Center");
 
         JPanel panelMessage = new JPanel();
         panelMessage.setLayout(new FlowLayout(FlowLayout.CENTER,0,10));
