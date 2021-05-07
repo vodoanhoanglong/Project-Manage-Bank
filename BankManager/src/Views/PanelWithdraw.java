@@ -1,7 +1,13 @@
 package Views;
 
 import javax.swing.*;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 import java.awt.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PanelWithdraw extends JPanel
 {
@@ -20,8 +26,7 @@ public class PanelWithdraw extends JPanel
         accountNumber.setBackground(Color.WHITE);
         accountNumber.setLayout(new GridBagLayout());
         JTextField txtAccountNumber = new JTextField();
-        txtAccountNumber.setFocusable(false);
-        txtAccountNumber.setForeground(Color.GRAY);
+        txtAccountNumber.setEnabled(false);
         txtAccountNumber.setText("Số tài khoản rút tiền");
         txtAccountNumber.setBackground(Color.WHITE);
         txtAccountNumber.setBorder(null);
@@ -34,6 +39,19 @@ public class PanelWithdraw extends JPanel
         amount.setBackground(Color.WHITE);
         amount.setLayout(new GridBagLayout());
         JTextField txtAmount = new JTextField();
+        ((AbstractDocument)txtAmount.getDocument()).setDocumentFilter(new DocumentFilter(){
+            Pattern regEx = Pattern.compile("\\d*");
+
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException
+            {
+                Matcher matcher = regEx.matcher(text);
+                if(!matcher.matches()){
+                    return;
+                }
+                super.replace(fb, offset, length, text, attrs);
+            }
+        });
         txtAmount.setBackground(Color.WHITE);
         txtAmount.setBorder(null);
         txtAmount.setColumns(20);

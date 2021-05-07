@@ -19,6 +19,7 @@ public class LoginFrame extends JFrame
     private JTextField txtUsername;
     private JPasswordField txtPassword;
 
+    private Image img_logo_right = new ImageIcon(LoginFrame.class.getResource("/Res/logoright.png")).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
     private Image img_logo = new ImageIcon(LoginFrame.class.getResource("/Res/bank.png")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
     private Image img_username = new ImageIcon(LoginFrame.class.getResource("/Res/businessman.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     private Image img_password = new ImageIcon(LoginFrame.class.getResource("/Res/padlock.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -57,11 +58,11 @@ public class LoginFrame extends JFrame
         contentPaneRight.setLayout(null);
         mainPane.add(contentPaneRight);
 
-//        JLabel lblIconLogoBank = new JLabel("");
-//        lblIconLogoBank.setHorizontalAlignment(SwingConstants.CENTER);
-//        lblIconLogoBank.setBounds(30, 42, 250, 111);
-//        lblIconLogoBank.setIcon(new ImageIcon(img_logo_bank));
-//        contentPaneRight.add(lblIconLogoBank);
+        JLabel lblIconLogoBank = new JLabel("");
+        lblIconLogoBank.setHorizontalAlignment(SwingConstants.CENTER);
+        lblIconLogoBank.setBounds(30, 42, 250, 111);
+        lblIconLogoBank.setIcon(new ImageIcon(img_logo_right));
+        contentPaneRight.add(lblIconLogoBank);
 
 
         JPanel panelUsername = new RadiusAndShadow();
@@ -95,7 +96,7 @@ public class LoginFrame extends JFrame
             }
         });
         txtUsername.setBackground(Color.WHITE);
-        txtUsername.setForeground(Color.black);
+        txtUsername.setForeground(Color.GRAY);
         txtUsername.setBorder(null);
         txtUsername.setFont(new Font("Arial", Font.PLAIN, 12));
         txtUsername.setText("Username");
@@ -104,7 +105,7 @@ public class LoginFrame extends JFrame
         panelUsername.add(txtUsername);
 
         JSeparator sptUsername = new JSeparator();
-        sptUsername.setForeground(Color.black);
+        sptUsername.setForeground(Color.GRAY);
         sptUsername.setBounds(10,35,210,1);
         panelUsername.add(sptUsername);
 
@@ -147,7 +148,7 @@ public class LoginFrame extends JFrame
             }
         });
         txtPassword.setBackground(Color.WHITE);
-        txtPassword.setForeground(Color.black);
+        txtPassword.setForeground(Color.GRAY);
         txtPassword.setBorder(null);
         txtPassword.setEchoChar((char) 0);
         txtPassword.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -156,7 +157,7 @@ public class LoginFrame extends JFrame
         panelPassword.add(txtPassword);
 
         JSeparator sptPassword = new JSeparator();
-        sptPassword.setForeground(Color.black);
+        sptPassword.setForeground(Color.GRAY);
         sptPassword.setBounds(10,35,210,1);
         panelPassword.add(sptPassword);
 

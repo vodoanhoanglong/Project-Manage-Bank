@@ -4,11 +4,14 @@ import Model.Login;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignUpFrame extends JFrame
 {
@@ -17,7 +20,8 @@ public class SignUpFrame extends JFrame
     private JTextField txtFullname;
     private JTextField txtGender;
     private JTextField txtPhoneNumber;
-    private JTextField txtBirthDay;
+    private String birthDay;
+    private JTextField txtDay, txtMonth, txtYear;
     private JTextField txtAddress;
     private JTextField txtUsername;
     private JPasswordField txtPassword;
@@ -31,7 +35,7 @@ public class SignUpFrame extends JFrame
     private Image img_Address = new ImageIcon(SignUpFrame.class.getResource("/Res/address.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     private Image img_Username = new ImageIcon(SignUpFrame.class.getResource("/Res/businessman.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     private Image img_Password = new ImageIcon(SignUpFrame.class.getResource("/Res/padlock.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-    private Image img_logo_bank = new ImageIcon(LoginFrame.class.getResource("/Res/logobank.png")).getImage().getScaledInstance(240, 240, Image.SCALE_SMOOTH);
+    private Image img_logo_bank = new ImageIcon(SignUpFrame.class.getResource("/Res/logobank.png")).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
 
     public SignUpFrame()
     {
@@ -59,30 +63,43 @@ public class SignUpFrame extends JFrame
         contentPane.add(panelCMND);
 
         txtCMND = new JTextField();
+        txtCMND.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyTyped(KeyEvent e)
+            {
+                if (txtCMND.getText().length() >= 12)
+                    e.consume();
+            }
+        });
         txtCMND.addFocusListener(new FocusAdapter()
         {
             @Override
             public void focusGained(FocusEvent e)
             {
+                ((AbstractDocument) txtCMND.getDocument()).setDocumentFilter(new DocumentFilter()
+                {
+                    Pattern regEx = Pattern.compile("\\d*");
+
+                    @Override
+                    public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException
+                    {
+                        Matcher matcher = regEx.matcher(text);
+                        if (!matcher.matches())
+                        {
+                            return;
+                        }
+                        super.replace(fb, offset, length, text, attrs);
+                    }
+                });
                 if (txtCMND.getText().equals("Citizen identification number"))
                 {
                     txtCMND.setText("");
-                } else
-                {
-                    txtCMND.selectAll();
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent focusEvent)
-            {
-                if (txtCMND.getText().equals(""))
-                {
-                    txtCMND.setText("Citizen identification number");
                 }
             }
         });
         txtCMND.setBackground(Color.WHITE);
+        txtCMND.setForeground(Color.GRAY);
         txtCMND.setBorder(null);
         txtCMND.setFont(new Font("Arial", Font.PLAIN, 12));
         txtCMND.setText("Citizen identification number");
@@ -91,7 +108,7 @@ public class SignUpFrame extends JFrame
         panelCMND.add(txtCMND);
 
         JSeparator sptCMND = new JSeparator();
-        sptCMND.setForeground(Color.black);
+        sptCMND.setForeground(Color.GRAY);
         sptCMND.setBounds(10, 35, 210, 1);
         panelCMND.add(sptCMND);
 
@@ -108,6 +125,15 @@ public class SignUpFrame extends JFrame
         contentPane.add(panelFullname);
 
         txtFullname = new JTextField();
+        txtFullname.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyTyped(KeyEvent e)
+            {
+                if (txtFullname.getText().length() >= 30)
+                    e.consume();
+            }
+        });
         txtFullname.addFocusListener(new FocusAdapter()
         {
             @Override
@@ -132,6 +158,7 @@ public class SignUpFrame extends JFrame
             }
         });
         txtFullname.setBackground(Color.WHITE);
+        txtFullname.setForeground(Color.GRAY);
         txtFullname.setBorder(null);
         txtFullname.setFont(new Font("Arial", Font.PLAIN, 12));
         txtFullname.setText("Full Name");
@@ -140,7 +167,7 @@ public class SignUpFrame extends JFrame
         panelFullname.add(txtFullname);
 
         JSeparator sptFullname = new JSeparator();
-        sptFullname.setForeground(Color.black);
+        sptFullname.setForeground(Color.GRAY);
         sptFullname.setBounds(10, 35, 210, 1);
         panelFullname.add(sptFullname);
 
@@ -157,6 +184,16 @@ public class SignUpFrame extends JFrame
         contentPane.add(panelGender);
 
         txtGender = new JTextField();
+        txtGender.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyTyped(KeyEvent e)
+            {
+                if (txtGender.getText().length() >= 3)
+                    e.consume();
+            }
+
+        });
         txtGender.addFocusListener(new FocusAdapter()
         {
             @Override
@@ -181,6 +218,7 @@ public class SignUpFrame extends JFrame
             }
         });
         txtGender.setBackground(Color.WHITE);
+        txtGender.setForeground(Color.GRAY);
         txtGender.setBorder(null);
         txtGender.setFont(new Font("Arial", Font.PLAIN, 12));
         txtGender.setText("Gender");
@@ -189,7 +227,7 @@ public class SignUpFrame extends JFrame
         panelGender.add(txtGender);
 
         JSeparator sptGender = new JSeparator();
-        sptGender.setForeground(Color.black);
+        sptGender.setForeground(Color.GRAY);
         sptGender.setBounds(10, 35, 210, 1);
         panelGender.add(sptGender);
 
@@ -206,30 +244,43 @@ public class SignUpFrame extends JFrame
         contentPane.add(panelPhoneNumber);
 
         txtPhoneNumber = new JTextField();
+        txtPhoneNumber.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyTyped(KeyEvent e)
+            {
+                if (txtPhoneNumber.getText().length() >= 11)
+                    e.consume();
+            }
+        });
         txtPhoneNumber.addFocusListener(new FocusAdapter()
         {
             @Override
             public void focusGained(FocusEvent e)
             {
+                ((AbstractDocument) txtPhoneNumber.getDocument()).setDocumentFilter(new DocumentFilter()
+                {
+                    Pattern regEx = Pattern.compile("\\d*");
+
+                    @Override
+                    public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException
+                    {
+                        Matcher matcher = regEx.matcher(text);
+                        if (!matcher.matches())
+                        {
+                            return;
+                        }
+                        super.replace(fb, offset, length, text, attrs);
+                    }
+                });
                 if (txtPhoneNumber.getText().equals("Phone number"))
                 {
                     txtPhoneNumber.setText("");
-                } else
-                {
-                    txtPhoneNumber.selectAll();
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent focusEvent)
-            {
-                if (txtPhoneNumber.getText().equals(""))
-                {
-                    txtPhoneNumber.setText("Phone number");
                 }
             }
         });
         txtPhoneNumber.setBackground(Color.WHITE);
+        txtPhoneNumber.setForeground(Color.GRAY);
         txtPhoneNumber.setBorder(null);
         txtPhoneNumber.setFont(new Font("Arial", Font.PLAIN, 12));
         txtPhoneNumber.setText("Phone number");
@@ -238,7 +289,7 @@ public class SignUpFrame extends JFrame
         panelPhoneNumber.add(txtPhoneNumber);
 
         JSeparator sptPhoneNumber = new JSeparator();
-        sptPhoneNumber.setForeground(Color.black);
+        sptPhoneNumber.setForeground(Color.GRAY);
         sptPhoneNumber.setBounds(10, 35, 210, 1);
         panelPhoneNumber.add(sptPhoneNumber);
 
@@ -253,43 +304,151 @@ public class SignUpFrame extends JFrame
         panelBirthDay.setBounds(20, 250, 260, 55);
         panelBirthDay.setLayout(null);
 
-
         contentPane.add(panelBirthDay);
 
-        txtBirthDay = new JTextField();
-        txtBirthDay.addFocusListener(new FocusAdapter()
+        txtDay = new JTextField();
+        txtDay.setColumns(2);
+        txtDay.setBackground(Color.WHITE);
+        txtDay.setForeground(Color.GRAY);
+        txtDay.setText("Day");
+        txtDay.setFont(new Font("Arial", Font.PLAIN, 12));
+        txtDay.setBounds(10, 10, 30, 20);
+        txtDay.setBorder(null);
+        txtDay.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyTyped(KeyEvent e)
+            {
+                if (txtDay.getText().length() >= 2) // limit to 3 characters
+                    e.consume();
+            }
+        });
+        txtDay.addFocusListener(new FocusAdapter()
         {
             @Override
             public void focusGained(FocusEvent e)
             {
-                if (txtBirthDay.getText().equals("Birth day"))
+                ((AbstractDocument) txtDay.getDocument()).setDocumentFilter(new DocumentFilter()
                 {
-                    txtBirthDay.setText("");
-                } else
-                {
-                    txtBirthDay.selectAll();
-                }
-            }
+                    Pattern regEx = Pattern.compile("\\d*");
 
-            @Override
-            public void focusLost(FocusEvent focusEvent)
-            {
-                if (txtBirthDay.getText().equals(""))
-                {
-                    txtBirthDay.setText("Birth day");
-                }
+                    @Override
+                    public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException
+                    {
+                        Matcher matcher = regEx.matcher(text);
+                        if (!matcher.matches())
+                        {
+                            return;
+                        }
+                        super.replace(fb, offset, length, text, attrs);
+                    }
+                });
+                if (txtDay.getText().equals("Day"))
+                    txtDay.setText("");
             }
         });
-        txtBirthDay.setBackground(Color.WHITE);
-        txtBirthDay.setBorder(null);
-        txtBirthDay.setFont(new Font("Arial", Font.PLAIN, 12));
-        txtBirthDay.setText("Birth day");
-        txtBirthDay.setBounds(10, 10, 170, 20);
-        txtBirthDay.setColumns(10);
-        panelBirthDay.add(txtBirthDay);
+        panelBirthDay.add(txtDay);
+
+        JSeparator sptMonth = new JSeparator();
+        sptMonth.setForeground(Color.GRAY);
+        sptMonth.setOrientation(SwingConstants.VERTICAL);
+        sptMonth.setBounds(40, 12, 10, 15);
+        panelBirthDay.add(sptMonth);
+
+        txtMonth = new JTextField();
+        txtMonth.setColumns(2);
+        txtMonth.setBackground(Color.WHITE);
+        txtMonth.setForeground(Color.GRAY);
+        txtMonth.setText("Month");
+        txtMonth.setFont(new Font("Arial", Font.PLAIN, 12));
+        txtMonth.setBounds(50, 10, 40, 20);
+        txtMonth.setBorder(null);
+        txtMonth.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyTyped(KeyEvent e)
+            {
+                if (txtMonth.getText().length() >= 2)
+                    e.consume();
+            }
+        });
+        txtMonth.addFocusListener(new FocusAdapter()
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                ((AbstractDocument) txtMonth.getDocument()).setDocumentFilter(new DocumentFilter()
+                {
+                    Pattern regEx = Pattern.compile("\\d*");
+
+                    @Override
+                    public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException
+                    {
+                        Matcher matcher = regEx.matcher(text);
+                        if (!matcher.matches())
+                        {
+                            return;
+                        }
+                        super.replace(fb, offset, length, text, attrs);
+                    }
+                });
+                if (txtMonth.getText().equals("Month"))
+                    txtMonth.setText("");
+            }
+        });
+        panelBirthDay.add(txtMonth);
+
+        JSeparator sptYear = new JSeparator();
+        sptYear.setForeground(Color.GRAY);
+        sptYear.setOrientation(SwingConstants.VERTICAL);
+        sptYear.setBounds(90, 12, 10, 15);
+        panelBirthDay.add(sptYear);
+
+        txtYear = new JTextField();
+        txtYear.setColumns(4);
+        txtYear.setBackground(Color.WHITE);
+        txtYear.setForeground(Color.GRAY);
+        txtYear.setText("Year");
+        txtYear.setFont(new Font("Arial", Font.PLAIN, 12));
+        txtYear.setBounds(100, 10, 50, 20);
+        txtYear.setBorder(null);
+        txtYear.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyTyped(KeyEvent e)
+            {
+                if (txtYear.getText().length() >= 4)
+                    e.consume();
+            }
+        });
+        txtYear.addFocusListener(new FocusAdapter()
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                ((AbstractDocument) txtYear.getDocument()).setDocumentFilter(new DocumentFilter()
+                {
+                    Pattern regEx = Pattern.compile("\\d*");
+
+                    @Override
+                    public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException
+                    {
+                        Matcher matcher = regEx.matcher(text);
+                        if (!matcher.matches())
+                        {
+                            return;
+                        }
+                        super.replace(fb, offset, length, text, attrs);
+                    }
+                });
+                if (txtYear.getText().equals("Year"))
+                    txtYear.setText("");
+            }
+        });
+        panelBirthDay.add(txtYear);
 
         JSeparator sptBirthDay = new JSeparator();
-        sptBirthDay.setForeground(Color.black);
+        sptBirthDay.setForeground(Color.GRAY);
         sptBirthDay.setBounds(10, 35, 210, 1);
         panelBirthDay.add(sptBirthDay);
 
@@ -297,6 +456,18 @@ public class SignUpFrame extends JFrame
         lblIconBirthDay.setHorizontalAlignment(SwingConstants.CENTER);
         lblIconBirthDay.setBounds(210, 0, 40, 40);
         lblIconBirthDay.setIcon(new ImageIcon(img_Birth_Day));
+        lblIconBirthDay.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                JFrame frame = new JFrame();
+                frame.setVisible(true);
+                frame.setSize(400, 400);
+                frame.setLocationRelativeTo(null);
+                frame.setContentPane(new JLabel("Đéo có Calendar đâu mà bấm vào địt con mẹ mày!"));
+            }
+        });
         panelBirthDay.add(lblIconBirthDay);
 
         JPanel panelAddress = new RadiusAndShadow();
@@ -330,6 +501,7 @@ public class SignUpFrame extends JFrame
             }
         });
         txtAddress.setBackground(Color.WHITE);
+        txtAddress.setForeground(Color.GRAY);
         txtAddress.setBorder(null);
         txtAddress.setFont(new Font("Arial", Font.PLAIN, 12));
         txtAddress.setText("Address");
@@ -338,7 +510,7 @@ public class SignUpFrame extends JFrame
         panelAddress.add(txtAddress);
 
         JSeparator sptAddress = new JSeparator();
-        sptAddress.setForeground(Color.black);
+        sptAddress.setForeground(Color.GRAY);
         sptAddress.setBounds(10, 35, 210, 1);
         panelAddress.add(sptAddress);
 
@@ -379,6 +551,7 @@ public class SignUpFrame extends JFrame
             }
         });
         txtUsername.setBackground(Color.WHITE);
+        txtUsername.setForeground(Color.GRAY);
         txtUsername.setBorder(null);
         txtUsername.setFont(new Font("Arial", Font.PLAIN, 12));
         txtUsername.setText("Username");
@@ -387,7 +560,7 @@ public class SignUpFrame extends JFrame
         panelUsername.add(txtUsername);
 
         JSeparator sptUsername = new JSeparator();
-        sptUsername.setForeground(Color.black);
+        sptUsername.setForeground(Color.GRAY);
         sptUsername.setBounds(10, 35, 210, 1);
         panelUsername.add(sptUsername);
 
@@ -430,6 +603,7 @@ public class SignUpFrame extends JFrame
             }
         });
         txtPassword.setBackground(Color.WHITE);
+        txtPassword.setForeground(Color.GRAY);
         txtPassword.setBorder(null);
         txtPassword.setEchoChar((char) 0);
         txtPassword.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -438,7 +612,7 @@ public class SignUpFrame extends JFrame
         panelPassword.add(txtPassword);
 
         JSeparator sptPassword = new JSeparator();
-        sptPassword.setForeground(Color.black);
+        sptPassword.setForeground(Color.GRAY);
         sptPassword.setBounds(10, 35, 210, 1);
         panelPassword.add(sptPassword);
 
@@ -481,6 +655,7 @@ public class SignUpFrame extends JFrame
             }
         });
         txtPasswordConfirm.setBackground(Color.WHITE);
+        txtPasswordConfirm.setForeground(Color.GRAY);
         txtPasswordConfirm.setBorder(null);
         txtPasswordConfirm.setEchoChar((char) 0);
         txtPasswordConfirm.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -489,7 +664,7 @@ public class SignUpFrame extends JFrame
         panelPasswordConfirm.add(txtPasswordConfirm);
 
         JSeparator sptPasswordConfirm = new JSeparator();
-        sptPasswordConfirm.setForeground(Color.black);
+        sptPasswordConfirm.setForeground(Color.GRAY);
         sptPasswordConfirm.setBounds(10, 35, 210, 1);
         panelPasswordConfirm.add(sptPasswordConfirm);
 
@@ -559,7 +734,7 @@ public class SignUpFrame extends JFrame
         JLabel lblLoginMessage = new JLabel("");
         lblLoginMessage.setForeground(Color.RED);
         lblLoginMessage.setFont(new Font("Arial", Font.BOLD, 12));
-        lblLoginMessage.setBounds(165, 350, 250, 18);
+        lblLoginMessage.setBounds(200, 360, 250, 18);
         setLocationRelativeTo(null);
         contentPane.add(lblLoginMessage);
 
@@ -574,9 +749,6 @@ public class SignUpFrame extends JFrame
             {
                 // obj.replaceAll("\\s+","") xóa tất cả các khoảng trắng và các ký tự không nhìn thấy (ví dụ: tab, \n).
                 // obj.replaceAll("[^a-zA-Z0-9]", "") xóa tất cả ký tự đặc biệt và thay bằng khoảng trắng
-                txtCMND.setText(txtCMND.getText().replaceAll("\\s+", ""));
-                txtCMND.setText(txtCMND.getText().replaceAll("[^Z0-9]", ""));
-
                 // [^\p{L}\s] xóa các ký tự đặc biệt trừ dấu tiếng Việt
                 txtFullname.setText(txtFullname.getText().replaceAll("[^\\p{L}\\s]", " "));
                 txtFullname.setText(txtFullname.getText().replaceAll("\\s+", " "));
@@ -584,28 +756,30 @@ public class SignUpFrame extends JFrame
                 txtGender.setText(txtGender.getText().replaceAll("\\s+", ""));
                 txtGender.setText(txtGender.getText().replaceAll("[^\\p{L}\\s]", ""));
 
-                txtPhoneNumber.setText(txtPhoneNumber.getText().replaceAll("\\s+", ""));
-                txtPhoneNumber.setText(txtPhoneNumber.getText().replaceAll("[^Z0-9]", ""));
+                txtAddress.setText(txtAddress.getText().replaceAll("[^a-zA-Z0-9-\\p{L}\\s]", " "));
+                txtAddress.setText(txtAddress.getText().replaceAll("\\s+", " "));
 
-//                txtBirthDay.setText(txtBirthDay.getText().replaceAll("\\s+", ""));
-//                txtBirthDay.setText(txtBirthDay.getText().replaceAll("[^a-zA-Z0-9 -]", ""));
-
-                txtUsername.getText().replaceAll("\\s+", "");
-                txtUsername.getText().replaceAll("[^a-zA-Z0-9]", "");
-
-                txtPassword.getText().replaceAll("\\s+", "");
-                txtPassword.getText().replaceAll("[^a-zA-Z0-9]", "");
-
-                txtPasswordConfirm.getText().replaceAll("\\s+", "");
-                txtPasswordConfirm.getText().replaceAll("[^a-zA-Z0-9]", "");
-
-                if (txtCMND.getText().equals("") || txtFullname.getText().equals("") || txtGender.getText().equals("") || txtPhoneNumber.getText().equals("") || txtBirthDay.getText().equals("") || txtAddress.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtPasswordConfirm.getText().equals("")
-                        || txtCMND.getText().equals("Citizen identification number") || txtFullname.getText().equals("Full Name") || txtGender.getText().equals("Gender") || txtPhoneNumber.getText().equals("Phone number") || txtBirthDay.getText().equals("Birth day") || txtAddress.getText().equals("Address") || txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password") || txtPasswordConfirm.getText().equals("Password confirm"))
+                if (txtCMND.getText().equals("") || txtFullname.getText().equals("") || txtGender.getText().equals("") || txtPhoneNumber.getText().equals("") || txtDay.getText().equals("") || txtMonth.getText().equals("") || txtYear.getText().equals("") || txtAddress.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtPasswordConfirm.getText().equals("")
+                        || txtCMND.getText().equals("Citizen identification number") || txtFullname.getText().equals("Full Name") || txtGender.getText().equals("Gender") || txtPhoneNumber.getText().equals("Phone number") || txtDay.getText().equals("Day") || txtMonth.getText().equals("Month") || txtAddress.getText().equals("Year") || txtAddress.getText().equals("Address") || txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password") || txtPasswordConfirm.getText().equals("Password confirm"))
                     lblLoginMessage.setText("Please input all requirements!");
-                else if(!txtPassword.getText().equals(txtPasswordConfirm.getText()))
+                else if (txtCMND.getText().length() < 12)
+                    lblLoginMessage.setText("Invalid citizen identification number");
+                else if (txtPhoneNumber.getText().length() < 10)
+                    lblLoginMessage.setText("Invalid phone number");
+                else if (Integer.parseInt(txtDay.getText()) > 31)
+                    lblLoginMessage.setText("Invalid day");
+                else if (Integer.parseInt(txtMonth.getText()) > 12)
+                    lblLoginMessage.setText("Invalid month");
+                else if (txtYear.getText().length() < 4)
+                    lblLoginMessage.setText("Invalid year of birth");
+                else if (Integer.parseInt(txtYear.getText()) >= 2003 || Integer.parseInt(txtYear.getText()) <= 1920)
+                    lblLoginMessage.setText("Your year old must inside 18 - 100");
+                else if (txtUsername.getText().length() < 6)
+                    lblLoginMessage.setText("Username must be 6 characters or more");
+                else if (txtPassword.getText().length() < 8)
+                    lblLoginMessage.setText("Password must be 8 characters or more");
+                else if (!txtPassword.getText().equals(txtPasswordConfirm.getText()))
                     lblLoginMessage.setText("Password confirm is not correct!");
-//                else if (!StringUtils.isNumeric(txtCMND.getText()))
-//                    lblLoginMessage.setText("Citizen identification number must be numeric");
                 else if (login.CheckCMND(txtCMND.getText()))
                 {
                     while (login.CheckSignUpSoTK(accountNumber))
@@ -621,7 +795,8 @@ public class SignUpFrame extends JFrame
                         lblLoginMessage.setText("Username already exists, please enter another name!");
                 } else
                 {
-                    login.InsertDataKHACHHANG(txtCMND.getText(), txtFullname.getText(), txtPhoneNumber.getText(), txtGender.getText(), txtBirthDay.getText(), txtAddress.getText());
+                    birthDay = txtYear.getText() + "-" + txtMonth.getText() + "-" + txtDay.getText();
+                    login.InsertDataKHACHHANG(txtCMND.getText(), txtFullname.getText(), txtPhoneNumber.getText(), txtGender.getText(), birthDay, txtAddress.getText());
                     while (login.CheckSignUpSoTK(accountNumber))
                         accountNumber = login.Random(0, 9, 10);
                     if (!login.CheckSignUpTenTK(txtUsername.getText()))
