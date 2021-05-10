@@ -314,6 +314,30 @@ public class MainFrame extends JFrame
         detailsPanel.setLayout(new BorderLayout(0, 0));
         this.contentPane.add((Component) detailsPanel, "Center");
 
+        JPanel toolPanel = new JPanel();
+        toolPanel.setLayout(new FlowLayout(2, 15, 0));
+        toolPanel.setBackground(Color.WHITE);
+        toolPanel.setBorder(null);
+        detailsPanel.add((Component) toolPanel, "North");
+
+
+        JLabel btnProfile = new JLabel();
+        btnProfile.setIcon(new ImageIcon(img_profile));
+        btnProfile.setFocusable(false);
+        btnProfile.setHorizontalTextPosition(4);
+        btnProfile.setBorder(null);
+        btnProfile.setToolTipText("Thông tin cá nhân");
+        btnProfile.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btnProfile.setBackground(Color.WHITE);
+        btnProfile.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getButton() == 1) {
+                    System.out.println("Hien thi thong tin ca nhan");
+                }
+            }
+        });
+        toolPanel.add((Component) btnProfile);
 
         this.cardPanelLayout = new CardLayout();
         this.cardPanel = new JPanel(this.cardPanelLayout);
