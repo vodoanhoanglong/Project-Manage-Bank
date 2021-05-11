@@ -674,18 +674,6 @@ public class SignUpFrame extends JFrame
         lblIconBirthDay.setHorizontalAlignment(SwingConstants.CENTER);
         lblIconBirthDay.setBounds(210, 0, 40, 40);
         lblIconBirthDay.setIcon(new ImageIcon(img_Birth_Day));
-        lblIconBirthDay.addMouseListener(new MouseAdapter()
-        {
-            @Override
-            public void mouseClicked(MouseEvent e)
-            {
-                JFrame frame = new JFrame();
-                frame.setVisible(true);
-                frame.setSize(400, 400);
-                frame.setLocationRelativeTo(null);
-                frame.setContentPane(new JLabel("Đéo có Calendar đâu mà bấm vào địt con mẹ mày!"));
-            }
-        });
         panelBirthDay.add(lblIconBirthDay);
 
         JPanel panelAddress = new RadiusAndShadow();

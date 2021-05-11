@@ -343,12 +343,10 @@ public class MainFrame extends JFrame
         this.cardPanel = new JPanel(this.cardPanelLayout);
         this.cardPanel.setBackground(Color.WHITE);
 
-        this.cardPanelIndex = new JPanel();
-        this.cardPanel.add((Component) this.cardPanelIndex, "index");
+        this.cardPanel.add(new PanelIndex(), "index");
         this.cardPanelLayout.show(this.cardPanel, "index");
 
         this.cardPanel.add(new PanelHome(), "overview");
-
 
         this.cardPanel.add(new PanelService(), "service");
 

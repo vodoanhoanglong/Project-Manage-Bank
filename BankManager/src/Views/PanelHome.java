@@ -11,7 +11,6 @@ public class PanelHome extends JPanel {
     private lineChart lineChart;
 
 
-
     private JPanel panel_north() {
         JPanel overViewPanel = new JPanel();
         overViewPanel.setPreferredSize(new Dimension(50, 70));

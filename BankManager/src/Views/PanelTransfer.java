@@ -82,7 +82,7 @@ public class PanelTransfer extends JPanel
 
         JLabel lblVND = new JLabel("VNĐ");
         lblVND.setForeground(Color.GRAY);
-        lblVND.setFont(new Font("Arial", Font.BOLD, 13));
+        lblVND.setFont(new Font("Arial", Font.BOLD, 15));
         panelVND.add(lblVND);
 
         NumberFormat format = NumberFormat.getInstance();

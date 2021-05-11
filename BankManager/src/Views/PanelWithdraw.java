@@ -65,7 +65,7 @@ public class PanelWithdraw extends JPanel
 
         JLabel lblVND = new JLabel("VNĐ");
         lblVND.setForeground(Color.GRAY);
-        lblVND.setFont(new Font("Arial", Font.BOLD, 13));
+        lblVND.setFont(new Font("Arial", Font.BOLD, 15));
         panelVND.add(lblVND);
 
         NumberFormat format = NumberFormat.getInstance();
@@ -79,8 +79,6 @@ public class PanelWithdraw extends JPanel
         formattedTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                String value = txtAccountNumber.getText();
-                int l = value.length();
                 if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9' || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
                     txtAccountNumber.setEditable(true);
                     lblMessage.setText("");
