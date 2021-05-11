@@ -14,12 +14,14 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 public class colunmChart
-        extends JFXPanel {
+        extends JFXPanel
+{
     private double received = 3000;
     private double spending = 3500;
 
 
-    public BarChart createChart() {
+    public BarChart createChart()
+    {
 
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
@@ -36,16 +38,18 @@ public class colunmChart
         return chart;
     }
 
-    private Scene createScene() {
+    private Scene createScene()
+    {
         BorderPane root = new BorderPane();
         Scene scene = new Scene((Parent) root, (Paint) Color.ALICEBLUE);
         root.setCenter((Node) this.createChart());
         return scene;
     }
 
-    public colunmChart() {
+    public colunmChart()
+    {
         this.setScene(this.createScene());
         this.setFont(new Font("Open Sans", Font.BOLD, 20));
-        this.setBorder(new TitledBorder(new EtchedBorder(1, null, null), "Tổng Thu Chi Trong Tháng ", TitledBorder.LEADING, TitledBorder.TOP, new Font("Open Sans", Font.PLAIN, 16), new java.awt.Color(0, 0, 0)));
+        this.setBorder(new TitledBorder(new EtchedBorder(1, null, null), "Tổng Thu Chi Trong Tháng ", TitledBorder.CENTER, TitledBorder.TOP, new Font("Open Sans", Font.PLAIN, 16), new java.awt.Color(0, 0, 0)));
     }
 }

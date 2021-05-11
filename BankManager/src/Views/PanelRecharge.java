@@ -1,13 +1,11 @@
 package Views;
 
 import javax.swing.*;
-import javax.swing.text.AbstractDocument;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.DocumentFilter;
+import javax.swing.text.NumberFormatter;
 import java.awt.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.text.NumberFormat;
 
 public class PanelRecharge extends JPanel
 {
@@ -15,18 +13,29 @@ public class PanelRecharge extends JPanel
 
     public PanelRecharge()
     {
+        this.setLayout(new BorderLayout(0, 0));
+
         gbc3 = new GridBagConstraints();
         gbc3.insets = new Insets(10, 10, 10, 10);
         gbc3.weightx = 1;
         gbc3.weighty = 1;
         gbc3.fill = GridBagConstraints.BOTH;
 
+        JLabel lblMessage = new JLabel();
+        lblMessage.setFont(new Font("Arial", Font.BOLD, 15));
+        lblMessage.setForeground(Color.red);
+
+        JPanel panelGBLHeader = new JPanel();
+        panelGBLHeader.add(lblMessage);
+        panelGBLHeader.setPreferredSize(new Dimension(200, 100));
+        this.add(panelGBLHeader, "North");
+
 
         JPanel accountNumber = new RadiusAndShadow();
         accountNumber.setBackground(Color.white);
         accountNumber.setLayout(new GridBagLayout());
         JTextField txtAccountNumber = new JTextField();
-        txtAccountNumber.setText("Số tài khoản nạp tiền");
+        txtAccountNumber.setText("Số tài khoản nạp");
         txtAccountNumber.setEnabled(false);
         txtAccountNumber.setBackground(Color.WHITE);
         txtAccountNumber.setBorder(null);
@@ -59,27 +68,40 @@ public class PanelRecharge extends JPanel
         lblVND.setFont(new Font("Arial", Font.BOLD, 13));
         panelVND.add(lblVND);
 
-        JTextField txtAmount = new JTextField();
-        ((AbstractDocument) txtAmount.getDocument()).setDocumentFilter(new DocumentFilter()
-        {
-            Pattern regEx = Pattern.compile("\\d*");
-
+        NumberFormat format = NumberFormat.getInstance();
+        format.setMaximumFractionDigits(0);
+        NumberFormatter numberFormat = new NumberFormatter(format);
+        numberFormat.setAllowsInvalid(false);
+        JFormattedTextField formattedTextField = new JFormattedTextField(numberFormat);
+        formattedTextField.setFont(new Font("Arial", Font.PLAIN, 15));
+        formattedTextField.setBorder(null);
+        formattedTextField.setText("0");
+        formattedTextField.addKeyListener(new KeyAdapter() {
             @Override
-            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException
-            {
-                Matcher matcher = regEx.matcher(text);
-                if (!matcher.matches())
-                {
-                    return;
+            public void keyPressed(KeyEvent e) {
+                String value = txtAccountNumber.getText();
+                int l = value.length();
+                if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9' || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+                    txtAccountNumber.setEditable(true);
+                    lblMessage.setText("");
+                } else {
+                    txtAccountNumber.setEditable(false);
+                    lblMessage.setText("Enter only numeric digits(0-9)");
                 }
-                super.replace(fb, offset, length, text, attrs);
+                if(e.getKeyCode()==KeyEvent.VK_BACK_SPACE){
+                    if(formattedTextField.getText().length() == 1){
+                        formattedTextField.setText("0");
+                    }
+                }
+            }
+            @Override
+            public void keyTyped(KeyEvent e)
+            {
+                if(formattedTextField.getText().length() == 27)
+                    e.consume();
             }
         });
-        txtAmount.setBackground(Color.WHITE);
-        txtAmount.setBorder(null);
-        txtAmount.setColumns(20);
-        txtAmount.setFont(new Font("Arial", Font.PLAIN, 15));
-        panelAmount.add(txtAmount);
+        panelAmount.add(formattedTextField);
         panelAmount.add(Box.createHorizontalGlue());
         panelAmount.add(panelVND);
 
@@ -97,12 +119,6 @@ public class PanelRecharge extends JPanel
         txtContent.setFont(new Font("Arial", Font.PLAIN, 15));
         content.add(txtContent, gbc3);
 
-
-        this.setLayout(new BorderLayout(0, 0));
-
-        JPanel panelGBLHeader = new JPanel();
-        panelGBLHeader.setPreferredSize(new Dimension(200, 100));
-        this.add(panelGBLHeader, "North");
 
         JPanel panelGBLFooter = new JPanel();
         panelGBLFooter.setPreferredSize(new Dimension(200, 100));

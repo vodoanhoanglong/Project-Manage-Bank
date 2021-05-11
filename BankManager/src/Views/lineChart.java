@@ -78,6 +78,6 @@ public class lineChart
     public lineChart() {
         this.setScene(this.createScene());
         this.setFont(new Font("Open Sans", Font.BOLD, 20));
-        this.setBorder(new TitledBorder(new EtchedBorder(1, null, null), "Biến Động Thu Chi Trong Tháng", TitledBorder.LEADING, TitledBorder.TOP, new Font("Open Sans", Font.PLAIN, 16), new java.awt.Color(0, 0, 0)));
+        this.setBorder(new TitledBorder(new EtchedBorder(1, null, null), "Biến Động Thu Chi Trong Tháng", TitledBorder.CENTER, TitledBorder.TOP, new Font("Open Sans", Font.PLAIN, 16), new java.awt.Color(0, 0, 0)));
     }
 }
