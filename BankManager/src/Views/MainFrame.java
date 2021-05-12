@@ -46,7 +46,6 @@ public class MainFrame extends JFrame
     private JLabel lblTextLogOut;
 
     private CardLayout cardPanelLayout;
-    private JPanel cardPanelIndex;
     private JPanel cardPanel;
     MetalToggleButtonUI metalToggleButton = new MetalToggleButtonUI()
     {
@@ -98,6 +97,14 @@ public class MainFrame extends JFrame
         this.Logo.setBorder(new EmptyBorder(0, 0, 0, 0));
         this.Logo.setHorizontalAlignment(SwingConstants.CENTER);
         this.Logo.setIcon(new ImageIcon(img_logo));
+        this.Logo.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                MainFrame.this.showDetailsPanel("index");
+            }
+        });
 
         GridBagConstraints logoConstraints = new GridBagConstraints();
         logoConstraints.insets = new Insets(15, 0, 50, 0);
@@ -223,7 +230,7 @@ public class MainFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                // goi panel History
+                MainFrame.this.showDetailsPanel("history");
             }
 
             @Override
@@ -333,7 +340,7 @@ public class MainFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == 1) {
-                    System.out.println("Hien thi thong tin ca nhan");
+                    MainFrame.this.showDetailsPanel("profile");
                 }
             }
         });
@@ -342,13 +349,12 @@ public class MainFrame extends JFrame
         this.cardPanelLayout = new CardLayout();
         this.cardPanel = new JPanel(this.cardPanelLayout);
         this.cardPanel.setBackground(Color.WHITE);
-
         this.cardPanel.add(new PanelIndex(), "index");
         this.cardPanelLayout.show(this.cardPanel, "index");
-
         this.cardPanel.add(new PanelHome(), "overview");
-
         this.cardPanel.add(new PanelService(), "service");
+        this.cardPanel.add(new PanelHistory(), "history");
+        this.cardPanel.add(new PanelProfile(), "profile");
 
         detailsPanel.add((Component) this.cardPanel, "Center");
 

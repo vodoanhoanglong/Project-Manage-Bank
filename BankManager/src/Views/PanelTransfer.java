@@ -14,7 +14,7 @@ public class PanelTransfer extends JPanel
 
     public PanelTransfer()
     {
-        this.setLayout(new BorderLayout(0, 0));
+        this.setLayout(new BorderLayout(40, 0));
 
         gbc3 = new GridBagConstraints();
         gbc3.insets = new Insets(10, 10, 10, 10);
@@ -27,9 +27,13 @@ public class PanelTransfer extends JPanel
         lblMessage.setForeground(Color.red);
 
         JPanel panelGBLHeader = new JPanel();
-        panelGBLHeader.add(lblMessage);
         panelGBLHeader.setPreferredSize(new Dimension(200, 100));
         this.add(panelGBLHeader, "North");
+
+        JPanel panelGBLFooter = new JPanel();
+        panelGBLFooter.add(lblMessage);
+        panelGBLFooter.setPreferredSize(new Dimension(200, 100));
+        this.add(panelGBLFooter, "South");
 
 
         JPanel accountNumber = new RadiusAndShadow();
@@ -135,17 +139,47 @@ public class PanelTransfer extends JPanel
         content.add(txtContent, gbc3);
 
 
-        JPanel panelGBLFooter = new JPanel();
-        panelGBLFooter.setPreferredSize(new Dimension(200, 100));
-        this.add(panelGBLFooter, "South");
+        JPanel panelGBLEast = new RadiusAndShadow();
+        panelGBLEast.setPreferredSize(new Dimension(500, 200));
+        panelGBLEast.setBackground(Color.WHITE);
+        panelGBLEast.setLayout(new BoxLayout(panelGBLEast, BoxLayout.Y_AXIS));
 
-        JPanel panelGBLEast = new JPanel();
-        panelGBLEast.setPreferredSize(new Dimension(300, 200));
+
+        JLabel lblName = new JLabel("VÕ ĐOÀN HOÀNG LONG");
+        lblName.setForeground(Color.RED);
+        lblName.setFont(new Font("Arial", Font.BOLD, 20));
+        lblName.setAlignmentX(CENTER_ALIGNMENT);
+        panelGBLEast.add(Box.createRigidArea(new Dimension(0,20)));
+        panelGBLEast.add(lblName);
+        panelGBLEast.add(Box.createRigidArea(new Dimension(0,20)));
+
+        JPanel panelInformation =  new JPanel();
+        panelInformation.setBackground(Color.white);
+        panelInformation.setLayout(new FlowLayout(FlowLayout.LEFT,20,20));
+        panelGBLEast.add(panelInformation);
+
+
+        JLabel lblAccountNumber = new JLabel("Account Number: ");
+        lblAccountNumber.setFont(new Font("Arial", Font.BOLD, 15));
+        JPanel panelAccountNumber = new JPanel();
+        panelAccountNumber.setBackground(Color.WHITE);
+        panelAccountNumber.add(lblAccountNumber);
+        panelAccountNumber.add(new JLabel("Số tài khoản của tôi"));
+        panelInformation.add(panelAccountNumber);
+
+
+        JLabel lblBalance = new JLabel("Balance: ");
+        lblBalance.setFont(new Font("Arial", Font.BOLD, 15));
+        JPanel panelBalance = new JPanel();
+        panelBalance.setBackground(Color.WHITE);
+        panelBalance.add(lblBalance);
+        panelBalance.add(new JLabel("10000000000000000000000000000000000000000000000000000"));
+        panelBalance.add(new JLabel("VNĐ"));
+        panelInformation.add(panelBalance);
+
+
         this.add(panelGBLEast, "East");
-
-        JPanel panelGBLWest = new JPanel();
-        panelGBLWest.setPreferredSize(new Dimension(250, 200));
-        this.add(panelGBLWest, "West");
+        this.add(new JPanel(), "West");
 
 
         JPanel panelCenter = new JPanel();
