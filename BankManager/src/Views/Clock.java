@@ -7,13 +7,11 @@ package Views; /**
  *
  * */
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import javax.management.remote.JMXConnectorFactory;
-import javax.swing.*;
 
 public class Clock extends JPanel implements MouseListener, MouseMotionListener {
     private static final long serialVersionUID = 1L;
@@ -91,10 +89,10 @@ public class Clock extends JPanel implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        this.setLocation(
-                this.getLocation().x + (e.getX()-initX),
-                this.getLocation().y + (e.getY()-initY)
-        );
+//        this.setLocation(
+//                this.getLocation().x + (e.getX()-initX),
+//                this.getLocation().y + (e.getY()-initY)
+//        );
     }
 
     @Override
