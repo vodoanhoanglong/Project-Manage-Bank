@@ -149,4 +149,21 @@ public class Login
             System.err.println("Login.java.InsertDataTAIKHOAN: " + exception.getMessage());
         }
     }
+    public boolean CheckGender(String accountNumber)
+    {
+        String SQL = "use QLNH Select GioiTinh From KHACHHANG KH Inner Join TAIKHOAN TK ON KH.CMND = TK.CMND Where TenTK = ?";
+        try
+        {
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, accountNumber);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            if(resultSet.getInt("GioiTinh") == 1)
+                return true;
+        } catch (Exception exception)
+        {
+            System.err.println("Login.java.CheckGender: " + exception.getMessage());
+        }
+        return false;
+    }
 }
