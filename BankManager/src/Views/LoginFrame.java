@@ -222,6 +222,7 @@ public class LoginFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
+
                 if (new Login().CheckLogin(txtUsername.getText(), txtPassword.getText()))
                 {
                     LoginFrame.accountNumber = txtUsername.getText();

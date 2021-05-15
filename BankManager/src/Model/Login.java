@@ -12,6 +12,7 @@ public class Login
     PreparedStatement preparedStatement;
 
     // khởi tạo k cần funcName
+
     {
         try
         {
