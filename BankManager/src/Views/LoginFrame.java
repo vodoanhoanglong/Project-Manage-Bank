@@ -15,6 +15,7 @@ public class LoginFrame extends JFrame
 {
 
     public static String username;
+    public static String password;
 
     private JPanel mainPane;
     private JTextField txtUsername;
@@ -225,6 +226,7 @@ public class LoginFrame extends JFrame
 
                 if (new Login().CheckLogin(txtUsername.getText(), txtPassword.getText()))
                 {
+                    LoginFrame.password = txtPassword.getText();
                     LoginFrame.username = txtUsername.getText();
                     new MainFrame().setVisible(true);
                     LoginFrame.this.dispose();

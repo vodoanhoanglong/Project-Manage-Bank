@@ -31,11 +31,12 @@ public class EditProfile extends JFrame
         mainPane.setBorder(null);
         this.setContentPane(mainPane);
         this.setLocationRelativeTo(null);
-        JLabel lblTitle = new JLabel("Edit Profile");
 
+        JLabel lblTitle = new JLabel("Edit Profile");
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         lblTitle.setForeground(Color.BLACK);
         lblTitle.setFont(new Font("Arial", Font.BOLD, 25));
-        lblTitle.setBounds(150,50,200,50);
+        lblTitle.setBounds(0,50,500,50);
         mainPane.add(lblTitle);
 
         JLabel lblLoginMessage = new JLabel("");
@@ -660,7 +661,16 @@ public class EditProfile extends JFrame
                 else if (Integer.parseInt(txtYear.getText()) >= 2003 || Integer.parseInt(txtYear.getText()) <= 1920)
                     lblLoginMessage.setText("Your year old must inside 18 - 100");
                 else
+                {
+                    JOptionPane.showMessageDialog(null, "Save Successful");
+                    EditProfile.this.dispose();
                     new Login().UpdateProfile(txtFullname.getText(), txtGender.getText(), txtPhoneNumber.getText(), birthDay, txtAddress.getText(), LoginFrame.username);
+
+                    if(new Login().CheckGender(LoginFrame.username))
+                        PanelProfile.lblAvatar.setIcon(new ImageIcon(PanelProfile.img_man));
+                    else PanelProfile.lblAvatar.setIcon(new ImageIcon(PanelProfile.img_woman));
+
+                }
             }
             @Override
             public void mouseEntered(MouseEvent e)

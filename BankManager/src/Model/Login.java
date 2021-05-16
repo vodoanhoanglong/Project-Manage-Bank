@@ -193,4 +193,19 @@ public class Login
             System.err.println("Login.java.UpdateProfile: " + exception.getMessage());
         }
     }
+
+    public void UpdatePassword(String password, String username)
+    {
+        String SQL = "use QLNH Update TAIKHOAN set MatKhau = ? where TenTK = ?";
+        try
+        {
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, password);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeQuery();
+        } catch (Exception exception)
+        {
+            System.err.println("Login.java.UpdateProfile: " + exception.getMessage());
+        }
+    }
 }

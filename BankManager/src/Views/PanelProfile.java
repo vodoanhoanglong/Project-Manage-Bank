@@ -9,9 +9,10 @@ import java.awt.event.MouseEvent;
 
 public class PanelProfile extends JPanel
 {
-    private Image img_woman = new ImageIcon(PanelProfile.class.getResource("/Res/avatar_woman.png")).getImage().getScaledInstance(180, 180, Image.SCALE_SMOOTH);
-    private Image img_man = new ImageIcon(PanelProfile.class.getResource("/Res/avatar_man.png")).getImage().getScaledInstance(180, 180, Image.SCALE_SMOOTH);
-
+    public static Image img_woman = new ImageIcon(PanelProfile.class.getResource("/Res/avatar_woman.png")).getImage().getScaledInstance(180, 180, Image.SCALE_SMOOTH);
+    public static Image img_man = new ImageIcon(PanelProfile.class.getResource("/Res/avatar_man.png")).getImage().getScaledInstance(180, 180, Image.SCALE_SMOOTH);
+    public static JLabel lblAvatar;
+    public static JPanel panelAvatar;
 
     public PanelProfile()
     {
@@ -27,12 +28,12 @@ public class PanelProfile extends JPanel
         panelHeader.setLayout(new BoxLayout(panelHeader, BoxLayout.Y_AXIS));
         panelHeader.setBackground(Color.WHITE);
 
-        JLabel lblAvatar = new JLabel("");
+        lblAvatar = new JLabel("");
         if(new Login().CheckGender(LoginFrame.username))
             lblAvatar.setIcon(new ImageIcon(img_man));
         else lblAvatar.setIcon(new ImageIcon(img_woman));
 
-        JPanel panelAvatar = new JPanel();
+        panelAvatar = new JPanel();
         panelAvatar.setBackground(Color.WHITE);
         panelAvatar.setLayout(new FlowLayout(FlowLayout.CENTER,0,20));
         panelAvatar.add(lblAvatar);
@@ -152,6 +153,14 @@ public class PanelProfile extends JPanel
         JPanel panelEditPassword = new RadiusAndShadow();
         panelEditPassword.setBackground(Color.GRAY);
         panelEditPassword.add(new JLabel("Chỉnh sửa mật khẩu"));
+        panelEditPassword.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                new EditPassword().setVisible(true);
+            }
+        });
         panelFooter.add(panelEditPassword, gridBagConstraints);
     }
 }
