@@ -3,10 +3,9 @@ package Views;
 import Model.Login;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class PanelProfile extends JPanel
 {
@@ -29,7 +28,7 @@ public class PanelProfile extends JPanel
         panelHeader.setBackground(Color.WHITE);
 
         JLabel lblAvatar = new JLabel("");
-        if(new Login().CheckGender(LoginFrame.accountNumber))
+        if(new Login().CheckGender(LoginFrame.username))
             lblAvatar.setIcon(new ImageIcon(img_man));
         else lblAvatar.setIcon(new ImageIcon(img_woman));
 
@@ -138,36 +137,12 @@ public class PanelProfile extends JPanel
         JPanel panelEditInf = new RadiusAndShadow();
         panelEditInf.setBackground(Color.GRAY);
         panelEditInf.add(new JLabel("Chỉnh sửa thông tin"));
-        panelFooter.addMouseListener(new MouseListener()
+        panelEditInf.addMouseListener(new MouseAdapter()
         {
             @Override
             public void mouseClicked(MouseEvent e)
             {
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e)
-            {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e)
-            {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e)
-            {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e)
-            {
-
+                new EditProfile().setVisible(true);
             }
         });
         panelFooter.add(panelEditInf, gridBagConstraints);

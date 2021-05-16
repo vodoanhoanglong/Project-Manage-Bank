@@ -14,7 +14,7 @@ import java.awt.event.MouseEvent;
 public class LoginFrame extends JFrame
 {
 
-    public static String accountNumber;
+    public static String username;
 
     private JPanel mainPane;
     private JTextField txtUsername;
@@ -225,7 +225,7 @@ public class LoginFrame extends JFrame
 
                 if (new Login().CheckLogin(txtUsername.getText(), txtPassword.getText()))
                 {
-                    LoginFrame.accountNumber = txtUsername.getText();
+                    LoginFrame.username = txtUsername.getText();
                     new MainFrame().setVisible(true);
                     LoginFrame.this.dispose();
                 } else if (txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password"))

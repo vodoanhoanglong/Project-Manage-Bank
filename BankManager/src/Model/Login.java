@@ -150,13 +150,13 @@ public class Login
             System.err.println("Login.java.InsertDataTAIKHOAN: " + exception.getMessage());
         }
     }
-    public boolean CheckGender(String accountNumber)
+    public boolean CheckGender(String username)
     {
         String SQL = "use QLNH Select GioiTinh From KHACHHANG KH Inner Join TAIKHOAN TK ON KH.CMND = TK.CMND Where TenTK = ?";
         try
         {
             preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, accountNumber);
+            preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             if(resultSet.getInt("GioiTinh") == 1)
@@ -166,5 +166,31 @@ public class Login
             System.err.println("Login.java.CheckGender: " + exception.getMessage());
         }
         return false;
+    }
+    public void UpdateProfile(String fullname, String gender, String phone, String birthDay, String address, String usernme)
+    {
+        int genderLast = -1;
+        if (gender.equalsIgnoreCase("nam"))
+            genderLast = 1;
+        else if (gender.equalsIgnoreCase("nu") || gender.equalsIgnoreCase("nữ"))
+            genderLast = 0;
+
+        String SQL = "use QLNH Update KHACHHANG set TenKH = ?, NgaySinh = ?, GioiTinh = ?, DiaChi=?, SoDienThoai=?\n" +
+                "where CMND = (select KH.CMND from KHACHHANG KH INNER JOIN TAIKHOAN TK ON KH.CMND = TK.CMND where TK.TenTK = ?)";
+
+        try
+        {
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, fullname);
+            preparedStatement.setString(2, birthDay);
+            preparedStatement.setInt(3, genderLast);
+            preparedStatement.setString(4, address);
+            preparedStatement.setString(5, phone);
+            preparedStatement.setString(6, usernme);
+            preparedStatement.executeQuery();
+        } catch (Exception exception)
+        {
+            System.err.println("Login.java.UpdateProfile: " + exception.getMessage());
+        }
     }
 }
