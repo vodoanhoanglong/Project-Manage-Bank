@@ -2,6 +2,7 @@ package Model;
 
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.Random;
 
 
@@ -10,6 +11,9 @@ public class Login
     Connection connection;
     ResultSet resultSet;
     PreparedStatement preparedStatement;
+
+    public static String fullname, gender, address, phone, dateSignUp, balance, accountNumber, born;
+    public static Date birthday, dateRegister;
 
     // khởi tạo k cần funcName
 
@@ -206,6 +210,36 @@ public class Login
         } catch (Exception exception)
         {
             System.err.println("Login.java.UpdateProfile: " + exception.getMessage());
+        }
+    }
+
+    public void getData(String username)
+    {
+        String SQL = "use QLNH select * from KHACHHANG KH INNER JOIN TAIKHOAN TK ON KH.CMND = TK.CMND WHERE TenTK = ?";
+
+        try
+        {
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, username);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            fullname = resultSet.getString(2);
+            birthday = resultSet.getDate(3);
+            born = new SimpleDateFormat("dd-MM-yyyy").format(Login.birthday);
+            gender = resultSet.getString(4);
+            if (gender.equalsIgnoreCase("1"))
+                gender = "Nam";
+            else if (gender.equalsIgnoreCase("0"))
+                gender = "Nữ";
+            address = resultSet.getString(5);
+            phone = resultSet.getString(6);
+            accountNumber = resultSet.getString(7);
+            dateRegister = resultSet.getDate(10);
+            dateSignUp = new SimpleDateFormat("dd-MM-yyyy").format(Login.dateRegister);
+            balance = resultSet.getString(12);
+        } catch (Exception exception)
+        {
+            System.err.println("Login.java.getData: " + exception.getMessage());
         }
     }
 }

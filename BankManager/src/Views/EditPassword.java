@@ -9,7 +9,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class EditPassword extends JFrame
+public class EditPassword extends JDialog
 {
 
 
@@ -19,15 +19,15 @@ public class EditPassword extends JFrame
     }
     public EditPassword()
     {
-        this.setBackground(Color.WHITE);
+        this.setModal(true);
+        this.setBackground(Color.GRAY);
         this.setUndecorated(true);
-        this.setBounds(0, 0, 400, 400);
+        this.setBounds(875, 370, 400, 400);
         JPanel mainPane = new JPanel();
         mainPane.setLayout(null);
         mainPane.setFocusable(true);
         mainPane.setBorder(null);
         this.setContentPane(mainPane);
-        this.setLocationRelativeTo(null);
         JLabel lblTitle = new JLabel("Changes PassWord");
 
         lblTitle.setForeground(Color.BLACK);

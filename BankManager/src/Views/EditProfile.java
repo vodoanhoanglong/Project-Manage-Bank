@@ -9,11 +9,12 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class EditProfile extends JFrame
+public class EditProfile extends JDialog
 {
     private String birthDay;
     public static void main(String[] args)
@@ -22,15 +23,15 @@ public class EditProfile extends JFrame
     }
     public EditProfile()
     {
+        this.setModal(true);
         this.setBackground(Color.WHITE);
         this.setUndecorated(true);
-        this.setBounds(0, 0, 500, 500);
+        this.setBounds(825, 350, 500, 500);
         JPanel mainPane = new JPanel();
         mainPane.setLayout(null);
         mainPane.setFocusable(true);
         mainPane.setBorder(null);
         this.setContentPane(mainPane);
-        this.setLocationRelativeTo(null);
 
         JLabel lblTitle = new JLabel("Edit Profile");
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -646,6 +647,7 @@ public class EditProfile extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
+                String birthDayEdited = txtDay.getText()+"-"+txtMonth.getText()+"-"+txtYear.getText();
                 birthDay = txtYear.getText() + "-" + txtMonth.getText() + "-" + txtDay.getText();
                 if ( txtFullname.getText().equals("") || txtGender.getText().equals("") || txtPhoneNumber.getText().equals("") || txtDay.getText().equals("") || txtMonth.getText().equals("") || txtYear.getText().equals("") || txtAddress.getText().equals("")
                         || txtFullname.getText().equals("Full Name") || txtGender.getText().equals("Gender") || txtPhoneNumber.getText().equals("Phone number") || txtDay.getText().equals("Day") || txtMonth.getText().equals("Month") || txtYear.getText().equals("Year") || txtAddress.getText().equals("Address"))
@@ -671,6 +673,11 @@ public class EditProfile extends JFrame
                         PanelProfile.lblAvatar.setIcon(new ImageIcon(PanelProfile.img_man));
                     else PanelProfile.lblAvatar.setIcon(new ImageIcon(PanelProfile.img_woman));
 
+                    PanelProfile.lblFullName.setText(Login.fullname = txtFullname.getText());
+                    PanelProfile.lblGender.setText(Login.gender = txtGender.getText());
+                    PanelProfile.lblPhone.setText(Login.phone = txtPhoneNumber.getText());
+                    PanelProfile.lblBirthday.setText(birthDayEdited);
+                    PanelProfile.lblAddress.setText(Login.address = txtAddress.getText());
                 }
             }
             @Override
