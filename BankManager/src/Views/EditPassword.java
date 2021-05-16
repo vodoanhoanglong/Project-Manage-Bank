@@ -240,6 +240,7 @@ public class EditPassword extends JFrame
                     EditPassword.this.dispose();
                     LoginFrame.password = txtPassword.getText();
                     new Login().UpdatePassword(txtPassword.getText(), LoginFrame.username);
+
                 }
             }
             @Override

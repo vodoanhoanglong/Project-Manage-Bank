@@ -664,9 +664,10 @@ public class EditProfile extends JFrame
                 {
                     JOptionPane.showMessageDialog(null, "Save Successful");
                     EditProfile.this.dispose();
-                    new Login().UpdateProfile(txtFullname.getText(), txtGender.getText(), txtPhoneNumber.getText(), birthDay, txtAddress.getText(), LoginFrame.username);
+                    Login login = new Login();
+                    login.UpdateProfile(txtFullname.getText(), txtGender.getText(), txtPhoneNumber.getText(), birthDay, txtAddress.getText(), LoginFrame.username);
 
-                    if(new Login().CheckGender(LoginFrame.username))
+                    if(login.CheckGender(LoginFrame.username))
                         PanelProfile.lblAvatar.setIcon(new ImageIcon(PanelProfile.img_man));
                     else PanelProfile.lblAvatar.setIcon(new ImageIcon(PanelProfile.img_woman));
 

@@ -53,7 +53,7 @@ public class PanelProfile extends JPanel
 
         JPanel panelMain = new JPanel();
         panelMain.setBackground(Color.WHITE);
-        panelMain.setLayout(new BorderLayout(100,35));
+        panelMain.setLayout(new BorderLayout(50,35));
         panelMain.add(panelHeader, "North");
 
         this.add(panelMain, "Center");
@@ -72,7 +72,6 @@ public class PanelProfile extends JPanel
         panelMain.add(panelCenter, "Center");
 
         JPanel panelInformation1 = new RadiusAndShadow();
-        panelInformation1.setBackground(Color.GRAY);
         panelInformation1.setLayout(new GridBagLayout());
         panelCenter.add(panelInformation1);
 
@@ -99,7 +98,6 @@ public class PanelProfile extends JPanel
         panelInformation1.add(lblAccountNumber, gbc);
 
         JPanel pnlBalance = new JPanel();
-        pnlBalance.setBackground(Color.WHITE);
         pnlBalance.setLayout(new BoxLayout(pnlBalance, BoxLayout.X_AXIS));
         gbc.gridy = 2;
         panelInformation1.add(pnlBalance, gbc);
@@ -120,6 +118,36 @@ public class PanelProfile extends JPanel
         gbc.gridy = 3;
         panelInformation1.add(lblDate, gbc);
 
+
+        JPanel panelInformation2 = new RadiusAndShadow();
+        panelInformation2.setLayout(new BoxLayout(panelInformation2, BoxLayout.Y_AXIS));
+        panelCenter.add(panelInformation2);
+
+        JLabel lblGender = new JLabel("nam");
+        lblGender.setForeground(Color.black);
+        lblGender.setFont(new Font("Arial", Font.BOLD, 15));
+        panelInformation2.add(Box.createRigidArea(new Dimension(15,10)));
+        panelInformation2.add(lblGender);
+
+        JLabel lblBirthday = new JLabel("03/03/2001");
+        lblBirthday.setForeground(Color.black);
+        lblBirthday.setFont(new Font("Arial", Font.BOLD, 15));
+        panelInformation2.add(Box.createVerticalGlue());
+        panelInformation2.add(lblBirthday);
+
+        JLabel lblPhone = new JLabel("0909230102");
+        lblPhone.setForeground(Color.black);
+        lblPhone.setFont(new Font("Arial", Font.BOLD, 15));
+        panelInformation2.add(Box.createVerticalGlue());
+        panelInformation2.add(lblPhone);
+
+        JLabel lblAddress = new JLabel("183 Nguyễn Văn Tăng P.Long Thạnh Mỹ Q.9 Tp.HCM");
+        lblAddress.setForeground(Color.black);
+        lblAddress.setFont(new Font("Arial", Font.BOLD, 15));
+        panelInformation2.add(Box.createVerticalGlue());
+        panelInformation2.add(lblAddress);
+        panelInformation2.add(Box.createRigidArea(new Dimension(0,10)));
+
         JPanel panelFooter = new JPanel();
         panelFooter.setLayout(new GridBagLayout());
         panelFooter.setBackground(Color.WHITE);
@@ -134,34 +162,92 @@ public class PanelProfile extends JPanel
         gridBagConstraints.weightx = 1;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
 
-        JPanel panelInformation2 = new RadiusAndShadow();
-        panelInformation2.setLayout(new BoxLayout(panelInformation2, BoxLayout.Y_AXIS));
-        panelCenter.add(panelInformation2);
+        JLabel lblEditprofile = new JLabel("Chỉnh sửa thông tin");
+        lblEditprofile.setForeground(Color.black);
+        lblEditprofile.setFont(new Font("Arial", Font.BOLD, 15));
 
         JPanel panelEditInf = new RadiusAndShadow();
-        panelEditInf.setBackground(Color.GRAY);
-        panelEditInf.add(new JLabel("Chỉnh sửa thông tin"));
+        JPanel panelEditPassword = new RadiusAndShadow();
+
+        panelEditInf.setBackground(Color.WHITE);
+        panelEditInf.setLayout(new FlowLayout(FlowLayout.CENTER,0,15));
+        panelEditInf.add(lblEditprofile);
         panelEditInf.addMouseListener(new MouseAdapter()
         {
             @Override
             public void mouseClicked(MouseEvent e)
             {
+                panelEditPassword.setEnabled(false);
+                panelEditInf.setEnabled(false);
                 new EditProfile().setVisible(true);
+            }
+            @Override
+            public void mouseEntered(MouseEvent e)
+            {
+                panelEditInf.setBackground(new Color(162, 85, 113));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e)
+            {
+                panelEditInf.setBackground(Color.WHITE);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e)
+            {
+                panelEditInf.setBackground(new Color(216, 53, 65));
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e)
+            {
+                panelEditInf.setBackground(Color.WHITE);
             }
         });
         panelFooter.add(panelEditInf, gridBagConstraints);
 
         gridBagConstraints.gridx = 2;
 
-        JPanel panelEditPassword = new RadiusAndShadow();
-        panelEditPassword.setBackground(Color.GRAY);
-        panelEditPassword.add(new JLabel("Chỉnh sửa mật khẩu"));
+        JLabel lblEditpassword = new JLabel("Chỉnh sửa mật khẩu");
+        lblEditpassword.setForeground(Color.black);
+        lblEditpassword.setFont(new Font("Arial", Font.BOLD, 15));
+
+
+        panelEditPassword.setLayout(new FlowLayout(FlowLayout.CENTER,0,15));
+        panelEditPassword.add(lblEditpassword);
+        panelEditPassword.setBackground(Color.WHITE);
         panelEditPassword.addMouseListener(new MouseAdapter()
         {
             @Override
             public void mouseClicked(MouseEvent e)
             {
+                panelEditInf.setEnabled(false);
+                panelEditPassword.setEnabled(false);
                 new EditPassword().setVisible(true);
+            }
+            @Override
+            public void mouseEntered(MouseEvent e)
+            {
+                panelEditPassword.setBackground(new Color(162, 85, 113));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e)
+            {
+                panelEditPassword.setBackground(Color.WHITE);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e)
+            {
+                panelEditPassword.setBackground(new Color(216, 53, 65));
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e)
+            {
+                panelEditPassword.setBackground(Color.WHITE);
             }
         });
         panelFooter.add(panelEditPassword, gridBagConstraints);
