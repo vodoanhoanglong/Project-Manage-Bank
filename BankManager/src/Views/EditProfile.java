@@ -9,7 +9,6 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import java.awt.*;
 import java.awt.event.*;
-import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -647,7 +646,6 @@ public class EditProfile extends JDialog
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                String birthDayEdited = txtDay.getText()+"-"+txtMonth.getText()+"-"+txtYear.getText();
                 birthDay = txtYear.getText() + "-" + txtMonth.getText() + "-" + txtDay.getText();
                 if ( txtFullname.getText().equals("") || txtGender.getText().equals("") || txtPhoneNumber.getText().equals("") || txtDay.getText().equals("") || txtMonth.getText().equals("") || txtYear.getText().equals("") || txtAddress.getText().equals("")
                         || txtFullname.getText().equals("Full Name") || txtGender.getText().equals("Gender") || txtPhoneNumber.getText().equals("Phone number") || txtDay.getText().equals("Day") || txtMonth.getText().equals("Month") || txtYear.getText().equals("Year") || txtAddress.getText().equals("Address"))
@@ -676,7 +674,7 @@ public class EditProfile extends JDialog
                     PanelProfile.lblFullName.setText(Login.fullname = txtFullname.getText());
                     PanelProfile.lblGender.setText(Login.gender = txtGender.getText());
                     PanelProfile.lblPhone.setText(Login.phone = txtPhoneNumber.getText());
-                    PanelProfile.lblBirthday.setText(birthDayEdited);
+                    PanelProfile.lblBirthday.setText(login.getBorn(LoginFrame.username));
                     PanelProfile.lblAddress.setText(Login.address = txtAddress.getText());
                 }
             }

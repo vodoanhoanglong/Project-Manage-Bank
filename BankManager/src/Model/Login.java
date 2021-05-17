@@ -242,4 +242,22 @@ public class Login
             System.err.println("Login.java.getData: " + exception.getMessage());
         }
     }
+
+    public String getBorn(String username)
+    {
+        String SQL = "use QLNH select NgaySinh from KHACHHANG KH INNER JOIN TAIKHOAN TK ON KH.CMND = TK.CMND WHERE TenTK = ?";
+        try
+        {
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, username);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            birthday = resultSet.getDate(1);
+        } catch (Exception exception)
+        {
+            System.err.println("Login.java.getDate: " + exception.getMessage());
+        }
+        return new SimpleDateFormat("dd-MM-yyyy").format(Login.birthday);
+    }
+
 }
