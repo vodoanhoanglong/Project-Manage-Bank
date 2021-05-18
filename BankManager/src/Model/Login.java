@@ -1,6 +1,7 @@
 package Model;
 
 
+import java.math.BigInteger;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Random;
@@ -236,7 +237,8 @@ public class Login
             accountNumber = resultSet.getString(7);
             dateRegister = resultSet.getDate(10);
             dateSignUp = new SimpleDateFormat("dd-MM-yyyy").format(Login.dateRegister);
-            balance = resultSet.getString(12);
+            double balanceTemp = resultSet.getDouble(12);
+            balance = String.format("%,.0f", balanceTemp);
         } catch (Exception exception)
         {
             System.err.println("Login.java.getData: " + exception.getMessage());

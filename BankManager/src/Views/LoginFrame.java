@@ -61,6 +61,13 @@ public class LoginFrame extends JFrame
         contentPaneRight.setLayout(null);
         mainPane.add(contentPaneRight);
 
+        JLabel lblLoginMessage = new JLabel("");
+        lblLoginMessage.setForeground(Color.RED);
+        lblLoginMessage.setHorizontalAlignment(SwingConstants.CENTER);
+        lblLoginMessage.setFont(new Font("Arial", Font.BOLD, 12));
+        lblLoginMessage.setBounds(0, 350, 298, 20);
+        contentPaneRight.add(lblLoginMessage);
+
         JLabel lblIconLogoBank = new JLabel("");
         lblIconLogoBank.setHorizontalAlignment(SwingConstants.CENTER);
         lblIconLogoBank.setBounds(30, 42, 250, 111);
@@ -211,12 +218,6 @@ public class LoginFrame extends JFrame
 
 
         // Button Login
-        JLabel lblLoginMessage = new JLabel("");
-        lblLoginMessage.setForeground(Color.RED);
-        lblLoginMessage.setFont(new Font("Arial", Font.BOLD, 12));
-        lblLoginMessage.setBounds(60, 350, 250, 20);
-        contentPaneRight.add(lblLoginMessage);
-
         JPanel pnlBtnLogin = new RadiusAndShadow();
         pnlBtnLogin.addMouseListener(new MouseAdapter()
         {

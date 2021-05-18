@@ -652,9 +652,9 @@ public class EditProfile extends JDialog
                     lblLoginMessage.setText("Please input all requirements!");
                 else if (txtPhoneNumber.getText().length() < 10)
                     lblLoginMessage.setText("Invalid phone number");
-                else if (Integer.parseInt(txtDay.getText()) > 31)
+                else if (Integer.parseInt(txtDay.getText()) > 31 || Integer.parseInt(txtDay.getText()) == 0)
                     lblLoginMessage.setText("Invalid day");
-                else if (Integer.parseInt(txtMonth.getText()) > 12)
+                else if (Integer.parseInt(txtMonth.getText()) > 12 || Integer.parseInt(txtMonth.getText()) == 0)
                     lblLoginMessage.setText("Invalid month");
                 else if (txtYear.getText().length() < 4)
                     lblLoginMessage.setText("Invalid year of birth");
