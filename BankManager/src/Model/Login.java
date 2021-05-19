@@ -262,4 +262,23 @@ public class Login
         return new SimpleDateFormat("dd-MM-yyyy").format(Login.birthday);
     }
 
+    public void getTransfer(String amount, String typeTrade, String accountNumberReceived, String accountNumber)
+    {
+        String SQL = "use QLNH" +
+                " insert into GIAODICH(SoTien, LoaiGD, SoTKNhan, SoTK)" +
+                "values(?,?,?,?)" +
+                "insert into CHITIETGD()";
+        try
+        {
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, amount);
+            preparedStatement.setString(2, typeTrade);
+            preparedStatement.setString(3, accountNumberReceived);
+            preparedStatement.setString(4, accountNumber);
+            preparedStatement.executeQuery();
+        } catch (Exception exception)
+        {
+            System.err.println("Login.java.InsertDataTAIKHOAN: " + exception.getMessage());
+        }
+    }
 }
