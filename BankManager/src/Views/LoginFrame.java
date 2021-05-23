@@ -17,9 +17,10 @@ public class LoginFrame extends JFrame
     public static String username;
     public static String password;
 
+    private MainFrame mainFrame = new MainFrame();
+
     private JPanel mainPane;
-    private JTextField txtUsername;
-    private JPasswordField txtPassword;
+
 
     private Image img_logo_right = new ImageIcon(LoginFrame.class.getResource("/Res/logoright.png")).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
     private Image img_logo = new ImageIcon(LoginFrame.class.getResource("/Res/img_login.jpg")).getImage().getScaledInstance(698, 596, Image.SCALE_SMOOTH);
@@ -87,7 +88,7 @@ public class LoginFrame extends JFrame
         panelUsername.setLayout(null);
         contentPaneRight.add(panelUsername);
 
-        txtUsername = new JTextField();
+        JTextField txtUsername = new JTextField();
         txtUsername.addFocusListener(new FocusAdapter()
         {
             @Override
@@ -137,7 +138,7 @@ public class LoginFrame extends JFrame
         panelPassword.setLayout(null);
         contentPaneRight.add(panelPassword);
 
-        txtPassword = new JPasswordField();
+        JPasswordField txtPassword = new JPasswordField();
         txtPassword.addFocusListener(new FocusAdapter()
         {
             @Override
@@ -224,12 +225,12 @@ public class LoginFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
-
                 if (new Login().CheckLogin(txtUsername.getText(), txtPassword.getText()))
                 {
                     LoginFrame.password = txtPassword.getText();
                     LoginFrame.username = txtUsername.getText();
-                    new MainFrame().setVisible(true);
+                    mainFrame = new MainFrame();
+                    mainFrame.setVisible(true); // loi line nay
                     LoginFrame.this.dispose();
                 } else if (txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password"))
                     lblLoginMessage.setText("Please input all requirements!");

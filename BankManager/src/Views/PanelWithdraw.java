@@ -12,6 +12,8 @@ import java.text.NumberFormat;
 public class PanelWithdraw extends JPanel
 {
     private GridBagConstraints gbc3;
+    private JFormattedTextField formattedTextField;
+    private JTextArea txtContent;
 
     public PanelWithdraw()
     {
@@ -73,7 +75,7 @@ public class PanelWithdraw extends JPanel
         format.setMaximumFractionDigits(0);
         NumberFormatter numberFormat = new NumberFormatter(format);
         numberFormat.setAllowsInvalid(false);
-        JFormattedTextField formattedTextField = new JFormattedTextField(numberFormat);
+        formattedTextField = new JFormattedTextField(numberFormat);
         formattedTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         formattedTextField.setBorder(null);
         formattedTextField.setText("0");
@@ -116,14 +118,14 @@ public class PanelWithdraw extends JPanel
         JPanel content = new RadiusAndShadow();
         content.setBackground(Color.WHITE);
         content.setLayout(new GridBagLayout());
-        JTextArea txtContentWithdraw = new JTextArea();
-        txtContentWithdraw.setBackground(Color.WHITE);
-        txtContentWithdraw.setLineWrap(true);
-        txtContentWithdraw.setBorder(null);
-        txtContentWithdraw.setRows(10);
-        txtContentWithdraw.setColumns(20);
-        txtContentWithdraw.setFont(new Font("Arial", Font.PLAIN, 15));
-        content.add(txtContentWithdraw, gbc3);
+        txtContent = new JTextArea();
+        txtContent.setBackground(Color.WHITE);
+        txtContent.setLineWrap(true);
+        txtContent.setBorder(null);
+        txtContent.setRows(10);
+        txtContent.setColumns(20);
+        txtContent.setFont(new Font("Arial", Font.PLAIN, 15));
+        content.add(txtContent, gbc3);
 
 
         JPanel panelGBLEast = new RadiusAndShadow();
@@ -191,5 +193,12 @@ public class PanelWithdraw extends JPanel
         panelCenter.add(panel3);
         panelCenter.add(Box.createRigidArea(new Dimension(0, 10)));
         panelCenter.add(content);
+    }
+
+    public boolean check()
+    {
+        if (this.formattedTextField.getText().equals("0") || this.txtContent.getText().equals(""))
+            return false;
+        return true;
     }
 }

@@ -12,10 +12,15 @@ public class PanelService extends JPanel
     private CardLayout cardLayout = new CardLayout();
     public static JLabel lblMessage;
 
+    private PanelTransfer transfer;
+    private PanelWithdraw withdraw;
+    private PanelRecharge recharge;
+
+    private int count = 0;
+
     public PanelService()
     {
         this.setLayout(new BorderLayout(0, 0));
-
 
         flowLayout.setAlignment(FlowLayout.CENTER);
         flowLayout.setHgap(80);
@@ -101,6 +106,22 @@ public class PanelService extends JPanel
             @Override
             public void mouseClicked(MouseEvent e)
             {
+                if(count==1)
+                {
+                    if (transfer.check())
+                        lblMessage.setText("Success1");
+                    else lblMessage.setText("Failed1");
+                }else if(count == 2)
+                {
+                    if (recharge.check())
+                        lblMessage.setText("Success2");
+                    else lblMessage.setText("Failed2");
+                }
+                else {
+                    if (withdraw.check())
+                        lblMessage.setText("Success3");
+                    else lblMessage.setText("Failed3");
+                }
             }
             @Override
             public void mouseEntered(MouseEvent e)
@@ -138,8 +159,10 @@ public class PanelService extends JPanel
             @Override
             public void mouseClicked(MouseEvent e)
             {
+                count = 1;
+                transfer = new PanelTransfer();
                 lblMessage.setText("");
-                panelForm.add(new PanelTransfer(), "1");
+                panelForm.add(transfer, "1");
                 panelForm.setVisible(true);
                 cardLayout.show(panelForm, "1");
                 panelFooter.setVisible(true);
@@ -181,8 +204,10 @@ public class PanelService extends JPanel
             @Override
             public void mouseClicked(MouseEvent e)
             {
+                count = 2;
+                recharge = new PanelRecharge();
                 lblMessage.setText("");
-                panelForm.add(new PanelRecharge(), "2");
+                panelForm.add(recharge, "2");
                 panelForm.setVisible(true);
                 cardLayout.show(panelForm, "2");
                 panelFooter.setVisible(true);
@@ -224,8 +249,10 @@ public class PanelService extends JPanel
             @Override
             public void mouseClicked(MouseEvent e)
             {
+                count = 3 ;
+                withdraw = new PanelWithdraw();
                 lblMessage.setText("");
-                panelForm.add(new PanelWithdraw(), "3");
+                panelForm.add(withdraw, "3");
                 panelForm.setVisible(true);
                 cardLayout.show(panelForm, "3");
                 panelFooter.setVisible(true);

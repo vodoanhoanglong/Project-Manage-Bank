@@ -13,6 +13,9 @@ import java.text.NumberFormat;
 public class PanelTransfer extends JPanel
 {
     private GridBagConstraints gbc3;
+    private JTextField txtAccountNumber;
+    private JFormattedTextField formattedTextField;
+    private JTextArea txtContent;
 
     public PanelTransfer()
     {
@@ -37,7 +40,7 @@ public class PanelTransfer extends JPanel
         JPanel accountNumber = new RadiusAndShadow();
         accountNumber.setBackground(Color.white);
         accountNumber.setLayout(new GridBagLayout());
-        JTextField txtAccountNumber = new JTextField();
+        txtAccountNumber = new JTextField();
         txtAccountNumber.addKeyListener(new KeyAdapter()
         {
             @Override
@@ -96,7 +99,7 @@ public class PanelTransfer extends JPanel
         format.setMaximumFractionDigits(0);
         NumberFormatter numberFormat = new NumberFormatter(format);
         numberFormat.setAllowsInvalid(false);
-        JFormattedTextField formattedTextField = new JFormattedTextField(numberFormat);
+        formattedTextField = new JFormattedTextField(numberFormat);
         formattedTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         formattedTextField.setBorder(null);
         formattedTextField.setText("0");
@@ -139,7 +142,7 @@ public class PanelTransfer extends JPanel
         JPanel content = new RadiusAndShadow();
         content.setBackground(Color.WHITE);
         content.setLayout(new GridBagLayout());
-        JTextArea txtContent = new JTextArea();
+        txtContent = new JTextArea();
         txtContent.setBackground(Color.WHITE);
         txtContent.setLineWrap(true);
         txtContent.setBorder(null);
@@ -214,5 +217,12 @@ public class PanelTransfer extends JPanel
         panelCenter.add(panel3);
         panelCenter.add(Box.createRigidArea(new Dimension(0, 10)));
         panelCenter.add(content);
+    }
+
+    public boolean check()
+    {
+        if (this.txtAccountNumber.getText().equals("") || this.formattedTextField.getText().equals("0") || this.txtContent.getText().equals(""))
+            return false;
+        return true;
     }
 }

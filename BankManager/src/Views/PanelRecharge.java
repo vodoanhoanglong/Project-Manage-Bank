@@ -13,6 +13,8 @@ public class PanelRecharge extends JPanel
 {
     private GridBagConstraints gbc3;
 
+    private JFormattedTextField formattedTextField;
+    private JTextArea txtContent;
 
     public PanelRecharge()
     {
@@ -75,30 +77,37 @@ public class PanelRecharge extends JPanel
         format.setMaximumFractionDigits(0);
         NumberFormatter numberFormat = new NumberFormatter(format);
         numberFormat.setAllowsInvalid(false);
-        JFormattedTextField formattedTextField = new JFormattedTextField(numberFormat);
+        formattedTextField = new JFormattedTextField(numberFormat);
         formattedTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         formattedTextField.setBorder(null);
         formattedTextField.setText("0");
-        formattedTextField.addKeyListener(new KeyAdapter() {
+        formattedTextField.addKeyListener(new KeyAdapter()
+        {
             @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9' || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9' || e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
+                {
                     txtAccountNumber.setEditable(true);
                     PanelService.lblMessage.setText("");
-                } else {
+                } else
+                {
                     txtAccountNumber.setEditable(false);
                     PanelService.lblMessage.setText("Enter only numeric digits(0-9)");
                 }
-                if(e.getKeyCode()==KeyEvent.VK_BACK_SPACE){
-                    if(formattedTextField.getText().length() == 1){
+                if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
+                {
+                    if (formattedTextField.getText().length() == 1)
+                    {
                         formattedTextField.setText("0");
                     }
                 }
             }
+
             @Override
             public void keyTyped(KeyEvent e)
             {
-                if(formattedTextField.getText().length() == 27)
+                if (formattedTextField.getText().length() == 27)
                     e.consume();
             }
         });
@@ -111,7 +120,7 @@ public class PanelRecharge extends JPanel
         JPanel content = new RadiusAndShadow();
         content.setBackground(Color.WHITE);
         content.setLayout(new GridBagLayout());
-        JTextArea txtContent = new JTextArea();
+        txtContent = new JTextArea();
         txtContent.setBackground(Color.WHITE);
         txtContent.setLineWrap(true);
         txtContent.setBorder(null);
@@ -124,7 +133,7 @@ public class PanelRecharge extends JPanel
         JPanel panelGBLEast = new RadiusAndShadow();
         panelGBLEast.setPreferredSize(new Dimension(500, 200));
         panelGBLEast.setBackground(Color.WHITE);
-        panelGBLEast.setLayout(new GridLayout(10,1,20,0));
+        panelGBLEast.setLayout(new GridLayout(10, 1, 20, 0));
 
 
         JLabel lblName = new JLabel(Login.fullname);
@@ -168,7 +177,7 @@ public class PanelRecharge extends JPanel
         panel1.add(new JLabel("Account number received"), "Center");
 
         panelCenter.add(panel1);
-        panelCenter.add(Box.createRigidArea(new Dimension(0,10)));
+        panelCenter.add(Box.createRigidArea(new Dimension(0, 10)));
         panelCenter.add(accountNumber);
 
         JPanel panel2 = new JPanel();
@@ -176,7 +185,7 @@ public class PanelRecharge extends JPanel
         panel2.add(new JLabel("Amount"), "Center");
 
         panelCenter.add(panel2);
-        panelCenter.add(Box.createRigidArea(new Dimension(0,10)));
+        panelCenter.add(Box.createRigidArea(new Dimension(0, 10)));
         panelCenter.add(amount);
 
         JPanel panel3 = new JPanel();
@@ -184,7 +193,14 @@ public class PanelRecharge extends JPanel
         panel3.add(new JLabel("Content"), "Center");
 
         panelCenter.add(panel3);
-        panelCenter.add(Box.createRigidArea(new Dimension(0,10)));
+        panelCenter.add(Box.createRigidArea(new Dimension(0, 10)));
         panelCenter.add(content);
+    }
+
+    public boolean check()
+    {
+        if (this.formattedTextField.getText().equals("0") || this.txtContent.getText().equals(""))
+            return false;
+        return true;
     }
 }

@@ -1,6 +1,7 @@
 package Views;
 
 
+import Main.main;
 import Model.Login;
 
 import javax.swing.*;
@@ -12,7 +13,7 @@ import java.awt.event.MouseEvent;
 
 public class MainFrame extends JFrame
 {
-    private Image img_logo = new ImageIcon(Login.class.getResource("/Res/bank.png")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+    private Image img_logo = new ImageIcon(("src/Res/bank.png")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
     private Image img_home = new ImageIcon("src/Res/home.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     private Image img_profile = new ImageIcon("src/Res/user.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
     private Image img_history = new ImageIcon("src/Res/history.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -55,18 +56,6 @@ public class MainFrame extends JFrame
         }
     };
 
-    public static void main(String[] args)
-    {
-        EventQueue.invokeLater(new Runnable()
-        {
-
-            @Override
-            public void run()
-            {
-                new MainFrame().setVisible(true);
-            }
-        });
-    }
 
     public MainFrame()
     {
@@ -263,6 +252,7 @@ public class MainFrame extends JFrame
         this.lblTextLogOut.setFont(new Font("Open Sans", 1, 15));
         this.btnLogOut = new JToggleButton();
         this.btnLogOut.setBorder(new EmptyBorder(0, 0, 0, 0));
+        this.btnLogOut.setUI(this.metalToggleButton);
         this.btnLogOut.setLayout(new FlowLayout(FlowLayout.LEADING,25,5));
         this.btnLogOut.add(lblLogOut);
         this.btnLogOut.add(lblTextLogOut);
@@ -274,11 +264,8 @@ public class MainFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                if (e.getButton() == 1)
-                {
                     new LoginFrame().setVisible(true);
                     MainFrame.this.dispose();
-                }
             }
 
             @Override

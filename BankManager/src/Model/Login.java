@@ -17,7 +17,7 @@ public class Login
     public static Date birthday, dateRegister;
 
     // khởi tạo k cần funcName
-
+    public Login()
     {
         try
         {
@@ -262,19 +262,43 @@ public class Login
         return new SimpleDateFormat("dd-MM-yyyy").format(Login.birthday);
     }
 
-    public void getTransfer(String amount, String typeTrade, String accountNumberReceived, String accountNumber)
+    private boolean checkTradingCode(String tradingCode)
     {
-        String SQL = "use QLNH" +
-                " insert into GIAODICH(SoTien, LoaiGD, SoTKNhan, SoTK)" +
-                "values(?,?,?,?)" +
-                "insert into CHITIETGD()";
+        String SQL = "use QLNH select * from GIAODICH Where MaGD = ?";
         try
         {
             preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, amount);
+            preparedStatement.setString(1, tradingCode);
+            resultSet = preparedStatement.executeQuery();
+            if(!resultSet.next())
+                return false;
+        } catch (Exception exception)
+        {
+            System.err.println("Login.java.InsertDataTAIKHOAN: " + exception.getMessage());
+        }
+        return true;
+    }
+    public void getTransfer(String typeTrade,String accountNumber, String accountNumberReceived, String amount, String content)
+    {
+        String tradingCode = Random(0,9,5);
+        while (checkTradingCode(tradingCode))
+            tradingCode = Random(0,9,5);
+
+        String SQL = "use QLNH" +
+                " insert into GIAODICH(MaGD, LoaiGD)" +
+                "values(?,?)" +
+                "insert into CHITIETGD(MaGD, SoTK, SoTKNhan, SoTien, NoiDungGD)" +
+                "value (?,?,?,?,?)";
+        try
+        {
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, tradingCode);
             preparedStatement.setString(2, typeTrade);
-            preparedStatement.setString(3, accountNumberReceived);
+            preparedStatement.setString(3, tradingCode);
             preparedStatement.setString(4, accountNumber);
+            preparedStatement.setString(5,accountNumberReceived);
+            preparedStatement.setString(6, amount);
+            preparedStatement.setString(7,content);
             preparedStatement.executeQuery();
         } catch (Exception exception)
         {
