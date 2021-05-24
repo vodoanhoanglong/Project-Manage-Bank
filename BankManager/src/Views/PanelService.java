@@ -108,9 +108,7 @@ public class PanelService extends JPanel
             {
                 if(count==1)
                 {
-                    if (transfer.check())
-                        lblMessage.setText("Success1");
-                    else lblMessage.setText("Failed1");
+                        lblMessage.setText(transfer.check());
                 }else if(count == 2)
                 {
                     if (recharge.check())

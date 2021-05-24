@@ -1,7 +1,6 @@
 package Model;
 
 
-import java.math.BigInteger;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Random;
@@ -15,6 +14,7 @@ public class Login
 
     public static String fullname, gender, address, phone, dateSignUp, balance, accountNumber, born;
     public static Date birthday, dateRegister;
+    public static double balanceService;
 
     // khởi tạo k cần funcName
     public Login()
@@ -210,7 +210,7 @@ public class Login
             preparedStatement.executeQuery();
         } catch (Exception exception)
         {
-            System.err.println("Login.java.UpdateProfile: " + exception.getMessage());
+            System.err.println("Login.java.UpdatePassword: " + exception.getMessage());
         }
     }
 
@@ -237,8 +237,8 @@ public class Login
             accountNumber = resultSet.getString(7);
             dateRegister = resultSet.getDate(10);
             dateSignUp = new SimpleDateFormat("dd-MM-yyyy").format(Login.dateRegister);
-            double balanceTemp = resultSet.getDouble(12);
-            balance = String.format("%,.0f", balanceTemp);
+            balanceService = resultSet.getDouble(12);
+            balance = String.format("%,.0f", balanceService);
         } catch (Exception exception)
         {
             System.err.println("Login.java.getData: " + exception.getMessage());
@@ -257,12 +257,12 @@ public class Login
             birthday = resultSet.getDate(1);
         } catch (Exception exception)
         {
-            System.err.println("Login.java.getDate: " + exception.getMessage());
+            System.err.println("Login.java.getBorn: " + exception.getMessage());
         }
         return new SimpleDateFormat("dd-MM-yyyy").format(Login.birthday);
     }
 
-    private boolean checkTradingCode(String tradingCode)
+    public boolean checkTradingCode(String tradingCode)
     {
         String SQL = "use QLNH select * from GIAODICH Where MaGD = ?";
         try
@@ -274,12 +274,34 @@ public class Login
                 return false;
         } catch (Exception exception)
         {
-            System.err.println("Login.java.InsertDataTAIKHOAN: " + exception.getMessage());
+            System.err.println("Login.java.checkTradingCode: " + exception.getMessage());
         }
         return true;
     }
-    public void getTransfer(String typeTrade,String accountNumber, String accountNumberReceived, String amount, String content)
+
+    public void updateAccountNumberTransfer(String accountNumber, String accountNumberReceived, double amount)
     {
+        String SQL = "use QLNH \n" +
+                " UPDATE TAIKHOAN SET SoDu = SoDu - ? WHERE SoTK = ?"
+                +" UPDATE TAIKHOAN SET SoDu = SoDu + ? WHERE SoTK = ?";
+        try
+        {
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setDouble(1, amount);
+            preparedStatement.setString(2,accountNumber);
+            preparedStatement.setDouble(3, amount);
+            preparedStatement.setString(4, accountNumberReceived);
+            preparedStatement.executeQuery();
+        }catch (Exception exception)
+        {
+            System.err.println("Login.java.updateAccountNumberTransfer: " + exception.getMessage());
+        }
+    }
+    public boolean updateTransfer(String typeTrade, String accountNumber, String accountNumberReceived, double amount, String content)
+    {
+        if(balanceService < amount)
+            return false;
+        updateAccountNumberTransfer(accountNumber, accountNumberReceived, amount);
         String tradingCode = Random(0,9,5);
         while (checkTradingCode(tradingCode))
             tradingCode = Random(0,9,5);
@@ -288,7 +310,7 @@ public class Login
                 " insert into GIAODICH(MaGD, LoaiGD)" +
                 "values(?,?)" +
                 "insert into CHITIETGD(MaGD, SoTK, SoTKNhan, SoTien, NoiDungGD)" +
-                "value (?,?,?,?,?)";
+                "values (?,?,?,?,?)";
         try
         {
             preparedStatement = connection.prepareStatement(SQL);
@@ -297,12 +319,40 @@ public class Login
             preparedStatement.setString(3, tradingCode);
             preparedStatement.setString(4, accountNumber);
             preparedStatement.setString(5,accountNumberReceived);
-            preparedStatement.setString(6, amount);
+            preparedStatement.setDouble(6, amount);
             preparedStatement.setString(7,content);
             preparedStatement.executeQuery();
         } catch (Exception exception)
         {
-            System.err.println("Login.java.InsertDataTAIKHOAN: " + exception.getMessage());
+            System.err.println("Login.java.updateTransfer: " + exception.getMessage());
+        }
+        return true;
+    }
+
+    public void updateWithDrawAndRecharge(String typeTrade, String accountNumber, double amount, String content)
+    {
+        String tradingCode = Random(0,9,5);
+        while (checkTradingCode(tradingCode))
+            tradingCode = Random(0,9,5);
+
+        String SQL = "use QLNH" +
+                " insert into GIAODICH(MaGD, LoaiGD)" +
+                "values(?,?)" +
+                "insert into CHITIETGD(MaGD, SoTK, SoTien, NoiDungGD)" +
+                "value (?,?,?,?)";
+        try
+        {
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, tradingCode);
+            preparedStatement.setString(2, typeTrade);
+            preparedStatement.setString(3, tradingCode);
+            preparedStatement.setString(4, accountNumber);
+            preparedStatement.setDouble(5, amount);
+            preparedStatement.setString(6,content);
+            preparedStatement.executeQuery();
+        } catch (Exception exception)
+        {
+            System.err.println("Login.java.insertWithDrawAndRecharge: " + exception.getMessage());
         }
     }
 }

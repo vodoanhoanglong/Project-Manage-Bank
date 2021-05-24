@@ -12,7 +12,7 @@ import java.text.NumberFormat;
 public class PanelWithdraw extends JPanel
 {
     private GridBagConstraints gbc3;
-    private JFormattedTextField formattedTextField;
+    private JFormattedTextField txtAmount;
     private JTextArea txtContent;
 
     public PanelWithdraw()
@@ -75,11 +75,11 @@ public class PanelWithdraw extends JPanel
         format.setMaximumFractionDigits(0);
         NumberFormatter numberFormat = new NumberFormatter(format);
         numberFormat.setAllowsInvalid(false);
-        formattedTextField = new JFormattedTextField(numberFormat);
-        formattedTextField.setFont(new Font("Arial", Font.PLAIN, 15));
-        formattedTextField.setBorder(null);
-        formattedTextField.setText("0");
-        formattedTextField.addKeyListener(new KeyAdapter()
+        txtAmount = new JFormattedTextField(numberFormat);
+        txtAmount.setFont(new Font("Arial", Font.PLAIN, 15));
+        txtAmount.setBorder(null);
+        txtAmount.setText("0");
+        txtAmount.addKeyListener(new KeyAdapter()
         {
             @Override
             public void keyPressed(KeyEvent e)
@@ -95,9 +95,9 @@ public class PanelWithdraw extends JPanel
                 }
                 if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
                 {
-                    if (formattedTextField.getText().length() == 1)
+                    if (txtAmount.getText().length() == 1)
                     {
-                        formattedTextField.setText("0");
+                        txtAmount.setText("0");
                     }
                 }
             }
@@ -105,11 +105,11 @@ public class PanelWithdraw extends JPanel
             @Override
             public void keyTyped(KeyEvent e)
             {
-                if (formattedTextField.getText().length() == 27)
+                if (txtAmount.getText().length() == 27)
                     e.consume();
             }
         });
-        panelAmount.add(formattedTextField);
+        panelAmount.add(txtAmount);
         panelAmount.add(Box.createHorizontalGlue());
         panelAmount.add(panelVND);
 
@@ -197,8 +197,9 @@ public class PanelWithdraw extends JPanel
 
     public boolean check()
     {
-        if (this.formattedTextField.getText().equals("0") || this.txtContent.getText().equals(""))
+        if (this.txtAmount.getText().equals("0") || this.txtContent.getText().equals(""))
             return false;
+//        new Login().updateWithDrawAndRecharge("Rút tiền", Login.accountNumber, Double.parseDouble(txtAmount.getText().replaceAll("[^Z0-9]", "")), txtContent.getText());
         return true;
     }
 }

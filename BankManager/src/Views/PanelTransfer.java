@@ -14,7 +14,7 @@ public class PanelTransfer extends JPanel
 {
     private GridBagConstraints gbc3;
     private JTextField txtAccountNumber;
-    private JFormattedTextField formattedTextField;
+    private JFormattedTextField txtAmount;
     private JTextArea txtContent;
 
     public PanelTransfer()
@@ -99,11 +99,11 @@ public class PanelTransfer extends JPanel
         format.setMaximumFractionDigits(0);
         NumberFormatter numberFormat = new NumberFormatter(format);
         numberFormat.setAllowsInvalid(false);
-        formattedTextField = new JFormattedTextField(numberFormat);
-        formattedTextField.setFont(new Font("Arial", Font.PLAIN, 15));
-        formattedTextField.setBorder(null);
-        formattedTextField.setText("0");
-        formattedTextField.addKeyListener(new KeyAdapter()
+        txtAmount = new JFormattedTextField(numberFormat);
+        txtAmount.setFont(new Font("Arial", Font.PLAIN, 15));
+        txtAmount.setBorder(null);
+        txtAmount.setText("0");
+        txtAmount.addKeyListener(new KeyAdapter()
         {
             @Override
             public void keyPressed(KeyEvent e)
@@ -119,9 +119,9 @@ public class PanelTransfer extends JPanel
                 }
                 if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
                 {
-                    if (formattedTextField.getText().length() == 1)
+                    if (txtAmount.getText().length() == 1)
                     {
-                        formattedTextField.setText("0");
+                        txtAmount.setText("0");
                     }
                 }
             }
@@ -129,11 +129,11 @@ public class PanelTransfer extends JPanel
             @Override
             public void keyTyped(KeyEvent e)
             {
-                if (formattedTextField.getText().length() == 27)
+                if (txtAmount.getText().length() == 27)
                     e.consume();
             }
         });
-        panelAmount.add(formattedTextField);
+        panelAmount.add(txtAmount);
         panelAmount.add(Box.createHorizontalGlue());
         panelAmount.add(panelVND);
 
@@ -219,10 +219,17 @@ public class PanelTransfer extends JPanel
         panelCenter.add(content);
     }
 
-    public boolean check()
+    public String check()
     {
-        if (this.txtAccountNumber.getText().equals("") || this.formattedTextField.getText().equals("0") || this.txtContent.getText().equals(""))
-            return false;
-        return true;
+        Login login = new Login();
+        if (this.txtAccountNumber.getText().equals("") || this.txtAmount.getText().equals("0") || this.txtContent.getText().equals(""))
+            return "Please input full";
+        else if(Login.accountNumber.equals(txtAccountNumber.getText()))
+            return "Account number received must different your account number";
+        else if(!login.CheckSignUpSoTK(txtAccountNumber.getText()))
+            return "Account number do not exist";
+        else if(!login.updateTransfer("Chuyển tiền", Login.accountNumber, txtAccountNumber.getText(), Double.parseDouble(txtAmount.getText().replaceAll("[^Z0-9]", "")), txtContent.getText()))
+            return "Balance enough";
+        else return "Success";
     }
 }
