@@ -14,6 +14,7 @@ public class PanelWithdraw extends JPanel
     private GridBagConstraints gbc3;
     private JFormattedTextField txtAmount;
     private JTextArea txtContent;
+    private JLabel lblBalanceData = new JLabel(Login.balance);
 
     public PanelWithdraw()
     {
@@ -157,7 +158,7 @@ public class PanelWithdraw extends JPanel
         JPanel panelBalance = new JPanel();
         panelBalance.setBackground(Color.WHITE);
         panelBalance.add(lblBalance);
-        panelBalance.add(new JLabel(Login.balance));
+        panelBalance.add(lblBalanceData);
         panelBalance.add(new JLabel("VNĐ"));
         panelGBLEast.add(panelBalance);
 
@@ -195,11 +196,18 @@ public class PanelWithdraw extends JPanel
         panelCenter.add(content);
     }
 
-    public boolean check()
+    public String check()
     {
+        Login login = new Login();
         if (this.txtAmount.getText().equals("0") || this.txtContent.getText().equals(""))
-            return false;
-//        new Login().updateWithDrawAndRecharge("Rút tiền", Login.accountNumber, Double.parseDouble(txtAmount.getText().replaceAll("[^Z0-9]", "")), txtContent.getText());
-        return true;
+            return "Please input full";
+        else if(!login.updateWithDrawAndRecharge("Rút tiền", Login.accountNumber, Double.parseDouble(txtAmount.getText().replaceAll("[^Z0-9]", "")), txtContent.getText()))
+            return "Balance enough";
+        else
+        {
+            login.getData(LoginFrame.username);
+            this.lblBalanceData.setText(login.balance);
+            return "Success";
+        }
     }
 }

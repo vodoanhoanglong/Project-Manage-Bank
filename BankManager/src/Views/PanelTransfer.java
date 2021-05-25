@@ -16,6 +16,7 @@ public class PanelTransfer extends JPanel
     private JTextField txtAccountNumber;
     private JFormattedTextField txtAmount;
     private JTextArea txtContent;
+    private JLabel lblBalanceData = new JLabel(Login.balance);
 
     public PanelTransfer()
     {
@@ -181,7 +182,7 @@ public class PanelTransfer extends JPanel
         JPanel panelBalance = new JPanel();
         panelBalance.setBackground(Color.WHITE);
         panelBalance.add(lblBalance);
-        panelBalance.add(new JLabel(Login.balance));
+        panelBalance.add(lblBalanceData);
         panelBalance.add(new JLabel("VNĐ"));
         panelGBLEast.add(panelBalance);
 
@@ -230,6 +231,11 @@ public class PanelTransfer extends JPanel
             return "Account number do not exist";
         else if(!login.updateTransfer("Chuyển tiền", Login.accountNumber, txtAccountNumber.getText(), Double.parseDouble(txtAmount.getText().replaceAll("[^Z0-9]", "")), txtContent.getText()))
             return "Balance enough";
-        else return "Success";
+        else
+        {
+            login.getData(LoginFrame.username);
+            this.lblBalanceData.setText(login.balance);
+            return "Success";
+        }
     }
 }

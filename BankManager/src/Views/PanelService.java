@@ -31,7 +31,7 @@ public class PanelService extends JPanel
         this.add(panelHeader, "North");
 
         JPanel panelFooter = new JPanel();
-        panelFooter.setLayout(new BorderLayout(0,0));
+        panelFooter.setLayout(new BorderLayout(0, 0));
         panelFooter.setVisible(false);
         this.add(panelFooter, "South");
 
@@ -39,12 +39,12 @@ public class PanelService extends JPanel
         JPanel panelForm = new JPanel();
         panelForm.setLayout(cardLayout);
         panelForm.add(new ScaleImg("/Res/img_service.jpg"), "4");
-        cardLayout.show(panelForm,"4");
+        cardLayout.show(panelForm, "4");
         this.add(panelForm, "Center");
 
         JPanel panelMessage = new JPanel();
-        panelMessage.setLayout(new FlowLayout(FlowLayout.CENTER,0,10));
-        panelMessage.setPreferredSize(new Dimension(500,30));
+        panelMessage.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 10));
+        panelMessage.setPreferredSize(new Dimension(500, 30));
         panelFooter.add(panelMessage, "North");
 
         lblMessage = new JLabel("");
@@ -69,6 +69,7 @@ public class PanelService extends JPanel
                 cardLayout.show(panelForm, "4");
                 panelFooter.setVisible(false);
             }
+
             @Override
             public void mouseEntered(MouseEvent e)
             {
@@ -93,7 +94,7 @@ public class PanelService extends JPanel
                 panelCancel.setBackground(Color.WHITE);
             }
         });
-        panelCancel.setLayout(new FlowLayout(FlowLayout.CENTER,0,10));
+        panelCancel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 10));
         panelCancel.setPreferredSize(new Dimension(170, 50));
         footer.add(panelCancel);
 
@@ -106,21 +107,14 @@ public class PanelService extends JPanel
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                if(count==1)
-                {
-                        lblMessage.setText(transfer.check());
-                }else if(count == 2)
-                {
-                    if (recharge.check())
-                        lblMessage.setText("Success2");
-                    else lblMessage.setText("Failed2");
-                }
-                else {
-                    if (withdraw.check())
-                        lblMessage.setText("Success3");
-                    else lblMessage.setText("Failed3");
-                }
+                if (count == 1)
+                    lblMessage.setText(transfer.check());
+                else if (count == 2)
+                    lblMessage.setText(recharge.check());
+                else
+                    lblMessage.setText(withdraw.check());
             }
+
             @Override
             public void mouseEntered(MouseEvent e)
             {
@@ -145,7 +139,7 @@ public class PanelService extends JPanel
                 panelConfirm.setBackground(Color.WHITE);
             }
         });
-        panelConfirm.setLayout(new FlowLayout(FlowLayout.CENTER,0,10));
+        panelConfirm.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 10));
         panelConfirm.setPreferredSize(new Dimension(170, 50));
         footer.add(panelConfirm);
 
@@ -165,6 +159,7 @@ public class PanelService extends JPanel
                 cardLayout.show(panelForm, "1");
                 panelFooter.setVisible(true);
             }
+
             @Override
             public void mouseEntered(MouseEvent e)
             {
@@ -189,7 +184,7 @@ public class PanelService extends JPanel
                 panelTransfer.setBackground(Color.WHITE);
             }
         });
-        panelTransfer.setLayout(new FlowLayout(FlowLayout.CENTER,0,20));
+        panelTransfer.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
         panelTransfer.setPreferredSize(new Dimension(170, 80));
         panelHeader.add(panelTransfer);
 
@@ -210,6 +205,7 @@ public class PanelService extends JPanel
                 cardLayout.show(panelForm, "2");
                 panelFooter.setVisible(true);
             }
+
             @Override
             public void mouseEntered(MouseEvent e)
             {
@@ -234,7 +230,7 @@ public class PanelService extends JPanel
                 panelRecharge.setBackground(Color.WHITE);
             }
         });
-        panelRecharge.setLayout(new FlowLayout(FlowLayout.CENTER,0,20));
+        panelRecharge.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
         panelRecharge.setPreferredSize(new Dimension(170, 80));
         panelHeader.add(panelRecharge);
 
@@ -247,7 +243,7 @@ public class PanelService extends JPanel
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                count = 3 ;
+                count = 3;
                 withdraw = new PanelWithdraw();
                 lblMessage.setText("");
                 panelForm.add(withdraw, "3");
@@ -255,6 +251,7 @@ public class PanelService extends JPanel
                 cardLayout.show(panelForm, "3");
                 panelFooter.setVisible(true);
             }
+
             @Override
             public void mouseEntered(MouseEvent e)
             {
@@ -279,7 +276,7 @@ public class PanelService extends JPanel
                 panelWithdraw.setBackground(Color.WHITE);
             }
         });
-        panelWithdraw.setLayout(new FlowLayout(FlowLayout.CENTER,0,20));
+        panelWithdraw.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
         panelWithdraw.setPreferredSize(new Dimension(170, 80));
         panelHeader.add(panelWithdraw);
 

@@ -328,9 +328,30 @@ public class Login
         }
         return true;
     }
-
-    public void updateWithDrawAndRecharge(String typeTrade, String accountNumber, double amount, String content)
+    public void updateAccountNumber(String typeTrade, String accountNumber, double amount)
     {
+        String SQL;
+        if(typeTrade.equals("Rút tiền"))
+            SQL = "use QLNH update TAIKHOAN set SoDu = SoDu - ? where SoTK = ?";
+        else SQL = "use QLNH update TAIKHOAN set SoDu = SoDu + ? where SoTK = ?";
+        try
+        {
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setDouble(1, amount);
+            preparedStatement.setString(2,accountNumber);
+            preparedStatement.executeQuery();
+        }catch (Exception exception)
+        {
+            System.err.println("Login.java.updateAccountNumber: " + exception.getMessage());
+        }
+    }
+
+    public boolean updateWithDrawAndRecharge(String typeTrade, String accountNumber, double amount, String content)
+    {
+        if(typeTrade.equals("Rút tiền"))
+            if(balanceService < amount)
+                return false;
+        updateAccountNumber(typeTrade, accountNumber, amount);
         String tradingCode = Random(0,9,5);
         while (checkTradingCode(tradingCode))
             tradingCode = Random(0,9,5);
@@ -339,7 +360,7 @@ public class Login
                 " insert into GIAODICH(MaGD, LoaiGD)" +
                 "values(?,?)" +
                 "insert into CHITIETGD(MaGD, SoTK, SoTien, NoiDungGD)" +
-                "value (?,?,?,?)";
+                "values (?,?,?,?)";
         try
         {
             preparedStatement = connection.prepareStatement(SQL);
@@ -354,5 +375,6 @@ public class Login
         {
             System.err.println("Login.java.insertWithDrawAndRecharge: " + exception.getMessage());
         }
+        return true;
     }
 }
