@@ -1,5 +1,6 @@
 package Views;
 
+import Controller.LoginController;
 import Model.Login;
 
 import javax.swing.*;
@@ -225,7 +226,7 @@ public class LoginFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                if (new Login().CheckLogin(txtUsername.getText(), txtPassword.getText()))
+                if (LoginController.CheckLogin(txtUsername.getText(), txtPassword.getText()))
                 {
                     LoginFrame.password = txtPassword.getText();
                     LoginFrame.username = txtUsername.getText();

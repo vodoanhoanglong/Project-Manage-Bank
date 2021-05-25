@@ -204,9 +204,10 @@ public class PanelRecharge extends JPanel
             return "Please input full";
         else
         {
-            login.updateWithDrawAndRecharge("Chuyển tiền", Login.accountNumber, Double.parseDouble(txtAmount.getText().replaceAll("[^Z0-9]", "")), txtContent.getText());
-            login.getData(LoginFrame.username);
+            login.updateWithDrawAndRecharge("Nạp tiền", Login.accountNumber, Double.parseDouble(txtAmount.getText().replaceAll("[^Z0-9]", "")), txtContent.getText());
+            login.getUserData(LoginFrame.username);
             this.lblBalanceData.setText(login.balance);
+            PanelProfile.lblBalance.setText(login.balance);
             return "Success";
         }
     }

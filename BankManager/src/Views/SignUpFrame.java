@@ -1,5 +1,6 @@
 package Views;
 
+import Controller.LoginController;
 import Model.Login;
 
 import javax.swing.*;
@@ -1039,8 +1040,8 @@ public class SignUpFrame extends JFrame
         JPanel pnlBtnSignUp = new RadiusAndShadow();
         pnlBtnSignUp.addMouseListener(new MouseAdapter()
         {
-            Login login = new Login();
-            String accountNumber = login.Random(0, 9, 10);
+
+            String accountNumber = LoginController.Random(0, 9, 10);
 
             @Override
             public void mouseClicked(MouseEvent e)
@@ -1070,13 +1071,13 @@ public class SignUpFrame extends JFrame
                     lblLoginMessage.setText("Password must be 8 characters or more");
                 else if (!txtPassword.getText().equals(txtPasswordConfirm.getText()))
                     lblLoginMessage.setText("Password confirm is not correct!");
-                else if (login.CheckCMND(txtCMND.getText()))
+                else if (LoginController.CheckCMND(txtCMND.getText()))
                 {
-                    while (login.CheckSignUpSoTK(accountNumber))
-                        accountNumber = login.Random(0, 9, 10);
-                    if (!login.CheckSignUpTenTK(txtUsername.getText()))
+                    while (LoginController.CheckSignUpSoTK(accountNumber))
+                        accountNumber = LoginController.Random(0, 9, 10);
+                    if (!LoginController.CheckSignUpTenTK(txtUsername.getText()))
                     {
-                        login.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
+                        LoginController.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
                         lblLoginMessage.setText("");
                         JOptionPane.showMessageDialog(null, "SignUp Successful");
                         new LoginFrame().setVisible(true);
@@ -1086,12 +1087,12 @@ public class SignUpFrame extends JFrame
                 } else
                 {
                     birthDay = txtYear.getText() + "-" + txtMonth.getText() + "-" + txtDay.getText();
-                    login.InsertDataKHACHHANG(txtCMND.getText(), txtFullname.getText(), txtPhoneNumber.getText(), txtGender.getText(), birthDay, txtAddress.getText());
-                    while (login.CheckSignUpSoTK(accountNumber))
-                        accountNumber = login.Random(0, 9, 10);
-                    if (!login.CheckSignUpTenTK(txtUsername.getText()))
+                    LoginController.InsertDataKHACHHANG(txtCMND.getText(), txtFullname.getText(), txtPhoneNumber.getText(), txtGender.getText(), birthDay, txtAddress.getText());
+                    while (LoginController.CheckSignUpSoTK(accountNumber))
+                        accountNumber = LoginController.Random(0, 9, 10);
+                    if (!LoginController.CheckSignUpTenTK(txtUsername.getText()))
                     {
-                        login.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
+                        LoginController.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
                         lblLoginMessage.setText("");
                         JOptionPane.showMessageDialog(null, "SignUp Successful");
                         new LoginFrame().setVisible(true);

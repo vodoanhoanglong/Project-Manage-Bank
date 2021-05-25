@@ -1,5 +1,6 @@
 package Views;
 
+import Controller.LoginController;
 import Model.Login;
 
 import javax.swing.*;
@@ -222,19 +223,19 @@ public class PanelTransfer extends JPanel
 
     public String check()
     {
-        Login login = new Login();
         if (this.txtAccountNumber.getText().equals("") || this.txtAmount.getText().equals("0") || this.txtContent.getText().equals(""))
             return "Please input full";
-        else if(Login.accountNumber.equals(txtAccountNumber.getText()))
+        else if(LoginController.accountNumber.equals(txtAccountNumber.getText()))
             return "Account number received must different your account number";
-        else if(!login.CheckSignUpSoTK(txtAccountNumber.getText()))
+        else if(!LoginController.CheckSignUpSoTK(txtAccountNumber.getText()))
             return "Account number do not exist";
-        else if(!login.updateTransfer("Chuyển tiền", Login.accountNumber, txtAccountNumber.getText(), Double.parseDouble(txtAmount.getText().replaceAll("[^Z0-9]", "")), txtContent.getText()))
+        else if(!LoginController.updateTransfer("Chuyển tiền", Login.accountNumber, txtAccountNumber.getText(), Double.parseDouble(txtAmount.getText().replaceAll("[^Z0-9]", "")), txtContent.getText()))
             return "Balance enough";
         else
         {
-            login.getData(LoginFrame.username);
-            this.lblBalanceData.setText(login.balance);
+            LoginController.getUserData(LoginFrame.username);
+            this.lblBalanceData.setText(LoginController.balance);
+            PanelProfile.lblBalance.setText(LoginController.balance);
             return "Success";
         }
     }

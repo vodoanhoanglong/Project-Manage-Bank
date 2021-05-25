@@ -205,8 +205,9 @@ public class PanelWithdraw extends JPanel
             return "Balance enough";
         else
         {
-            login.getData(LoginFrame.username);
+            login.getUserData(LoginFrame.username);
             this.lblBalanceData.setText(login.balance);
+            PanelProfile.lblBalance.setText(login.balance);
             return "Success";
         }
     }

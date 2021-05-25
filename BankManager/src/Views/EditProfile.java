@@ -671,6 +671,8 @@ public class EditProfile extends JDialog
                         PanelProfile.lblAvatar.setIcon(new ImageIcon(PanelProfile.img_man));
                     else PanelProfile.lblAvatar.setIcon(new ImageIcon(PanelProfile.img_woman));
 
+                    MainFrame.btnProfile.setText(Login.fullname = txtFullname.getText());
+
                     PanelProfile.lblFullName.setText(Login.fullname = txtFullname.getText());
                     PanelProfile.lblGender.setText(Login.gender = txtGender.getText());
                     PanelProfile.lblPhone.setText(Login.phone = txtPhoneNumber.getText());

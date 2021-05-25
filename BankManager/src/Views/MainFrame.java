@@ -1,7 +1,6 @@
 package Views;
 
 
-import Main.main;
 import Model.Login;
 
 import javax.swing.*;
@@ -56,9 +55,12 @@ public class MainFrame extends JFrame
         }
     };
 
+    public static JLabel btnProfile;
 
     public MainFrame()
     {
+        new Login().getUserData(LoginFrame.username);
+
         this.setDefaultCloseOperation(3);
         this.setBounds(100, 100, 1383, 773);
         this.contentPane = new JPanel();
@@ -313,11 +315,10 @@ public class MainFrame extends JFrame
         toolPanel.setBorder(null);
         detailsPanel.add((Component) toolPanel, "North");
 
-
-        JLabel btnProfile = new JLabel();
+        btnProfile = new JLabel(Login.fullname);
         btnProfile.setIcon(new ImageIcon(img_profile));
         btnProfile.setFocusable(false);
-        btnProfile.setHorizontalTextPosition(4);
+        btnProfile.setHorizontalTextPosition(SwingConstants.LEADING);
         btnProfile.setBorder(null);
         btnProfile.setToolTipText("Thông tin cá nhân");
         btnProfile.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
