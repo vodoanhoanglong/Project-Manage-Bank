@@ -17,7 +17,7 @@ public class PanelTransfer extends JPanel
     private JTextField txtAccountNumber;
     private JFormattedTextField txtAmount;
     private JTextArea txtContent;
-    private JLabel lblBalanceData = new JLabel(Login.balance);
+    private JLabel lblBalanceData = new JLabel(LoginController.balance);
 
     public PanelTransfer()
     {
@@ -160,7 +160,7 @@ public class PanelTransfer extends JPanel
         panelGBLEast.setLayout(new GridLayout(10, 1, 20, 0));
 
 
-        JLabel lblName = new JLabel(Login.fullname);
+        JLabel lblName = new JLabel(LoginController.fullname);
         lblName.setForeground(Color.RED);
         lblName.setFont(new Font("Arial", Font.BOLD, 20));
         JPanel panelName = new JPanel();
@@ -174,7 +174,7 @@ public class PanelTransfer extends JPanel
         JPanel panelAccountNumber = new JPanel();
         panelAccountNumber.setBackground(Color.WHITE);
         panelAccountNumber.add(lblAccountNumber);
-        panelAccountNumber.add(new JLabel(Login.accountNumber));
+        panelAccountNumber.add(new JLabel(LoginController.accountNumber));
         panelGBLEast.add(panelAccountNumber);
 
 
@@ -229,7 +229,7 @@ public class PanelTransfer extends JPanel
             return "Account number received must different your account number";
         else if(!LoginController.CheckSignUpSoTK(txtAccountNumber.getText()))
             return "Account number do not exist";
-        else if(!LoginController.updateTransfer("Chuyển tiền", Login.accountNumber, txtAccountNumber.getText(), Double.parseDouble(txtAmount.getText().replaceAll("[^Z0-9]", "")), txtContent.getText()))
+        else if(!LoginController.updateTransfer("Chuyển tiền", LoginController.accountNumber, txtAccountNumber.getText(), Double.parseDouble(txtAmount.getText().replaceAll("[^Z0-9]", "")), txtContent.getText()))
             return "Balance enough";
         else
         {

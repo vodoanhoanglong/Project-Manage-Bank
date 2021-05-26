@@ -31,7 +31,7 @@ public class PanelProfile extends JPanel
         panelHeader.setBackground(Color.WHITE);
 
         lblAvatar = new JLabel("");
-        if(new Login().CheckGender(LoginFrame.username))
+        if(LoginController.CheckGender(LoginFrame.username))
             lblAvatar.setIcon(new ImageIcon(img_man));
         else lblAvatar.setIcon(new ImageIcon(img_woman));
 

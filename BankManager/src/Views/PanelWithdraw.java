@@ -1,5 +1,6 @@
 package Views;
 
+import Controller.LoginController;
 import Model.Login;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ public class PanelWithdraw extends JPanel
     private GridBagConstraints gbc3;
     private JFormattedTextField txtAmount;
     private JTextArea txtContent;
-    private JLabel lblBalanceData = new JLabel(Login.balance);
+    private JLabel lblBalanceData = new JLabel(LoginController.balance);
 
     public PanelWithdraw()
     {
@@ -40,7 +41,7 @@ public class PanelWithdraw extends JPanel
         accountNumber.setLayout(new GridBagLayout());
         JTextField txtAccountNumber = new JTextField();
         txtAccountNumber.setEnabled(false);
-        txtAccountNumber.setText(Login.accountNumber);
+        txtAccountNumber.setText(LoginController.accountNumber);
         txtAccountNumber.setBackground(Color.WHITE);
         txtAccountNumber.setBorder(null);
         txtAccountNumber.setColumns(20);
@@ -135,7 +136,7 @@ public class PanelWithdraw extends JPanel
         panelGBLEast.setLayout(new GridLayout(10, 1, 20, 0));
 
 
-        JLabel lblName = new JLabel(Login.fullname);
+        JLabel lblName = new JLabel(LoginController.fullname);
         lblName.setForeground(Color.RED);
         lblName.setFont(new Font("Arial", Font.BOLD, 20));
         JPanel panelName = new JPanel();
@@ -149,7 +150,7 @@ public class PanelWithdraw extends JPanel
         JPanel panelAccountNumber = new JPanel();
         panelAccountNumber.setBackground(Color.WHITE);
         panelAccountNumber.add(lblAccountNumber);
-        panelAccountNumber.add(new JLabel(Login.accountNumber));
+        panelAccountNumber.add(new JLabel(LoginController.accountNumber));
         panelGBLEast.add(panelAccountNumber);
 
 
@@ -198,16 +199,15 @@ public class PanelWithdraw extends JPanel
 
     public String check()
     {
-        Login login = new Login();
         if (this.txtAmount.getText().equals("0") || this.txtContent.getText().equals(""))
             return "Please input full";
-        else if(!login.updateWithDrawAndRecharge("Rút tiền", Login.accountNumber, Double.parseDouble(txtAmount.getText().replaceAll("[^Z0-9]", "")), txtContent.getText()))
+        else if(!LoginController.updateWithDrawAndRecharge("Rút tiền", LoginController.accountNumber, Double.parseDouble(txtAmount.getText().replaceAll("[^Z0-9]", "")), txtContent.getText()))
             return "Balance enough";
         else
         {
-            login.getUserData(LoginFrame.username);
-            this.lblBalanceData.setText(login.balance);
-            PanelProfile.lblBalance.setText(login.balance);
+            LoginController.getUserData(LoginFrame.username);
+            this.lblBalanceData.setText(LoginController.balance);
+            PanelProfile.lblBalance.setText(LoginController.balance);
             return "Success";
         }
     }

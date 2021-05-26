@@ -18,8 +18,6 @@ public class LoginFrame extends JFrame
     public static String username;
     public static String password;
 
-    private MainFrame mainFrame = new MainFrame();
-
     private JPanel mainPane;
 
 
@@ -33,6 +31,7 @@ public class LoginFrame extends JFrame
 
     public LoginFrame()
     {
+        new Login();
         // GUI login
         setUndecorated(true);
         setBounds(100, 100, 1000, 600);
@@ -230,8 +229,8 @@ public class LoginFrame extends JFrame
                 {
                     LoginFrame.password = txtPassword.getText();
                     LoginFrame.username = txtUsername.getText();
-                    mainFrame = new MainFrame();
-                    mainFrame.setVisible(true); // loi line nay
+                    LoginController.getUserData(LoginFrame.username);
+                    new MainFrame().setVisible(true);
                     LoginFrame.this.dispose();
                 } else if (txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password"))
                     lblLoginMessage.setText("Please input all requirements!");
@@ -347,4 +346,5 @@ public class LoginFrame extends JFrame
         lblX.setBounds(280, 0, 20, 20);
         contentPaneRight.add(lblX);
     }
+
 }

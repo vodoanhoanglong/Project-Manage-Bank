@@ -1,6 +1,9 @@
 package Model;
 
 
+import Controller.LoginController;
+import Views.MainFrame;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Random;
@@ -12,9 +15,6 @@ public class Login
     ResultSet resultSet;
     PreparedStatement preparedStatement;
 
-    public static String fullname, gender, address, phone, dateSignUp, balance, accountNumber, born;
-    public static Date birthday, dateRegister;
-    public static double balanceService;
 
     // khởi tạo k cần funcName
     public Login()
@@ -32,34 +32,23 @@ public class Login
 
     public static ResultSet CheckSignUpSoTK(String accountNumber)
     {
-        String SQL = "use QLNH select SoTK from TAIKHOAN where SoTK = "+accountNumber;
+        String SQL = "use QLNH select SoTK from TAIKHOAN where SoTK = '"+accountNumber+"'";
         return Model.connection.getData(SQL);
     }
 
     public static ResultSet CheckSignUpTenTK(String username)
     {
-        String SQL = "use QLNH select TenTK from TAIKHOAN where TenTK = ?";
+        String SQL = "use QLNH select TenTK from TAIKHOAN where TenTK = '"+username+"'";
         return Model.connection.getData(SQL);
     }
 
-    public boolean CheckCMND(String cmnd)
+    public static ResultSet CheckCMND(String cmnd)
     {
-        String SQL = "use QLNH select CMND from KHACHHANG where CMND = ?";
-        try
-        {
-            preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, cmnd);
-            resultSet = preparedStatement.executeQuery();
-            if (!resultSet.next())
-                return false;
-        } catch (Exception exception)
-        {
-            System.err.println("Login.java.CheckCMND: " + exception.getMessage());
-        }
-        return true;
+        String SQL = "use QLNH select CMND from KHACHHANG where CMND = '"+cmnd+"'";
+        return Model.connection.getData(SQL);
     }
 
-    public void InsertDataKHACHHANG(String cmnd, String fullname, String phoneNumber, String gender, String birthDay, String address)
+    public static ResultSet InsertDataKHACHHANG(String cmnd, String fullname, String phoneNumber, String gender, String birthDay, String address)
     {
         int genderLast = -1;
         String SQL;
@@ -69,61 +58,25 @@ public class Login
             genderLast = 0;
         SQL = "use QLNH " +
                 "insert into KHACHHANG(CMND, TenKH, NgaySinh, GioiTinh, DiaChi, SoDienThoai)" +
-                "values(?,?,?,?,?,?)";
-        try
-        {
-            preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, cmnd);
-            preparedStatement.setString(2, fullname);
-            preparedStatement.setString(3, birthDay);
-            preparedStatement.setInt(4, genderLast);
-            preparedStatement.setString(5, address);
-            preparedStatement.setString(6, phoneNumber);
-            preparedStatement.executeQuery();
-        } catch (Exception exception)
-        {
-            System.err.println("Login.java.InsertDataKHACHHANG: " + exception.getMessage());
-        }
+                "values('"+cmnd+"',N'"+fullname+"','"+birthDay+"',"+genderLast+",N'"+address+"','"+phoneNumber+"')";
+        return Model.connection.getData(SQL);
     }
 
-    public void InsertDataTAIKHOAN(String accountNumber, String username, String password, String CMND)
+    public static ResultSet InsertDataTAIKHOAN(String accountNumber, String username, String password, String CMND)
     {
         String SQL = "use QLNH" +
                 " insert into TAIKHOAN(SoTK, TenTK, MatKhau, CMND)" +
-                "values(?,?,?,?)";
-        try
-        {
-            preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, accountNumber);
-            preparedStatement.setString(2, username);
-            preparedStatement.setString(3, password);
-            preparedStatement.setString(4, CMND);
-            preparedStatement.executeQuery();
-        } catch (Exception exception)
-        {
-            System.err.println("Login.java.InsertDataTAIKHOAN: " + exception.getMessage());
-        }
+                "values('"+accountNumber+"','"+username+"','"+password+"','"+CMND+"')";
+        return Model.connection.getData(SQL);
     }
 
-    public boolean CheckGender(String username)
+    public static ResultSet CheckGender(String username)
     {
-        String SQL = "use QLNH Select GioiTinh From KHACHHANG KH Inner Join TAIKHOAN TK ON KH.CMND = TK.CMND Where TenTK = ?";
-        try
-        {
-            preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, username);
-            resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            if (resultSet.getInt("GioiTinh") == 1)
-                return true;
-        } catch (Exception exception)
-        {
-            System.err.println("Login.java.CheckGender: " + exception.getMessage());
-        }
-        return false;
+        String SQL = "use QLNH Select GioiTinh From KHACHHANG KH Inner Join TAIKHOAN TK ON KH.CMND = TK.CMND Where TenTK = '"+username+"'";
+        return Model.connection.getData(SQL);
     }
 
-    public void UpdateProfile(String fullname, String gender, String phone, String birthDay, String address, String usernme)
+    public static ResultSet UpdateProfile(String fullname, String gender, String phone, String birthDay, String address, String usernme)
     {
         int genderLast = -1;
         if (gender.equalsIgnoreCase("nam"))
@@ -131,38 +84,15 @@ public class Login
         else if (gender.equalsIgnoreCase("nu") || gender.equalsIgnoreCase("nữ"))
             genderLast = 0;
 
-        String SQL = "use QLNH Update KHACHHANG set TenKH = ?, NgaySinh = ?, GioiTinh = ?, DiaChi=?, SoDienThoai=?\n" +
-                "where CMND = (select KH.CMND from KHACHHANG KH INNER JOIN TAIKHOAN TK ON KH.CMND = TK.CMND where TK.TenTK = ?)";
-
-        try
-        {
-            preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, fullname);
-            preparedStatement.setString(2, birthDay);
-            preparedStatement.setInt(3, genderLast);
-            preparedStatement.setString(4, address);
-            preparedStatement.setString(5, phone);
-            preparedStatement.setString(6, usernme);
-            preparedStatement.executeQuery();
-        } catch (Exception exception)
-        {
-            System.err.println("Login.java.UpdateProfile: " + exception.getMessage());
-        }
+        String SQL = "use QLNH Update KHACHHANG set TenKH = N'"+fullname+"', NgaySinh = '"+birthDay+"', GioiTinh = "+genderLast+", DiaChi=N'"+address+"', SoDienThoai= '"+phone+"' \n" +
+                "where CMND = (select KH.CMND from KHACHHANG KH INNER JOIN TAIKHOAN TK ON KH.CMND = TK.CMND where TK.TenTK = '"+usernme+"')";
+        return Model.connection.getData(SQL);
     }
 
-    public void UpdatePassword(String password, String username)
+    public static ResultSet UpdatePassword(String password, String username)
     {
-        String SQL = "use QLNH Update TAIKHOAN set MatKhau = ? where TenTK = ?";
-        try
-        {
-            preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, password);
-            preparedStatement.setString(2, username);
-            preparedStatement.executeQuery();
-        } catch (Exception exception)
-        {
-            System.err.println("Login.java.UpdatePassword: " + exception.getMessage());
-        }
+        String SQL = "use QLNH Update TAIKHOAN set MatKhau = '"+password+"' where TenTK = '"+username+"'";
+        return Model.connection.getData(SQL);
     }
 
 //    public void getUserData(String username)
@@ -198,142 +128,67 @@ public class Login
 
     public static ResultSet getUserData(String username)
     {
-        String SQL = "use QLNH select * from KHACHHANG KH INNER JOIN TAIKHOAN TK ON KH.CMND = TK.CMND WHERE TenTK =N'" + username + "'";
+        String SQL = "use QLNH select * from KHACHHANG KH INNER JOIN TAIKHOAN TK ON KH.CMND = TK.CMND WHERE TenTK =N'" +username+ "'";
         return Model.connection.getData(SQL);
     }
 
-    public String getBorn(String username)
+//    public String getBorn(String username)
+//    {
+//        String SQL = "use QLNH select NgaySinh from KHACHHANG KH INNER JOIN TAIKHOAN TK ON KH.CMND = TK.CMND WHERE TenTK = ?";
+//        try
+//        {
+//            preparedStatement = connection.prepareStatement(SQL);
+//            preparedStatement.setString(1, username);
+//            resultSet = preparedStatement.executeQuery();
+//            resultSet.next();
+//            birthday = resultSet.getDate(1);
+//        } catch (Exception exception)
+//        {
+//            System.err.println("Login.java.getBorn: " + exception.getMessage());
+//        }
+//        return new SimpleDateFormat("dd-MM-yyyy").format(Login.birthday);
+//    }
+
+    public static ResultSet checkTradingCode(String tradingCode)
     {
-        String SQL = "use QLNH select NgaySinh from KHACHHANG KH INNER JOIN TAIKHOAN TK ON KH.CMND = TK.CMND WHERE TenTK = ?";
-        try
-        {
-            preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, username);
-            resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            birthday = resultSet.getDate(1);
-        } catch (Exception exception)
-        {
-            System.err.println("Login.java.getBorn: " + exception.getMessage());
-        }
-        return new SimpleDateFormat("dd-MM-yyyy").format(Login.birthday);
+        String SQL = "use QLNH select * from GIAODICH Where MaGD = '"+tradingCode+"'";
+        return Model.connection.getData(SQL);
     }
 
-    public boolean checkTradingCode(String tradingCode)
-    {
-        String SQL = "use QLNH select * from GIAODICH Where MaGD = ?";
-        try
-        {
-            preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, tradingCode);
-            resultSet = preparedStatement.executeQuery();
-            if (!resultSet.next())
-                return false;
-        } catch (Exception exception)
-        {
-            System.err.println("Login.java.checkTradingCode: " + exception.getMessage());
-        }
-        return true;
-    }
-
-    public void updateAccountNumberTransfer(String accountNumber, String accountNumberReceived, double amount)
+    public static ResultSet updateAccountNumberTransfer(String accountNumber, String accountNumberReceived, double amount)
     {
         String SQL = "use QLNH \n" +
-                " UPDATE TAIKHOAN SET SoDu = SoDu - ? WHERE SoTK = ?"
-                + " UPDATE TAIKHOAN SET SoDu = SoDu + ? WHERE SoTK = ?";
-        try
-        {
-            preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setDouble(1, amount);
-            preparedStatement.setString(2, accountNumber);
-            preparedStatement.setDouble(3, amount);
-            preparedStatement.setString(4, accountNumberReceived);
-            preparedStatement.executeQuery();
-        } catch (Exception exception)
-        {
-            System.err.println("Login.java.updateAccountNumberTransfer: " + exception.getMessage());
-        }
+                " UPDATE TAIKHOAN SET SoDu = SoDu - "+amount+" WHERE SoTK = '"+accountNumber+"'"
+                + " UPDATE TAIKHOAN SET SoDu = SoDu + "+amount+" WHERE SoTK = '"+accountNumberReceived+"'";
+        return Model.connection.getData(SQL);
     }
 
-    public boolean updateTransfer(String typeTrade, String accountNumber, String accountNumberReceived, double amount, String content)
+    public static ResultSet updateTransfer(String idTrade, String typeTrade, String accountNumber, String accountNumberReceived, double amount, String content)
     {
-        if (balanceService < amount)
-            return false;
-        updateAccountNumberTransfer(accountNumber, accountNumberReceived, amount);
-        String tradingCode = Random(0, 9, 5);
-        while (checkTradingCode(tradingCode))
-            tradingCode = Random(0, 9, 5);
-
         String SQL = "use QLNH" +
                 " insert into GIAODICH(MaGD, LoaiGD)" +
-                "values(?,?)" +
+                "values('"+idTrade+"',N'"+typeTrade+"')" +
                 "insert into CHITIETGD(MaGD, SoTK, SoTKNhan, SoTien, NoiDungGD)" +
-                "values (?,?,?,?,?)";
-        try
-        {
-            preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, tradingCode);
-            preparedStatement.setString(2, typeTrade);
-            preparedStatement.setString(3, tradingCode);
-            preparedStatement.setString(4, accountNumber);
-            preparedStatement.setString(5, accountNumberReceived);
-            preparedStatement.setDouble(6, amount);
-            preparedStatement.setString(7, content);
-            preparedStatement.executeQuery();
-        } catch (Exception exception)
-        {
-            System.err.println("Login.java.updateTransfer: " + exception.getMessage());
-        }
-        return true;
+                "values ('"+idTrade+"','"+accountNumber+"','"+accountNumberReceived+"',"+amount+",N'"+content+"')";
+        return Model.connection.getData(SQL);
     }
 
-    public void updateAccountNumber(String typeTrade, String accountNumber, double amount)
+    public static ResultSet updateAccountNumber(String typeTrade, String accountNumber, double amount)
     {
         String SQL;
         if (typeTrade.equals("Rút tiền"))
-            SQL = "use QLNH update TAIKHOAN set SoDu = SoDu - ? where SoTK = ?";
-        else SQL = "use QLNH update TAIKHOAN set SoDu = SoDu + ? where SoTK = ?";
-        try
-        {
-            preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setDouble(1, amount);
-            preparedStatement.setString(2, accountNumber);
-            preparedStatement.executeQuery();
-        } catch (Exception exception)
-        {
-            System.err.println("Login.java.updateAccountNumber: " + exception.getMessage());
-        }
+            SQL = "use QLNH update TAIKHOAN set SoDu = SoDu - "+amount+" where SoTK = '"+accountNumber+"'";
+        else SQL = "use QLNH update TAIKHOAN set SoDu = SoDu + "+amount+" where SoTK = '"+accountNumber+"'";
+        return Model.connection.getData(SQL);
     }
 
-    public boolean updateWithDrawAndRecharge(String typeTrade, String accountNumber, double amount, String content)
+    public static ResultSet updateWithDrawAndRecharge(String idTrade ,String typeTrade, String accountNumber, double amount, String content)
     {
-        if (typeTrade.equals("Rút tiền"))
-            if (balanceService < amount)
-                return false;
-        updateAccountNumber(typeTrade, accountNumber, amount);
-        String tradingCode = Random(0, 9, 5);
-        while (checkTradingCode(tradingCode))
-            tradingCode = Random(0, 9, 5);
-
         String SQL = "use QLNH" +
                 " insert into GIAODICH(MaGD, LoaiGD)" +
-                "values(?,?)" +
+                "values('"+idTrade+"',N'"+typeTrade+"')" +
                 "insert into CHITIETGD(MaGD, SoTK, SoTien, NoiDungGD)" +
-                "values (?,?,?,?)";
-        try
-        {
-            preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, tradingCode);
-            preparedStatement.setString(2, typeTrade);
-            preparedStatement.setString(3, tradingCode);
-            preparedStatement.setString(4, accountNumber);
-            preparedStatement.setDouble(5, amount);
-            preparedStatement.setString(6, content);
-            preparedStatement.executeQuery();
-        } catch (Exception exception)
-        {
-            System.err.println("Login.java.insertWithDrawAndRecharge: " + exception.getMessage());
-        }
-        return true;
+                "values ('"+idTrade+"','"+accountNumber+"',"+amount+",N'"+content+"')";
+        return Model.connection.getData(SQL);
     }
 }

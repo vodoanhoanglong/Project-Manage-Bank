@@ -1,7 +1,9 @@
 package Views;
 
 
+import Controller.LoginController;
 import Model.Login;
+import Model.connection;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -59,7 +61,6 @@ public class MainFrame extends JFrame
 
     public MainFrame()
     {
-        new Login().getUserData(LoginFrame.username);
 
         this.setDefaultCloseOperation(3);
         this.setBounds(100, 100, 1383, 773);
@@ -266,8 +267,11 @@ public class MainFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
+                if(e.getButton() == 1)
+                {
                     new LoginFrame().setVisible(true);
-                    MainFrame.this.dispose();
+                    MainFrame.this.setVisible(false);
+                }
             }
 
             @Override
@@ -315,7 +319,7 @@ public class MainFrame extends JFrame
         toolPanel.setBorder(null);
         detailsPanel.add((Component) toolPanel, "North");
 
-        btnProfile = new JLabel(Login.fullname);
+        btnProfile = new JLabel(LoginController.fullname);
         btnProfile.setIcon(new ImageIcon(img_profile));
         btnProfile.setFocusable(false);
         btnProfile.setHorizontalTextPosition(SwingConstants.LEADING);

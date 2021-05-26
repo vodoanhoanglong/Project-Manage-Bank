@@ -1069,36 +1069,30 @@ public class SignUpFrame extends JFrame
                     lblLoginMessage.setText("Username must be 6 characters or more");
                 else if (txtPassword.getText().length() < 8)
                     lblLoginMessage.setText("Password must be 8 characters or more");
+                else if (LoginController.CheckSignUpTenTK(txtUsername.getText()))
+                    lblLoginMessage.setText("Username already exists, please enter another name!");
                 else if (!txtPassword.getText().equals(txtPasswordConfirm.getText()))
                     lblLoginMessage.setText("Password confirm is not correct!");
                 else if (LoginController.CheckCMND(txtCMND.getText()))
                 {
                     while (LoginController.CheckSignUpSoTK(accountNumber))
                         accountNumber = LoginController.Random(0, 9, 10);
-                    if (!LoginController.CheckSignUpTenTK(txtUsername.getText()))
-                    {
-                        LoginController.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
-                        lblLoginMessage.setText("");
-                        JOptionPane.showMessageDialog(null, "SignUp Successful");
-                        new LoginFrame().setVisible(true);
-                        SignUpFrame.this.dispose();
-                    } else
-                        lblLoginMessage.setText("Username already exists, please enter another name!");
+                    LoginController.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
+                    lblLoginMessage.setText("");
+                    JOptionPane.showMessageDialog(null, "SignUp Successful");
+                    new LoginFrame().setVisible(true);
+                    SignUpFrame.this.dispose();
                 } else
                 {
                     birthDay = txtYear.getText() + "-" + txtMonth.getText() + "-" + txtDay.getText();
                     LoginController.InsertDataKHACHHANG(txtCMND.getText(), txtFullname.getText(), txtPhoneNumber.getText(), txtGender.getText(), birthDay, txtAddress.getText());
                     while (LoginController.CheckSignUpSoTK(accountNumber))
                         accountNumber = LoginController.Random(0, 9, 10);
-                    if (!LoginController.CheckSignUpTenTK(txtUsername.getText()))
-                    {
-                        LoginController.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
-                        lblLoginMessage.setText("");
-                        JOptionPane.showMessageDialog(null, "SignUp Successful");
-                        new LoginFrame().setVisible(true);
-                        SignUpFrame.this.dispose();
-                    } else
-                        lblLoginMessage.setText("Username already exists, please enter another name!");
+                    LoginController.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
+                    lblLoginMessage.setText("");
+                    JOptionPane.showMessageDialog(null, "SignUp Successful");
+                    new LoginFrame().setVisible(true);
+                    SignUpFrame.this.dispose();
                 }
             }
 

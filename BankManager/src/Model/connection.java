@@ -3,7 +3,7 @@ package Model;
 import java.sql.*;
 
 public class connection {
-    private static Connection connect;
+    public static Connection connect;
 
     public connection() {
         try {
