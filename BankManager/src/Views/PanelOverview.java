@@ -17,7 +17,7 @@ public class PanelOverview extends JPanel {
 
 
     private JPanel northPanel() {
-        JPanel rootPanel = new JPanel();
+        JPanel rootPanel = new LinearGradient(1);
         rootPanel.setPreferredSize(new Dimension(50, 70));
         GridBagLayout overViewPanelLayout = new GridBagLayout();
         int[] columnWidths = new int[5];

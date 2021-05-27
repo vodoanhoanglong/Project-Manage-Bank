@@ -90,12 +90,18 @@ public class LoginFrame extends JFrame
         panelUsername.setLayout(null);
         contentPaneRight.add(panelUsername);
 
+        JSeparator sptUsername = new JSeparator();
+        sptUsername.setForeground(Color.GRAY);
+        sptUsername.setBounds(10,35,210,1);
+        panelUsername.add(sptUsername);
+
         JTextField txtUsername = new JTextField();
         txtUsername.addFocusListener(new FocusAdapter()
         {
             @Override
             public void focusGained(FocusEvent e)
             {
+                sptUsername.setForeground(new Color(222, 97, 97));
                 if (txtUsername.getText().equals("Username"))
                 {
                     txtUsername.setText("");
@@ -108,6 +114,7 @@ public class LoginFrame extends JFrame
             @Override
             public void focusLost(FocusEvent focusEvent)
             {
+                sptUsername.setForeground(Color.GRAY);
                 if (txtUsername.getText().equals(""))
                 {
                     txtUsername.setText("Username");
@@ -123,10 +130,6 @@ public class LoginFrame extends JFrame
         txtUsername.setColumns(10);
         panelUsername.add(txtUsername);
 
-        JSeparator sptUsername = new JSeparator();
-        sptUsername.setForeground(Color.GRAY);
-        sptUsername.setBounds(10,35,210,1);
-        panelUsername.add(sptUsername);
 
         JLabel lblIconUsername = new JLabel("");
         lblIconUsername.setHorizontalAlignment(SwingConstants.CENTER);
@@ -140,12 +143,18 @@ public class LoginFrame extends JFrame
         panelPassword.setLayout(null);
         contentPaneRight.add(panelPassword);
 
+        JSeparator sptPassword = new JSeparator();
+        sptPassword.setForeground(Color.GRAY);
+        sptPassword.setBounds(10,35,210,1);
+        panelPassword.add(sptPassword);
+
         JPasswordField txtPassword = new JPasswordField();
         txtPassword.addFocusListener(new FocusAdapter()
         {
             @Override
             public void focusGained(FocusEvent e)
             {
+                sptPassword.setForeground(new Color(222, 97, 97));
                 if(LoginFrame.this.count % 2 == 0)
                 {
                     if (txtPassword.getText().equals("Password"))
@@ -172,6 +181,7 @@ public class LoginFrame extends JFrame
             @Override
             public void focusLost(FocusEvent fe)
             {
+                sptPassword.setForeground(Color.GRAY);
                 if (txtPassword.getText().equals(""))
                 {
                     txtPassword.setText("Password");
@@ -187,11 +197,6 @@ public class LoginFrame extends JFrame
         txtPassword.setText("Password");
         txtPassword.setBounds(10, 11, 170, 20);
         panelPassword.add(txtPassword);
-
-        JSeparator sptPassword = new JSeparator();
-        sptPassword.setForeground(Color.GRAY);
-        sptPassword.setBounds(10,35,210,1);
-        panelPassword.add(sptPassword);
 
 
         JLabel lblIconPassword = new JLabel("");

@@ -9,7 +9,7 @@ public class PanelHome extends JPanel
     {
         this.setLayout(new BorderLayout(0,0));
 
-        JPanel panelHeader = new JPanel();
+        JPanel panelHeader = new LinearGradient(1);
         panelHeader.setBackground(Color.WHITE);
         panelHeader.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
 

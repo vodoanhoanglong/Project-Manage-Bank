@@ -177,6 +177,8 @@ public class MainFrame extends JFrame
                 {
                     toolPanel.setVisible(true);
                     MainFrame.this.showDetailsPanel("service");
+                    PanelService.panelFooter.setVisible(false);
+                    PanelService.cardLayout.show(PanelService.panelForm, "4");
                 }
             }
 
@@ -316,7 +318,7 @@ public class MainFrame extends JFrame
         detailsPanel.setLayout(new BorderLayout(0, 0));
         this.contentPane.add((Component) detailsPanel, "Center");
 
-        toolPanel = new JPanel();
+        toolPanel = new LinearGradient(1);
         toolPanel.setLayout(new FlowLayout(2, 15, 0));
         toolPanel.setBackground(Color.WHITE);
         toolPanel.setBorder(null);
