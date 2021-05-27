@@ -29,6 +29,7 @@ public class MainFrame extends JFrame
     private Color clickedColor = new Color(60, 179, 113);
     private Dimension btnSize = new Dimension(230, 40);
     private JPanel contentPane;
+    private JPanel toolPanel;
     private JLabel Logo;
     private JToggleButton btnHome;
     private JToggleButton btnHistory;
@@ -91,6 +92,7 @@ public class MainFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
+                toolPanel.setVisible(true);
                 MainFrame.this.showDetailsPanel("home");
             }
         });
@@ -123,6 +125,7 @@ public class MainFrame extends JFrame
             {
                 if (e.getButton() == 1)
                 {
+                    toolPanel.setVisible(true);
                     MainFrame.this.showDetailsPanel("overview");
                 }
             }
@@ -172,6 +175,7 @@ public class MainFrame extends JFrame
             {
                 if (e.getButton() == 1)
                 {
+                    toolPanel.setVisible(true);
                     MainFrame.this.showDetailsPanel("service");
                 }
             }
@@ -219,6 +223,7 @@ public class MainFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
+                toolPanel.setVisible(true);
                 MainFrame.this.showDetailsPanel("history");
             }
 
@@ -311,7 +316,7 @@ public class MainFrame extends JFrame
         detailsPanel.setLayout(new BorderLayout(0, 0));
         this.contentPane.add((Component) detailsPanel, "Center");
 
-        JPanel toolPanel = new JPanel();
+        toolPanel = new JPanel();
         toolPanel.setLayout(new FlowLayout(2, 15, 0));
         toolPanel.setBackground(Color.WHITE);
         toolPanel.setBorder(null);
@@ -328,7 +333,9 @@ public class MainFrame extends JFrame
         btnProfile.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == 1) {
+                if (e.getButton() == 1)
+                {
+                    toolPanel.setVisible(false);
                     MainFrame.this.showDetailsPanel("profile");
                 }
             }

@@ -9,8 +9,8 @@ public class PanelHome extends JPanel
     {
         this.setLayout(new BorderLayout(0,0));
 
-
         JPanel panelHeader = new JPanel();
+        panelHeader.setBackground(Color.WHITE);
         panelHeader.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
 
         JPanel panelTitle = new RadiusAndShadow();
@@ -29,8 +29,10 @@ public class PanelHome extends JPanel
         this.add(panelHeader, "North");
 
         JPanel panelClock = new Clock(Color.WHITE);
+        panelClock.setBackground(Color.WHITE);
 
         JPanel panelFooter = new JPanel();
+        panelFooter.setBackground(Color.WHITE);
         panelFooter.setLayout(new FlowLayout(FlowLayout.RIGHT,0,10));
         panelFooter.add(panelClock);
 
@@ -38,25 +40,30 @@ public class PanelHome extends JPanel
 
 
         JPanel panelCenterMain = new JPanel();
+        panelCenterMain.setBackground(Color.WHITE);
         panelCenterMain.setLayout(new BorderLayout(10,0));
         panelCenterMain.add(new ScaleImg("/Res/img_home2.png"), "Center");
         panelCenterMain.setPreferredSize(new Dimension(150,0));
         this.add(panelCenterMain, "Center");
 
-        this.add(new JPanel(), "East");
-
+        JPanel panelRight = new JPanel();
+        panelRight.setBackground(Color.WHITE);
+        this.add(panelRight, "East");
 
 
         JPanel panelNorth = new JPanel();
+        panelNorth.setBackground(Color.WHITE);
         panelNorth.setPreferredSize(new Dimension(100,20));
         panelCenterMain.add(panelNorth, "North");
 
         JPanel panelWest = new JPanel();
+        panelWest.setBackground(Color.WHITE);
         panelWest.setPreferredSize(new Dimension(0,100));
         panelCenterMain.add(panelWest, "West");
 
 
         JPanel panelEast = new JPanel();
+        panelEast.setBackground(Color.WHITE);
         panelEast.setLayout(new BoxLayout(panelEast, BoxLayout.Y_AXIS));
         panelEast.add(new ScaleImg("/Res/img_home1.png"));
         panelEast.add(Box.createRigidArea(new Dimension(0,10)));

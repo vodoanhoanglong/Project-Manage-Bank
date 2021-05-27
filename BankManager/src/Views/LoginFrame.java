@@ -22,7 +22,7 @@ public class LoginFrame extends JFrame
 
 
     private Image img_logo_right = new ImageIcon(LoginFrame.class.getResource("/Res/logoright.png")).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
-    private Image img_logo = new ImageIcon(LoginFrame.class.getResource("/Res/img_login.jpg")).getImage().getScaledInstance(698, 596, Image.SCALE_SMOOTH);
+    private Image img_logo = new ImageIcon(LoginFrame.class.getResource("/Res/test_logo.png")).getImage().getScaledInstance(700, 600, Image.SCALE_SMOOTH);
     private Image img_username = new ImageIcon(LoginFrame.class.getResource("/Res/businessman.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     private Image img_hide_password = new ImageIcon(LoginFrame.class.getResource("/Res/hide_password.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     private Image img_show_password = new ImageIcon(LoginFrame.class.getResource("/Res/show_password.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -38,7 +38,7 @@ public class LoginFrame extends JFrame
         setLocationRelativeTo(null);
         mainPane = new JPanel();
         mainPane.setBackground(new Color(49, 47, 47));
-        mainPane.setBorder(new EmptyBorder(0,0,0,0));
+        mainPane.setBorder(null);
         mainPane.setLayout(null);
         mainPane.setFocusable(true); // khi Frame hiện ra sẽ k lấy cái nào làm tiêu điểm
         setContentPane(mainPane);
@@ -46,18 +46,20 @@ public class LoginFrame extends JFrame
         //khung nội dung bên trái
 
         JPanel contentPaneLeft = new JPanel();
-        contentPaneLeft.setBounds(2, 2, 698, 596);
+        contentPaneLeft.setBorder(null);
+        contentPaneLeft.setBounds(2, 2, 700, 600);
         contentPaneLeft.setLayout(null);
         mainPane.add(contentPaneLeft);
 
         JLabel lblIconLogo = new JLabel("");
-        lblIconLogo.setBounds(0,0, 698, 596);
+        lblIconLogo.setBounds(0,0, 700, 600);
+//        lblIconLogo.setBounds(200,300,100,100);
         lblIconLogo.setIcon(new ImageIcon(img_logo));
         contentPaneLeft.add(lblIconLogo);;
 
 
         // Khung nội dung bên phải
-        JPanel contentPaneRight = new JPanel();
+        JPanel contentPaneRight = new LinearGradient(0);
         contentPaneRight.setBounds(700, 2, 298,596);
         contentPaneRight.setLayout(null);
         mainPane.add(contentPaneRight);
@@ -77,14 +79,14 @@ public class LoginFrame extends JFrame
 
         JLabel lblTitle = new JLabel();
         lblTitle.setText("Login Form");
-        lblTitle.setForeground(Color.GRAY);
+        lblTitle.setForeground(Color.BLACK);
         lblTitle.setBounds(99,170,200,30);
         lblTitle.setFont(new Font("Arial", Font.BOLD, 20));
         contentPaneRight.add(lblTitle);
 
         JPanel panelUsername = new RadiusAndShadow();
         panelUsername.setBackground(Color.WHITE);
-        panelUsername.setBounds(20, 220, 260, 55);
+        panelUsername.setBounds(25, 220, 260, 55);
         panelUsername.setLayout(null);
         contentPaneRight.add(panelUsername);
 
@@ -134,7 +136,7 @@ public class LoginFrame extends JFrame
 
         JPanel panelPassword = new RadiusAndShadow();
         panelPassword.setBackground(Color.WHITE);
-        panelPassword.setBounds(20, 280, 260, 55);
+        panelPassword.setBounds(25, 280, 260, 55);
         panelPassword.setLayout(null);
         contentPaneRight.add(panelPassword);
 
