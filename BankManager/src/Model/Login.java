@@ -168,7 +168,7 @@ public class Login
         String SQL = "use QLNH" +
                 " insert into GIAODICH(MaGD, LoaiGD)" +
                 "values('"+idTrade+"',N'"+typeTrade+"')" +
-                "insert into CHITIETGD(MaGD, SoTK, SoTKNhan, SoTien, NoiDungGD)" +
+                "insert into CHITIETGD(MaGD, SoTK, SoTKNhan, SoTien, GhiChu)" +
                 "values ('"+idTrade+"','"+accountNumber+"','"+accountNumberReceived+"',"+amount+",N'"+content+"')";
         return Model.connection.getData(SQL);
     }
@@ -187,7 +187,7 @@ public class Login
         String SQL = "use QLNH" +
                 " insert into GIAODICH(MaGD, LoaiGD)" +
                 "values('"+idTrade+"',N'"+typeTrade+"')" +
-                "insert into CHITIETGD(MaGD, SoTK, SoTien, NoiDungGD)" +
+                "insert into CHITIETGD(MaGD, SoTK, SoTien, GhiChu)" +
                 "values ('"+idTrade+"','"+accountNumber+"',"+amount+",N'"+content+"')";
         return Model.connection.getData(SQL);
     }

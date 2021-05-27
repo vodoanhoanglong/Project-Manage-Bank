@@ -2,8 +2,6 @@ package Views;
 
 
 import Controller.LoginController;
-import Model.Login;
-import Model.connection;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -62,7 +60,7 @@ public class MainFrame extends JFrame
     public MainFrame()
     {
 
-        this.setDefaultCloseOperation(3);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setBounds(100, 100, 1383, 773);
         this.contentPane = new JPanel();
         this.contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -93,7 +91,7 @@ public class MainFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                MainFrame.this.showDetailsPanel("index");
+                MainFrame.this.showDetailsPanel("home");
             }
         });
 
@@ -340,11 +338,11 @@ public class MainFrame extends JFrame
         this.cardPanelLayout = new CardLayout();
         this.cardPanel = new JPanel(this.cardPanelLayout);
         this.cardPanel.setBackground(Color.WHITE);
-        this.cardPanel.add(new PanelIndex(), "index");
-        this.cardPanelLayout.show(this.cardPanel, "index");
-        this.cardPanel.add(new PanelHome(), "overview");
+        this.cardPanel.add(new PanelHome(), "home");
+        this.cardPanelLayout.show(this.cardPanel, "home");
+        this.cardPanel.add(new PanelOverview(), "overview");
         this.cardPanel.add(new PanelService(), "service");
-        this.cardPanel.add(new PanelHistory(), "history");
+        this.cardPanel.add(new PanelTradingsHistory(), "history");
         this.cardPanel.add(new PanelProfile(), "profile");
 
         detailsPanel.add((Component) this.cardPanel, "Center");

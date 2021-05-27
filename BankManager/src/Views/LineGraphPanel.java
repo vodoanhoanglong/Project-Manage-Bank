@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class lineChart
+public class LineGraphPanel
         extends JFXPanel {
     private int d1 = 1;
     private int m1 = 5;
@@ -75,7 +75,7 @@ public class lineChart
         return scene;
     }
 
-    public lineChart() {
+    public LineGraphPanel() {
         this.setScene(this.createScene());
         this.setFont(new Font("Open Sans", Font.BOLD, 20));
         this.setBorder(new TitledBorder(new EtchedBorder(1, null, null), "Biến Động Thu Chi Trong Tháng", TitledBorder.CENTER, TitledBorder.TOP, new Font("Open Sans", Font.PLAIN, 16), new java.awt.Color(0, 0, 0)));

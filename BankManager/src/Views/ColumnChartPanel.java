@@ -13,7 +13,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
-public class colunmChart
+public class ColumnChartPanel
         extends JFXPanel
 {
     private double received = 3000;
@@ -46,7 +46,7 @@ public class colunmChart
         return scene;
     }
 
-    public colunmChart()
+    public ColumnChartPanel()
     {
         this.setScene(this.createScene());
         this.setFont(new Font("Open Sans", Font.BOLD, 20));
