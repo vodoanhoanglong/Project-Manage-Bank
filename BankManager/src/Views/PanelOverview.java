@@ -44,7 +44,7 @@ public class PanelOverview extends JPanel {
         TitleConstraints.ipadx = 50;
         TitleConstraints.insets = new Insets(0, 0, 5, 5);
         TitleConstraints.gridx = 0;
-        TitleConstraints.gridy = 1;
+        TitleConstraints.gridy = 0;
         rootPanel.add((Component) panelTitle, TitleConstraints);
 
         return rootPanel;
