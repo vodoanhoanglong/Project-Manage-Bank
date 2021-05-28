@@ -4,7 +4,6 @@ import Controller.LoginController;
 import Model.Login;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -21,9 +20,9 @@ public class LoginFrame extends JFrame
     private JPanel mainPane;
 
 
-    private Image img_logo_right = new ImageIcon(LoginFrame.class.getResource("/Res/logoright.png")).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
-    private Image img_logo = new ImageIcon(LoginFrame.class.getResource("/Res/test_logo.png")).getImage().getScaledInstance(700, 600, Image.SCALE_SMOOTH);
-    private Image img_username = new ImageIcon(LoginFrame.class.getResource("/Res/businessman.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+    private Image img_logo_right = new ImageIcon(LoginFrame.class.getResource("/Res/bank.png")).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+    private Image img_logo = new ImageIcon(LoginFrame.class.getResource("/Res/img_left_login.png")).getImage().getScaledInstance(700, 600, Image.SCALE_SMOOTH);
+    private Image img_username = new ImageIcon(LoginFrame.class.getResource("/Res/login_username.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     private Image img_hide_password = new ImageIcon(LoginFrame.class.getResource("/Res/hide_password.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     private Image img_show_password = new ImageIcon(LoginFrame.class.getResource("/Res/show_password.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
@@ -53,7 +52,6 @@ public class LoginFrame extends JFrame
 
         JLabel lblIconLogo = new JLabel("");
         lblIconLogo.setBounds(0,0, 700, 600);
-//        lblIconLogo.setBounds(200,300,100,100);
         lblIconLogo.setIcon(new ImageIcon(img_logo));
         contentPaneLeft.add(lblIconLogo);;
 
@@ -73,16 +71,10 @@ public class LoginFrame extends JFrame
 
         JLabel lblIconLogoBank = new JLabel("");
         lblIconLogoBank.setHorizontalAlignment(SwingConstants.CENTER);
-        lblIconLogoBank.setBounds(30, 42, 250, 111);
+        lblIconLogoBank.setBounds(30, 30, 250, 150);
         lblIconLogoBank.setIcon(new ImageIcon(img_logo_right));
         contentPaneRight.add(lblIconLogoBank);
 
-        JLabel lblTitle = new JLabel();
-        lblTitle.setText("Login Form");
-        lblTitle.setForeground(Color.BLACK);
-        lblTitle.setBounds(99,170,200,30);
-        lblTitle.setFont(new Font("Arial", Font.BOLD, 20));
-        contentPaneRight.add(lblTitle);
 
         JPanel panelUsername = new RadiusAndShadow();
         panelUsername.setBackground(Color.WHITE);
@@ -129,7 +121,6 @@ public class LoginFrame extends JFrame
         txtUsername.setBounds(10, 10, 170, 20);
         txtUsername.setColumns(10);
         panelUsername.add(txtUsername);
-
 
         JLabel lblIconUsername = new JLabel("");
         lblIconUsername.setHorizontalAlignment(SwingConstants.CENTER);
