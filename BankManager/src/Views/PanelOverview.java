@@ -193,7 +193,6 @@ public class PanelOverview extends JPanel {
     }
 
     public PanelOverview() {
-        System.out.println("Lần nữa");
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {

@@ -792,6 +792,14 @@ public class SignUpFrame extends JFrame
                 }
             }
         });
+        txtUsername.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                lblLoginMessage.setText("");
+            }
+        });
         txtUsername.setBackground(Color.WHITE);
         txtUsername.setForeground(Color.GRAY);
         txtUsername.setBorder(null);
@@ -855,6 +863,14 @@ public class SignUpFrame extends JFrame
                     txtPassword.setText("Password");
                     txtPassword.setEchoChar((char) 0);
                 }
+            }
+        });
+        txtPassword.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                lblLoginMessage.setText("");
             }
         });
         txtPassword.setBackground(Color.WHITE);
@@ -939,6 +955,14 @@ public class SignUpFrame extends JFrame
                     txtPasswordConfirm.setText("Password confirm");
                     txtPasswordConfirm.setEchoChar((char) 0);
                 }
+            }
+        });
+        txtPasswordConfirm.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                lblLoginMessage.setText("");
             }
         });
         txtPasswordConfirm.setBackground(Color.WHITE);
@@ -1044,7 +1068,7 @@ public class SignUpFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                if(e.getButton() == 1)
+                if (e.getButton() == 1)
                     CheckSignUp();
             }
 
@@ -1072,114 +1096,18 @@ public class SignUpFrame extends JFrame
                 pnlBtnSignUp.setBackground(Color.WHITE);
             }
         });
-        contentPane.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    CheckSignUp();
-            }
-        });
-        txtCMND.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    CheckSignUp();
-            }
-        });
-        txtFullname.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    CheckSignUp();
-            }
-        });
-        txtGender.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    CheckSignUp();
-            }
-        });
-        txtPhoneNumber.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    CheckSignUp();
-            }
-        });
-        txtDay.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    CheckSignUp();
-            }
-        });
-        txtMonth.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    CheckSignUp();
-            }
-        });
-        txtYear.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    CheckSignUp();
-            }
-        });
-        txtAddress.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    CheckSignUp();
-            }
-        });
-        txtUsername.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    CheckSignUp();
-            }
-        });
-        txtPassword.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    CheckSignUp();
-            }
-        });
-        txtPasswordConfirm.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    CheckSignUp();
-            }
-        });
+        AddEventEnter(contentPane);
+        AddEventEnter(txtCMND);
+        AddEventEnter(txtFullname);
+        AddEventEnter(txtGender);
+        AddEventEnter(txtPhoneNumber);
+        AddEventEnter(txtDay);
+        AddEventEnter(txtMonth);
+        AddEventEnter(txtYear);
+        AddEventEnter(txtAddress);
+        AddEventEnter(txtUsername);
+        AddEventEnter(txtPassword);
+        AddEventEnter(txtPasswordConfirm);
         pnlBtnSignUp.setBackground(Color.WHITE);
         pnlBtnSignUp.setBounds(165, 400, 250, 50);
         pnlBtnSignUp.setLayout(null);
@@ -1246,5 +1174,18 @@ public class SignUpFrame extends JFrame
             new LoginFrame().setVisible(true);
             SignUpFrame.this.dispose();
         }
+    }
+
+    private void AddEventEnter(JComponent item)
+    {
+        item.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    CheckSignUp();
+            }
+        });
     }
 }

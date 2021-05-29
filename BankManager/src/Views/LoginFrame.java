@@ -114,6 +114,14 @@ public class LoginFrame extends JFrame
                 }
             }
         });
+        txtUsername.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                lblLoginMessage.setText("");
+            }
+        });
         txtUsername.setBackground(Color.WHITE);
         txtUsername.setForeground(Color.GRAY);
         txtUsername.setBorder(null);
@@ -179,6 +187,14 @@ public class LoginFrame extends JFrame
                     txtPassword.setText("Password");
                     txtPassword.setEchoChar((char) 0);
                 }
+            }
+        });
+        txtPassword.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                    lblLoginMessage.setText("");
             }
         });
         txtPassword.setBackground(Color.WHITE);
@@ -255,33 +271,9 @@ public class LoginFrame extends JFrame
                 pnlBtnLogin.setBackground(Color.WHITE);
             }
         });
-        mainPane.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    CheckLogin();
-            }
-        });
-        txtUsername.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    CheckLogin();
-            }
-        });
-        txtPassword.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    CheckLogin();
-            }
-        });
+        AddEventEnter(txtUsername);
+        AddEventEnter(txtPassword);
+        AddEventEnter(mainPane);
         pnlBtnLogin.setBackground(Color.WHITE);
         pnlBtnLogin.setBounds(55, 380, 200, 50);
         pnlBtnLogin.setLayout(null);
@@ -386,4 +378,16 @@ public class LoginFrame extends JFrame
         else lblLoginMessage.setText("Username or Password wrong!");
     }
 
+    private void AddEventEnter(JComponent item)
+    {
+        item.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    CheckLogin();
+            }
+        });
+    }
 }
