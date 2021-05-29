@@ -139,7 +139,7 @@ public class PanelWithdraw extends JPanel
 
         JLabel lblName = new JLabel(LoginController.fullname);
         lblName.setForeground(Color.RED);
-        lblName.setFont(new Font("Arial", Font.BOLD, 20));
+        lblName.setFont(new Font("Aurella", Font.BOLD, 20));
         JPanel panelName = new JPanel();
         panelName.add(lblName);
         panelName.setBackground(Color.WHITE);
@@ -147,21 +147,26 @@ public class PanelWithdraw extends JPanel
 
 
         JLabel lblAccountNumber = new JLabel("Account Number: ");
-        lblAccountNumber.setFont(new Font("Arial", Font.BOLD, 15));
+        lblAccountNumber.setFont(new Font("Aurella", Font.BOLD, 15));
+        JLabel lblaccountNumber = new JLabel(LoginController.accountNumber);
+        lblaccountNumber.setFont(new Font("Aurella", Font.BOLD, 15));
         JPanel panelAccountNumber = new JPanel();
         panelAccountNumber.setBackground(Color.WHITE);
         panelAccountNumber.add(lblAccountNumber);
-        panelAccountNumber.add(new JLabel(LoginController.accountNumber));
+        panelAccountNumber.add(lblaccountNumber);
         panelGBLEast.add(panelAccountNumber);
 
 
         JLabel lblBalance = new JLabel("Balance: ");
-        lblBalance.setFont(new Font("Arial", Font.BOLD, 15));
+        lblBalance.setFont(new Font("Aurella", Font.BOLD, 15));
+        lblBalanceData.setFont(new Font("Aurella", Font.BOLD, 15));
+        JLabel lblvnd = new JLabel("VNĐ");
+        lblvnd.setFont(new Font("Aurella", Font.BOLD, 15));
         JPanel panelBalance = new JPanel();
         panelBalance.setBackground(Color.WHITE);
         panelBalance.add(lblBalance);
         panelBalance.add(lblBalanceData);
-        panelBalance.add(new JLabel("VNĐ"));
+        panelBalance.add(lblvnd);
         panelGBLEast.add(panelBalance);
 
 
@@ -173,25 +178,34 @@ public class PanelWithdraw extends JPanel
         panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
         this.add(panelCenter, "Center");
 
+        JLabel lblAccountReceived = new JLabel("Account number withdraw");
+        lblAccountReceived.setFont(new Font("Aurella", Font.BOLD, 15));
+
         JPanel panel1 = new JPanel();
         panel1.setLayout(new BorderLayout());
-        panel1.add(new JLabel("Account number withdraw"), "Center");
+        panel1.add(lblAccountReceived, "Center");
 
         panelCenter.add(panel1);
         panelCenter.add(Box.createRigidArea(new Dimension(0, 10)));
         panelCenter.add(accountNumber);
 
+        JLabel lblAmount = new JLabel("Amount");
+        lblAmount.setFont(new Font("Aurella", Font.BOLD, 15));
+
         JPanel panel2 = new JPanel();
         panel2.setLayout(new BorderLayout());
-        panel2.add(new JLabel("Amount"), "Center");
+        panel2.add(lblAmount, "Center");
 
         panelCenter.add(panel2);
         panelCenter.add(Box.createRigidArea(new Dimension(0, 10)));
         panelCenter.add(amount);
 
+        JLabel lblContent = new JLabel("Content");
+        lblContent.setFont(new Font("Aurella", Font.BOLD, 15));
+
         JPanel panel3 = new JPanel();
         panel3.setLayout(new BorderLayout());
-        panel3.add(new JLabel("Content"), "Center");
+        panel3.add(lblContent, "Center");
 
         panelCenter.add(panel3);
         panelCenter.add(Box.createRigidArea(new Dimension(0, 10)));

@@ -54,7 +54,7 @@ public class PanelService extends JPanel
 
         lblMessage = new JLabel("");
         lblMessage.setForeground(Color.RED);
-        lblMessage.setFont(new Font("Arial", Font.BOLD, 12));
+        lblMessage.setFont(new Font("Aurella", Font.BOLD, 15));
         panelMessage.add(lblMessage);
 
         flowLayout.setVgap(10);
@@ -62,9 +62,12 @@ public class PanelService extends JPanel
         footer.setLayout(flowLayout);
         panelFooter.add(footer, "Center");
 
+        JLabel lblCancel = new JLabel("Cancel");
+        lblCancel.setFont(new Font("Aurella", Font.BOLD, 15));
+
         JPanel panelCancel = new RadiusAndShadow();
         panelCancel.setBackground(Color.WHITE);
-        panelCancel.add(new JLabel("Cancel"));
+        panelCancel.add(lblCancel);
         panelCancel.setOpaque(false);
         panelCancel.addMouseListener(new MouseAdapter()
         {
@@ -103,9 +106,12 @@ public class PanelService extends JPanel
         panelCancel.setPreferredSize(new Dimension(170, 50));
         footer.add(panelCancel);
 
+        JLabel lblConfirm = new JLabel("Confirm");
+        lblConfirm.setFont(new Font("Aurella", Font.BOLD, 15));
+
         JPanel panelConfirm = new RadiusAndShadow();
         panelConfirm.setBackground(Color.WHITE);
-        panelConfirm.add(new JLabel("Confirm"));
+        panelConfirm.add(lblConfirm);
         panelConfirm.setOpaque(false);
         panelConfirm.addMouseListener(new MouseAdapter()
         {
@@ -148,9 +154,13 @@ public class PanelService extends JPanel
         panelConfirm.setPreferredSize(new Dimension(170, 50));
         footer.add(panelConfirm);
 
+        JLabel lblTransfer = new JLabel("Transfer");
+        lblTransfer.setForeground(Color.BLACK);
+        lblTransfer.setFont(new Font("Aurella", Font.BOLD, 20));
+
         panelTransfer = new RadiusAndShadow();
         panelTransfer.setBackground(Color.WHITE);
-        panelTransfer.add(new JLabel("Transfer"));
+        panelTransfer.add(lblTransfer);
         panelTransfer.addMouseListener(new MouseAdapter()
         {
             @Override
@@ -194,9 +204,13 @@ public class PanelService extends JPanel
         panelTransfer.setPreferredSize(new Dimension(170, 80));
         panelHeader.add(panelTransfer);
 
+        JLabel lblRecharge = new JLabel("Recharge");
+        lblRecharge.setForeground(Color.BLACK);
+        lblRecharge.setFont(new Font("Aurella", Font.BOLD, 20));
+
         panelRecharge = new RadiusAndShadow();
         panelRecharge.setBackground(Color.WHITE);
-        panelRecharge.add(new JLabel("Recharge"));
+        panelRecharge.add(lblRecharge);
         panelRecharge.setOpaque(false);
         panelRecharge.addMouseListener(new MouseAdapter()
         {
@@ -240,9 +254,13 @@ public class PanelService extends JPanel
         panelRecharge.setPreferredSize(new Dimension(170, 80));
         panelHeader.add(panelRecharge);
 
+        JLabel lblWithdraw = new JLabel("Withdraw");
+        lblWithdraw.setForeground(Color.BLACK);
+        lblWithdraw.setFont(new Font("Aurella", Font.BOLD, 20));
+
         panelWithdraw = new RadiusAndShadow();
         panelWithdraw.setBackground(Color.WHITE);
-        panelWithdraw.add(new JLabel("Withdraw"));
+        panelWithdraw.add(lblWithdraw);
         panelWithdraw.setOpaque(false);
         panelWithdraw.addMouseListener(new MouseAdapter()
         {

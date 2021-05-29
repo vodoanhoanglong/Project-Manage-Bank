@@ -37,7 +37,7 @@ public class TradingsController {
                             dataObjects[1] = resultSet.getString("NgayGD");
                             dataObjects[2] = resultSet.getString("SoTKNhan");
                             dataObjects[3] = resultSet.getString("GhiChu");
-                            dataObjects[4] = resultSet.getString("SoTien");
+                            dataObjects[4] = String.format("%,.0f", resultSet.getDouble("SoTien"));
                         }
                         else if(LoginController.accountNumber.equals(resultSet.getString("SoTKNhan")))
                         {
@@ -45,7 +45,7 @@ public class TradingsController {
                         dataObjects[1] = resultSet.getString("NgayGD");
                         dataObjects[2] = resultSet.getString("SoTK");
                         dataObjects[3] = resultSet.getString("GhiChu");
-                        dataObjects[4] = resultSet.getString("SoTien");
+                        dataObjects[4] = String.format("%,.0f", resultSet.getDouble("SoTien"));
                         }
                 }
                 else
@@ -54,7 +54,7 @@ public class TradingsController {
                     dataObjects[1] = resultSet.getString("NgayGD");
                     dataObjects[2] = resultSet.getString("SoTK");
                     dataObjects[3] = resultSet.getString("GhiChu");
-                    dataObjects[4] = resultSet.getString("SoTien");
+                    dataObjects[4] = String.format("%,.0f", resultSet.getDouble("SoTien"));
                 }
                 tableModel.addRow(dataObjects);
             }
