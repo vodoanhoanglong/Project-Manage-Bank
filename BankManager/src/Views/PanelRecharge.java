@@ -14,8 +14,8 @@ import java.text.NumberFormat;
 public class PanelRecharge extends JPanel
 {
     private GridBagConstraints gbc3;
-    private JFormattedTextField txtAmount;
-    private JTextArea txtContent;
+    public static JFormattedTextField txtAmount;
+    public static JTextArea txtContent;
     private JLabel lblBalanceData = new JLabel(LoginController.balance);
 
     public PanelRecharge()
@@ -223,6 +223,7 @@ public class PanelRecharge extends JPanel
             LoginController.getUserData(LoginFrame.username);
             this.lblBalanceData.setText(LoginController.balance);
             PanelProfile.lblBalance.setText(LoginController.balance);
+            PanelOverview.accountBalanceLabelValue.setText(LoginController.balance);
             TradingsController.uploadAllTradingData(PanelTradingsHistory.contentTable, LoginController.accountNumber);
             return "Success";
         }

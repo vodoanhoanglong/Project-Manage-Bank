@@ -1,5 +1,7 @@
 package Views;
 
+import Controller.LoginController;
+
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -9,7 +11,7 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 
 public class PanelOverview extends JPanel {
-    static JLabel accountBalanceLabelValue;
+    public static JLabel accountBalanceLabelValue;
     static JLabel totalSpendingValue;
     static JLabel totalReceivedValue;
     private ColumnChartPanel barChart;
@@ -65,7 +67,7 @@ public class PanelOverview extends JPanel {
         accountBalanceLabelTitle.setHorizontalAlignment(0);
         accountBalanceLabelTitle.setFont(new Font("Open Sans", Font.PLAIN, 18));
         accountBalancePanel.add((Component)accountBalanceLabelTitle, "South");
-        accountBalanceLabelValue = new JLabel("0");
+        accountBalanceLabelValue = new JLabel(LoginController.balance);
         accountBalanceLabelValue.setHorizontalAlignment(0);
         accountBalanceLabelValue.setFont(new Font("Open Sans", Font.PLAIN, 20));
         accountBalancePanel.add((Component)accountBalanceLabelValue, "Center");
@@ -191,6 +193,7 @@ public class PanelOverview extends JPanel {
     }
 
     public PanelOverview() {
+        System.out.println("Lần nữa");
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {

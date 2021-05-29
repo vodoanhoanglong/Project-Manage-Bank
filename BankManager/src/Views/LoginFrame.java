@@ -200,17 +200,20 @@ public class LoginFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                if (LoginFrame.this.count % 2 == 0)
+                if (e.getButton() == 1)
                 {
-                    LoginFrame.this.count++;
-                    lblIconPassword.setIcon(new ImageIcon(img_show_password));
-                    txtPassword.setEchoChar((char) 0);
-                } else
-                {
-                    LoginFrame.this.count++;
-                    lblIconPassword.setIcon(new ImageIcon(img_hide_password));
-                    if (!txtPassword.getText().equals("Password"))
-                        txtPassword.setEchoChar('*');
+                    if (LoginFrame.this.count % 2 == 0)
+                    {
+                        LoginFrame.this.count++;
+                        lblIconPassword.setIcon(new ImageIcon(img_show_password));
+                        txtPassword.setEchoChar((char) 0);
+                    } else
+                    {
+                        LoginFrame.this.count++;
+                        lblIconPassword.setIcon(new ImageIcon(img_hide_password));
+                        if (!txtPassword.getText().equals("Password"))
+                            txtPassword.setEchoChar('*');
+                    }
                 }
             }
         });

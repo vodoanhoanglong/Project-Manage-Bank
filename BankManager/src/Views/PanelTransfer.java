@@ -15,15 +15,14 @@ import java.text.NumberFormat;
 public class PanelTransfer extends JPanel
 {
     private GridBagConstraints gbc3;
-    private JTextField txtAccountNumber;
-    private JFormattedTextField txtAmount;
-    private JTextArea txtContent;
+    public static JTextField txtAccountNumber;
+    public static JFormattedTextField txtAmount;
+    public static JTextArea txtContent;
     private JLabel lblBalanceData = new JLabel(LoginController.balance);
 
     public PanelTransfer()
     {
         this.setLayout(new BorderLayout(40, 0));
-
         gbc3 = new GridBagConstraints();
         gbc3.insets = new Insets(10, 10, 10, 10);
         gbc3.weightx = 1;
@@ -251,8 +250,10 @@ public class PanelTransfer extends JPanel
             LoginController.getUserData(LoginFrame.username);
             this.lblBalanceData.setText(LoginController.balance);
             PanelProfile.lblBalance.setText(LoginController.balance);
+            PanelOverview.accountBalanceLabelValue.setText(LoginController.balance);
             TradingsController.uploadAllTradingData(PanelTradingsHistory.contentTable, LoginController.accountNumber);
             return "Success";
         }
     }
+
 }

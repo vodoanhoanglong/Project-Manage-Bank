@@ -92,8 +92,11 @@ public class MainFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                toolPanel.setVisible(true);
-                MainFrame.this.showDetailsPanel("home");
+                if(e.getButton() == 1)
+                {
+                    toolPanel.setVisible(true);
+                    MainFrame.this.showDetailsPanel("home");
+                }
             }
         });
 
@@ -225,8 +228,11 @@ public class MainFrame extends JFrame
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                toolPanel.setVisible(true);
-                MainFrame.this.showDetailsPanel("history");
+                if(e.getButton() == 1)
+                {
+                    toolPanel.setVisible(true);
+                    MainFrame.this.showDetailsPanel("history");
+                }
             }
 
             @Override

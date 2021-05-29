@@ -17,8 +17,7 @@ public class PanelProfile extends JPanel
 
     public PanelProfile()
     {
-        LoginController.getUserData(LoginFrame.username);
-        this.setLayout(new BorderLayout(0,0));
+        this.setLayout(new BorderLayout(0, 0));
         JPanel panelWest = new LinearGradient(0);
         panelWest.setPreferredSize(new Dimension(300, 0));
         JPanel panelEast = new LinearGradient(0);
@@ -31,13 +30,13 @@ public class PanelProfile extends JPanel
         panelHeader.setBackground(Color.WHITE);
 
         lblAvatar = new JLabel("");
-        if(LoginController.CheckGender(LoginFrame.username))
+        if (LoginController.CheckGender(LoginFrame.username))
             lblAvatar.setIcon(new ImageIcon(img_man));
         else lblAvatar.setIcon(new ImageIcon(img_woman));
 
         JPanel panelAvatar = new JPanel();
         panelAvatar.setBackground(Color.WHITE);
-        panelAvatar.setLayout(new FlowLayout(FlowLayout.CENTER,0,20));
+        panelAvatar.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
         panelAvatar.add(lblAvatar);
 
         JLabel lblProfile = new JLabel(LoginFrame.username);
@@ -46,7 +45,7 @@ public class PanelProfile extends JPanel
 
         JPanel panelProfile = new JPanel();
         panelProfile.setBackground(Color.WHITE);
-        panelProfile.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
+        panelProfile.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         panelProfile.add(lblProfile);
 
         panelHeader.add(panelAvatar);
@@ -55,7 +54,7 @@ public class PanelProfile extends JPanel
 
         JPanel panelMain = new JPanel();
         panelMain.setBackground(Color.WHITE);
-        panelMain.setLayout(new BorderLayout(50,25));
+        panelMain.setLayout(new BorderLayout(50, 25));
         panelMain.add(panelHeader, "North");
 
         this.add(panelMain, "Center");
@@ -69,7 +68,7 @@ public class PanelProfile extends JPanel
 
 
         JPanel panelCenter = new JPanel();
-        panelCenter.setLayout(new GridLayout(2,0));
+        panelCenter.setLayout(new GridLayout(2, 0));
         panelCenter.setBackground(Color.WHITE);
         panelMain.add(panelCenter, "Center");
 
@@ -87,7 +86,7 @@ public class PanelProfile extends JPanel
         gbc.gridy = 0;
         gbc.weightx = 1;
         gbc.weighty = 1;
-        gbc.insets = new Insets(10,10,10,10);
+        gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         panelInformation1.add(lblFullName, gbc);
@@ -130,10 +129,10 @@ public class PanelProfile extends JPanel
         lblGender = new JLabel(LoginController.gender);
         lblGender.setForeground(Color.black);
         lblGender.setFont(new Font("Arial", Font.BOLD, 15));
-        panelInformation2.add(Box.createRigidArea(new Dimension(5,10)));
+        panelInformation2.add(Box.createRigidArea(new Dimension(5, 10)));
         panelInformation2.add(lblGender);
 
-         lblBirthday = new JLabel(LoginController.born);
+        lblBirthday = new JLabel(LoginController.born);
         lblBirthday.setForeground(Color.black);
         lblBirthday.setFont(new Font("Arial", Font.BOLD, 15));
         panelInformation2.add(Box.createVerticalGlue());
@@ -145,12 +144,12 @@ public class PanelProfile extends JPanel
         panelInformation2.add(Box.createVerticalGlue());
         panelInformation2.add(lblPhone);
 
-         lblAddress = new JLabel(LoginController.address);
+        lblAddress = new JLabel(LoginController.address);
         lblAddress.setForeground(Color.black);
         lblAddress.setFont(new Font("Arial", Font.BOLD, 15));
         panelInformation2.add(Box.createVerticalGlue());
         panelInformation2.add(lblAddress);
-        panelInformation2.add(Box.createRigidArea(new Dimension(0,10)));
+        panelInformation2.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JPanel panelFooter = new JPanel();
         panelFooter.setLayout(new GridBagLayout());
@@ -161,7 +160,7 @@ public class PanelProfile extends JPanel
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.insets = new Insets(0,50,40,50);
+        gridBagConstraints.insets = new Insets(0, 50, 40, 50);
         gridBagConstraints.weighty = 1;
         gridBagConstraints.weightx = 1;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
@@ -174,15 +173,17 @@ public class PanelProfile extends JPanel
         JPanel panelEditPassword = new RadiusAndShadow();
 
         panelEditInf.setBackground(Color.WHITE);
-        panelEditInf.setLayout(new FlowLayout(FlowLayout.CENTER,0,15));
+        panelEditInf.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 15));
         panelEditInf.add(lblEditprofile);
         panelEditInf.addMouseListener(new MouseAdapter()
         {
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                new EditProfile().setVisible(true);
+                if (e.getButton() == 1)
+                    new EditProfile().setVisible(true);
             }
+
             @Override
             public void mouseEntered(MouseEvent e)
             {
@@ -216,7 +217,7 @@ public class PanelProfile extends JPanel
         lblEditpassword.setFont(new Font("Arial", Font.BOLD, 15));
 
 
-        panelEditPassword.setLayout(new FlowLayout(FlowLayout.CENTER,0,15));
+        panelEditPassword.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 15));
         panelEditPassword.add(lblEditpassword);
         panelEditPassword.setBackground(Color.WHITE);
         panelEditPassword.addMouseListener(new MouseAdapter()
@@ -224,8 +225,10 @@ public class PanelProfile extends JPanel
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                new EditPassword().setVisible(true);
+                if (e.getButton() == 1)
+                    new EditPassword().setVisible(true);
             }
+
             @Override
             public void mouseEntered(MouseEvent e)
             {
