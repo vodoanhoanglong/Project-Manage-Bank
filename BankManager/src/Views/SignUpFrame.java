@@ -27,6 +27,8 @@ public class SignUpFrame extends JFrame
     private JTextField txtUsername;
     private JPasswordField txtPassword;
     private JPasswordField txtPasswordConfirm;
+    private JLabel lblLoginMessage;
+    private JPanel pnlBtnSignUp;
 
     private Image img_CMND = new ImageIcon(SignUpFrame.class.getResource("/Res/CMND.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     private Image img_Fullname = new ImageIcon(SignUpFrame.class.getResource("/Res/fullname.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -67,7 +69,7 @@ public class SignUpFrame extends JFrame
         lblIconLogoBank.setIcon(new ImageIcon(img_logo_bank));
         contentPane.add(lblIconLogoBank);
 
-        JLabel lblLoginMessage = new JLabel("");
+        lblLoginMessage = new JLabel("");
         lblLoginMessage.setForeground(Color.RED);
         lblLoginMessage.setHorizontalAlignment(SwingConstants.CENTER);
         lblLoginMessage.setFont(new Font("Arial", Font.BOLD, 12));
@@ -1036,64 +1038,14 @@ public class SignUpFrame extends JFrame
         lblX.setBounds(580, 0, 20, 20);
         contentPane.add(lblX);
 
-
-        JPanel pnlBtnSignUp = new RadiusAndShadow();
+        pnlBtnSignUp = new RadiusAndShadow();
         pnlBtnSignUp.addMouseListener(new MouseAdapter()
         {
-
-            String accountNumber = LoginController.Random(0, 9, 10);
-
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                // obj.replaceAll("\\s+","") xóa tất cả các khoảng trắng và các ký tự không nhìn thấy (ví dụ: tab, \n).
-                // obj.replaceAll("[^a-zA-Z0-9]", "") xóa tất cả ký tự đặc biệt và thay bằng khoảng trắng
-                // [^\p{L}\s] xóa các ký tự đặc biệt trừ dấu tiếng Việt
-
-                if (txtCMND.getText().equals("") || txtFullname.getText().equals("") || txtGender.getText().equals("") || txtPhoneNumber.getText().equals("") || txtDay.getText().equals("") || txtMonth.getText().equals("") || txtYear.getText().equals("") || txtAddress.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtPasswordConfirm.getText().equals("")
-                        || txtCMND.getText().equals("Citizen identification number") || txtFullname.getText().equals("Full Name") || txtGender.getText().equals("Gender") || txtPhoneNumber.getText().equals("Phone number") || txtDay.getText().equals("Day") || txtMonth.getText().equals("Month") || txtAddress.getText().equals("Year") || txtAddress.getText().equals("Address") || txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password") || txtPasswordConfirm.getText().equals("Password confirm"))
-                    lblLoginMessage.setText("Please input all requirements!");
-                else if (txtCMND.getText().length() < 12)
-                    lblLoginMessage.setText("Invalid citizen identification number");
-                else if (txtPhoneNumber.getText().length() < 10)
-                    lblLoginMessage.setText("Invalid phone number");
-                else if (Integer.parseInt(txtDay.getText()) > 31 || Integer.parseInt(txtDay.getText()) == 0)
-                    lblLoginMessage.setText("Invalid day");
-                else if (Integer.parseInt(txtMonth.getText()) > 12 || Integer.parseInt(txtMonth.getText()) == 0)
-                    lblLoginMessage.setText("Invalid month");
-                else if (txtYear.getText().length() < 4)
-                    lblLoginMessage.setText("Invalid year of birth");
-                else if (Integer.parseInt(txtYear.getText()) >= 2003 || Integer.parseInt(txtYear.getText()) <= 1920)
-                    lblLoginMessage.setText("Your year old must inside 18 - 100");
-                else if (txtUsername.getText().length() < 6)
-                    lblLoginMessage.setText("Username must be 6 characters or more");
-                else if (txtPassword.getText().length() < 8)
-                    lblLoginMessage.setText("Password must be 8 characters or more");
-                else if (LoginController.CheckSignUpTenTK(txtUsername.getText()))
-                    lblLoginMessage.setText("Username already exists, please enter another name!");
-                else if (!txtPassword.getText().equals(txtPasswordConfirm.getText()))
-                    lblLoginMessage.setText("Password confirm is not correct!");
-                else if (LoginController.CheckCMND(txtCMND.getText()))
-                {
-                    while (LoginController.CheckSignUpSoTK(accountNumber))
-                        accountNumber = LoginController.Random(0, 9, 10);
-                    LoginController.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
-                    lblLoginMessage.setText("");
-                    JOptionPane.showMessageDialog(null, "SignUp Successful");
-                    new LoginFrame().setVisible(true);
-                    SignUpFrame.this.dispose();
-                } else
-                {
-                    birthDay = txtYear.getText() + "-" + txtMonth.getText() + "-" + txtDay.getText();
-                    LoginController.InsertDataKHACHHANG(txtCMND.getText(), txtFullname.getText(), txtPhoneNumber.getText(), txtGender.getText(), birthDay, txtAddress.getText());
-                    while (LoginController.CheckSignUpSoTK(accountNumber))
-                        accountNumber = LoginController.Random(0, 9, 10);
-                    LoginController.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
-                    lblLoginMessage.setText("");
-                    JOptionPane.showMessageDialog(null, "SignUp Successful");
-                    new LoginFrame().setVisible(true);
-                    SignUpFrame.this.dispose();
-                }
+                if(e.getButton() == 1)
+                    CheckSignUp();
             }
 
             @Override
@@ -1120,6 +1072,114 @@ public class SignUpFrame extends JFrame
                 pnlBtnSignUp.setBackground(Color.WHITE);
             }
         });
+        contentPane.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    CheckSignUp();
+            }
+        });
+        txtCMND.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    CheckSignUp();
+            }
+        });
+        txtFullname.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    CheckSignUp();
+            }
+        });
+        txtGender.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    CheckSignUp();
+            }
+        });
+        txtPhoneNumber.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    CheckSignUp();
+            }
+        });
+        txtDay.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    CheckSignUp();
+            }
+        });
+        txtMonth.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    CheckSignUp();
+            }
+        });
+        txtYear.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    CheckSignUp();
+            }
+        });
+        txtAddress.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    CheckSignUp();
+            }
+        });
+        txtUsername.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    CheckSignUp();
+            }
+        });
+        txtPassword.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    CheckSignUp();
+            }
+        });
+        txtPasswordConfirm.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    CheckSignUp();
+            }
+        });
         pnlBtnSignUp.setBackground(Color.WHITE);
         pnlBtnSignUp.setBounds(165, 400, 250, 50);
         pnlBtnSignUp.setLayout(null);
@@ -1133,4 +1193,58 @@ public class SignUpFrame extends JFrame
 
     }
 
+    private void CheckSignUp()
+    {
+        String accountNumber = LoginController.Random(0, 9, 10);
+        // obj.replaceAll("\\s+","") xóa tất cả các khoảng trắng và các ký tự không nhìn thấy (ví dụ: tab, \n).
+        // obj.replaceAll("[^a-zA-Z0-9]", "") xóa tất cả ký tự đặc biệt và thay bằng khoảng trắng
+        // [^\p{L}\s] xóa các ký tự đặc biệt trừ dấu tiếng Việt
+
+        if (txtCMND.getText().equals("") || txtFullname.getText().equals("") || txtGender.getText().equals("") || txtPhoneNumber.getText().equals("") || txtDay.getText().equals("") || txtMonth.getText().equals("") || txtYear.getText().equals("") || txtAddress.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtPasswordConfirm.getText().equals("")
+                || txtCMND.getText().equals("Citizen identification number") || txtFullname.getText().equals("Full Name") || txtGender.getText().equals("Gender") || txtPhoneNumber.getText().equals("Phone number") || txtDay.getText().equals("Day") || txtMonth.getText().equals("Month") || txtAddress.getText().equals("Year") || txtAddress.getText().equals("Address") || txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password") || txtPasswordConfirm.getText().equals("Password confirm"))
+            lblLoginMessage.setText("Please input all requirements!");
+        else if (txtCMND.getText().length() < 12)
+            lblLoginMessage.setText("Invalid citizen identification number");
+        else if (txtPhoneNumber.getText().length() < 10)
+            lblLoginMessage.setText("Invalid phone number");
+        else if (Integer.parseInt(txtDay.getText()) > 31 || Integer.parseInt(txtDay.getText()) == 0)
+            lblLoginMessage.setText("Invalid day");
+        else if (Integer.parseInt(txtMonth.getText()) > 12 || Integer.parseInt(txtMonth.getText()) == 0)
+            lblLoginMessage.setText("Invalid month");
+        else if (txtYear.getText().length() < 4)
+            lblLoginMessage.setText("Invalid year of birth");
+        else if (Integer.parseInt(txtYear.getText()) >= 2003 || Integer.parseInt(txtYear.getText()) <= 1920)
+            lblLoginMessage.setText("Your year old must inside 18 - 100");
+        else if (txtUsername.getText().length() < 6)
+            lblLoginMessage.setText("Username must be 6 characters or more");
+        else if (txtPassword.getText().length() < 8)
+            lblLoginMessage.setText("Password must be 8 characters or more");
+        else if (LoginController.CheckSignUpTenTK(txtUsername.getText()))
+            lblLoginMessage.setText("Username already exists, please enter another name!");
+        else if (!txtPassword.getText().equals(txtPasswordConfirm.getText()))
+            lblLoginMessage.setText("Password confirm is not correct!");
+        else if (LoginController.CheckCMND(txtCMND.getText()))
+        {
+            pnlBtnSignUp.setBackground(new Color(21, 140, 180));
+            while (LoginController.CheckSignUpSoTK(accountNumber))
+                accountNumber = LoginController.Random(0, 9, 10);
+            LoginController.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
+            lblLoginMessage.setText("");
+            JOptionPane.showMessageDialog(null, "SignUp Successful");
+            new LoginFrame().setVisible(true);
+            SignUpFrame.this.dispose();
+        } else
+        {
+            pnlBtnSignUp.setBackground(new Color(21, 140, 180));
+            birthDay = txtYear.getText() + "-" + txtMonth.getText() + "-" + txtDay.getText();
+            LoginController.InsertDataKHACHHANG(txtCMND.getText(), txtFullname.getText(), txtPhoneNumber.getText(), txtGender.getText(), birthDay, txtAddress.getText());
+            while (LoginController.CheckSignUpSoTK(accountNumber))
+                accountNumber = LoginController.Random(0, 9, 10);
+            LoginController.InsertDataTAIKHOAN(accountNumber, txtUsername.getText(), txtPassword.getText(), txtCMND.getText());
+            lblLoginMessage.setText("");
+            JOptionPane.showMessageDialog(null, "SignUp Successful");
+            new LoginFrame().setVisible(true);
+            SignUpFrame.this.dispose();
+        }
+    }
 }
