@@ -176,7 +176,7 @@ public class PanelRecharge extends JPanel
 
         JPanel panel1 = new JPanel();
         panel1.setLayout(new BorderLayout());
-        panel1.add(new JLabel("Account number received"), "Center");
+        panel1.add(new JLabel("Account number recharge"), "Center");
 
         panelCenter.add(panel1);
         panelCenter.add(Box.createRigidArea(new Dimension(0, 10)));

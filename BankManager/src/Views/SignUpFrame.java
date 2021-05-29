@@ -37,7 +37,7 @@ public class SignUpFrame extends JFrame
     private Image img_Username = new ImageIcon(SignUpFrame.class.getResource("/Res/businessman.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     private Image img_hide_password = new ImageIcon(LoginFrame.class.getResource("/Res/hide_password.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     private Image img_show_password = new ImageIcon(LoginFrame.class.getResource("/Res/show_password.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-    private Image img_logo_bank = new ImageIcon(SignUpFrame.class.getResource("/Res/logobank.png")).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+    private Image img_logo_bank = new ImageIcon(SignUpFrame.class.getResource("/Res/bank.png")).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
 
     private int count1 = 0;
     private int count2 = 0;

@@ -18,6 +18,10 @@ public class PanelService extends JPanel
     private PanelWithdraw withdraw;
     private PanelRecharge recharge;
 
+    private JPanel panelTransfer;
+    private JPanel panelRecharge;
+    private JPanel panelWithdraw;
+
     private int count = 0;
 
     public PanelService()
@@ -144,7 +148,7 @@ public class PanelService extends JPanel
         panelConfirm.setPreferredSize(new Dimension(170, 50));
         footer.add(panelConfirm);
 
-        JPanel panelTransfer = new RadiusAndShadow();
+        panelTransfer = new RadiusAndShadow();
         panelTransfer.setBackground(Color.WHITE);
         panelTransfer.add(new JLabel("Transfer"));
         panelTransfer.addMouseListener(new MouseAdapter()
@@ -159,6 +163,7 @@ public class PanelService extends JPanel
                 panelForm.setVisible(true);
                 cardLayout.show(panelForm, "1");
                 panelFooter.setVisible(true);
+
             }
 
             @Override
@@ -189,7 +194,7 @@ public class PanelService extends JPanel
         panelTransfer.setPreferredSize(new Dimension(170, 80));
         panelHeader.add(panelTransfer);
 
-        JPanel panelRecharge = new RadiusAndShadow();
+        panelRecharge = new RadiusAndShadow();
         panelRecharge.setBackground(Color.WHITE);
         panelRecharge.add(new JLabel("Recharge"));
         panelRecharge.setOpaque(false);
@@ -235,7 +240,7 @@ public class PanelService extends JPanel
         panelRecharge.setPreferredSize(new Dimension(170, 80));
         panelHeader.add(panelRecharge);
 
-        JPanel panelWithdraw = new RadiusAndShadow();
+        panelWithdraw = new RadiusAndShadow();
         panelWithdraw.setBackground(Color.WHITE);
         panelWithdraw.add(new JLabel("Withdraw"));
         panelWithdraw.setOpaque(false);
