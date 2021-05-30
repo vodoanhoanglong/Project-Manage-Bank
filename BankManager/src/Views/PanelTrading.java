@@ -1,8 +1,11 @@
 package Views;
 
+
+
 import Controller.LoginController;
 import Controller.TradingsController;
-import Model.Login;
+import Views.*;
+
 
 import javax.swing.*;
 import javax.swing.text.NumberFormatter;
@@ -11,22 +14,24 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.NumberFormat;
 
-public class PanelWithdraw extends JPanel
+public class PanelTrading extends JPanel
 {
     private GridBagConstraints gbc3;
+    public static JTextField txtAccountNumber;
     public static JFormattedTextField txtAmount;
     public static JTextArea txtContent;
+    private JLabel lblAccountReceived;
     private JLabel lblBalanceData = new JLabel(LoginController.balance);
 
-    public PanelWithdraw()
+    public PanelTrading(String typeTrade)
     {
         this.setLayout(new BorderLayout(40, 0));
-
         gbc3 = new GridBagConstraints();
         gbc3.insets = new Insets(10, 10, 10, 10);
         gbc3.weightx = 1;
         gbc3.weighty = 1;
         gbc3.fill = GridBagConstraints.BOTH;
+
 
         JPanel panelGBLHeader = new JPanel();
         panelGBLHeader.setPreferredSize(new Dimension(200, 100));
@@ -40,13 +45,51 @@ public class PanelWithdraw extends JPanel
         JPanel accountNumber = new RadiusAndShadow();
         accountNumber.setBackground(Color.white);
         accountNumber.setLayout(new GridBagLayout());
-        JTextField txtAccountNumber = new JTextField();
-        txtAccountNumber.setEnabled(false);
-        txtAccountNumber.setText(LoginController.accountNumber);
-        txtAccountNumber.setBackground(Color.WHITE);
-        txtAccountNumber.setBorder(null);
-        txtAccountNumber.setColumns(20);
-        txtAccountNumber.setFont(new Font("Arial", Font.PLAIN, 15));
+        if(typeTrade.equals("Transfer"))
+        {
+            lblAccountReceived = new JLabel("Account number received");
+            txtAccountNumber = new JTextField();
+            txtAccountNumber.addKeyListener(new KeyAdapter()
+            {
+                @Override
+                public void keyPressed(KeyEvent e)
+                {
+                    if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9' || e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
+                    {
+                        txtAccountNumber.setEditable(true);
+                        PanelService.lblMessage.setText("");
+                    } else
+                    {
+                        txtAccountNumber.setEditable(false);
+                        PanelService.lblMessage.setText("Enter only numeric digits(0-9)");
+                    }
+                }
+
+                @Override
+                public void keyTyped(KeyEvent e)
+                {
+                    if (txtAccountNumber.getText().length() >= 10)
+                        e.consume();
+                }
+            });
+            txtAccountNumber.setBackground(Color.WHITE);
+            txtAccountNumber.setBorder(null);
+            txtAccountNumber.setColumns(20);
+            txtAccountNumber.setFont(new Font("Arial", Font.PLAIN, 15));
+        }
+        else
+        {
+            if(typeTrade.equals("Recharge"))
+                lblAccountReceived = new JLabel("Account number recharge");
+            else lblAccountReceived = new JLabel("Account number withdraw");
+            txtAccountNumber = new JTextField();
+            txtAccountNumber.setEnabled(false);
+            txtAccountNumber.setText(LoginController.accountNumber);
+            txtAccountNumber.setBackground(Color.WHITE);
+            txtAccountNumber.setBorder(null);
+            txtAccountNumber.setColumns(20);
+            txtAccountNumber.setFont(new Font("Arial", Font.PLAIN, 15));
+        }
         accountNumber.add(txtAccountNumber, gbc3);
 
 
@@ -178,7 +221,7 @@ public class PanelWithdraw extends JPanel
         panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
         this.add(panelCenter, "Center");
 
-        JLabel lblAccountReceived = new JLabel("Account number withdraw");
+
         lblAccountReceived.setFont(new Font("Aurella", Font.BOLD, 15));
 
         JPanel panel1 = new JPanel();
@@ -212,7 +255,44 @@ public class PanelWithdraw extends JPanel
         panelCenter.add(content);
     }
 
-    public String check()
+    public String checkTransfer()
+    {
+        if (this.txtAccountNumber.getText().equals("") || this.txtAmount.getText().equals("0") || this.txtContent.getText().equals(""))
+            return "Please input full";
+        else if (LoginController.accountNumber.equals(txtAccountNumber.getText()))
+            return "Account number received must different your account number";
+        else if (!LoginController.CheckSignUpSoTK(txtAccountNumber.getText()))
+            return "Account number do not exist";
+        else if (!LoginController.updateTransfer("Chuyển tiền", LoginController.accountNumber, txtAccountNumber.getText(), Double.parseDouble(txtAmount.getText().replaceAll("[^Z0-9]", "")), txtContent.getText()))
+            return "Balance enough";
+        else
+        {
+            LoginController.getUserData(LoginFrame.username);
+            this.lblBalanceData.setText(LoginController.balance);
+            PanelProfile.lblBalance.setText(LoginController.balance);
+            PanelOverview.accountBalanceLabelValue.setText(LoginController.balance);
+            TradingsController.uploadAllTradingData(PanelTradingsHistory.contentTable, LoginController.accountNumber);
+            return "Success";
+        }
+    }
+
+    public String checkRecharge()
+    {
+        if (this.txtAmount.getText().equals("0") || this.txtContent.getText().equals(""))
+            return "Please input full";
+        else
+        {
+            LoginController.updateWithDrawAndRecharge("Nạp tiền", LoginController.accountNumber, Double.parseDouble(txtAmount.getText().replaceAll("[^Z0-9]", "")), txtContent.getText());
+            LoginController.getUserData(LoginFrame.username);
+            this.lblBalanceData.setText(LoginController.balance);
+            PanelProfile.lblBalance.setText(LoginController.balance);
+            PanelOverview.accountBalanceLabelValue.setText(LoginController.balance);
+            TradingsController.uploadAllTradingData(PanelTradingsHistory.contentTable, LoginController.accountNumber);
+            return "Success";
+        }
+    }
+
+    public String checkWithdraw()
     {
         if (this.txtAmount.getText().equals("0") || this.txtContent.getText().equals(""))
             return "Please input full";
@@ -229,3 +309,4 @@ public class PanelWithdraw extends JPanel
         }
     }
 }
+
