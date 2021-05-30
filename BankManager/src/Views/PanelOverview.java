@@ -1,6 +1,7 @@
 package Views;
 
 import Controller.LoginController;
+import Controller.TradingsController;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -11,11 +12,13 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 
 public class PanelOverview extends JPanel {
+
     public static JLabel accountBalanceLabelValue;
     static JLabel totalSpendingValue;
     static JLabel totalReceivedValue;
     private ColumnChartPanel barChart;
     private LineGraphPanel lineChart;
+    private JTable recentTransactionsTable;
 
 
     private JPanel northPanel() {
@@ -83,7 +86,9 @@ public class PanelOverview extends JPanel {
         totalSpendingTitle.setHorizontalTextPosition(4);
         totalSpendingTitle.setHorizontalAlignment(0);
         totalSpendingPanel.add((Component)totalSpendingTitle, "South");
-        totalSpendingValue = new JLabel("0");
+
+
+        totalSpendingValue = new JLabel(String.format("%,.0f", TradingsController.totalSpendingValue));
         totalSpendingValue.setHorizontalAlignment(0);
         totalSpendingValue.setFont(new Font("Arial", Font.PLAIN, 20));
         totalSpendingPanel.add((Component)totalSpendingValue, "Center");
@@ -99,7 +104,7 @@ public class PanelOverview extends JPanel {
         totalReceivedTitle.setHorizontalAlignment(0);
         totalReceivedTitle.setFont(new Font("Open Sans", Font.PLAIN, 18));
         totalReceivedPanel.add((Component)totalReceivedTitle, "South");
-        totalReceivedValue = new JLabel("0");
+        totalReceivedValue = new JLabel(String.format("%,.0f", TradingsController.totalReceivedValue));
         totalReceivedValue.setHorizontalAlignment(0);
         totalReceivedValue.setFont(new Font("Open Sans", Font.PLAIN, 20));
         totalReceivedPanel.add((Component)totalReceivedValue, "Center");
@@ -133,7 +138,7 @@ public class PanelOverview extends JPanel {
         gbcLineChart.insets = new Insets(0, 0, 5, 0);
         gbcLineChart.gridx = 0;
         gbcLineChart.gridy = 0;
-        this.lineChart = new LineGraphPanel();
+        this.lineChart = new LineGraphPanel(TradingsController.totalSpendingValue, TradingsController.totalReceivedValue);
         mainPanel.add((Component) ((Object) this.lineChart), gbcLineChart);
         GridBagConstraints gbcBarChart = new GridBagConstraints();
         gbcBarChart.fill = 1;
@@ -147,13 +152,13 @@ public class PanelOverview extends JPanel {
         recentTransactionsPanel.setBorder(new TitledBorder(new EtchedBorder(1, null, null), "Giao Dịch Gần Đây", TitledBorder.CENTER, TitledBorder.TOP, new Font("Open Sans", Font.PLAIN, 16), null));
         recentTransactionsPanel.setLayout(new BorderLayout(0, 0));
         recentTransactionsPanel.setPreferredSize(new Dimension(100, 265));
-        JTable recentTransactionsTable = new JTable();
+         recentTransactionsTable = new JTable();
         JScrollPane scrollPane = new JScrollPane(recentTransactionsTable);
         recentTransactionsPanel.add(scrollPane);
         recentTransactionsTable.setFillsViewportHeight(true);
         recentTransactionsTable.setSelectionMode(0);
         recentTransactionsTable.setFont(new Font("Open Sans", Font.PLAIN, 12));
-        recentTransactionsTable.setModel(new DefaultTableModel(new Object[0][], new String[]{"Người Nhận/Chuyển", "Nội Dung", "Số Tiền"}) {
+        recentTransactionsTable.setModel(new DefaultTableModel(new Object[0][], new String[]{"Người Nhận/Gửi", "Nội Dung", "Số Tiền"}) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -205,8 +210,9 @@ public class PanelOverview extends JPanel {
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         mainPanel.add((Component) this.northPanel(), "North");
         mainPanel.add((Component) this.centerPanel(), "Center");
-        this.barChart = new ColumnChartPanel();
+        this.barChart = new ColumnChartPanel(TradingsController.totalSpendingValue, TradingsController.totalReceivedValue);
         mainPanel.add((Component) this.southPanel(), "South");
         this.add((Component) scrollPane, "Center");
+        TradingsController.uploadTradingDataOverview(recentTransactionsTable, LoginController.accountNumber);
     }
 }
