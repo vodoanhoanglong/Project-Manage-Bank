@@ -1,5 +1,8 @@
 package Views;
 
+import Controller.LoginController;
+import Controller.TradingsController;
+import Model.TradingsData;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -12,6 +15,7 @@ import javafx.scene.paint.Paint;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.sql.ResultSet;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -26,7 +30,7 @@ public class LineGraphPanel
     static String endDay = today.getDayOfMonth() + "/" + today.getMonthValue() + "/" + today.getYear();
 
 
-    private LineChart createChart(double spending, double receives) {
+    private LineChart createChart() {
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("");
         NumberAxis yAxis = new NumberAxis();
@@ -47,16 +51,14 @@ public class LineGraphPanel
             calendar.setTime(startDayFormat);
             long i = 0;
             while (i <= totalDays) {
-//                double Spending = UserData.getUsersSpendingPerDay(LoginID,currentDateFormat);
-
-                spendingSeries.getData().add((Object) new XYChart.Data((Object) simple.format(calendar.getTime()), (Object) spending));
-//                double receives = UserData.getUserReceivedPerDay(LoginID, currentDateFormat);
-
+                double Spending = TradingsController.getUsersSpendingPerDay(LoginController.accountNumber, new SimpleDateFormat("dd/MM/yyyy").format(calendar.getTime()));
+                spendingSeries.getData().add((Object) new XYChart.Data((Object) simple.format(calendar.getTime()), (Object) Spending));
+                double receives = TradingsController.getUsersReceivedPerDay(LoginController.accountNumber, new SimpleDateFormat("dd/MM/yyyy").format(calendar.getTime()));
                 receivedSeries.getData().add((Object) new XYChart.Data((Object) simple.format(calendar.getTime()), (Object) receives));
                 calendar.add(Calendar.DATE, 1);
                 ++i;
             }
-        } catch (ParseException parseException) {
+        } catch (Exception parseException) {
             System.out.println(parseException.getMessage());
         }
         lineChart.getData().addAll((Object[]) new XYChart.Series[]{spendingSeries, receivedSeries});
@@ -64,15 +66,15 @@ public class LineGraphPanel
     }
 
 
-    private Scene createScene(double spending, double receives) {
+    private Scene createScene() {
         BorderPane root = new BorderPane();
         Scene scene = new Scene((Parent)root, (Paint)Color.ALICEBLUE);
-        root.setCenter((Node)this.createChart(spending, receives));
+        root.setCenter((Node)this.createChart());
         return scene;
     }
 
-    public LineGraphPanel(double spending, double receives) {
-        this.setScene(this.createScene(spending, receives));
+    public LineGraphPanel() {
+        this.setScene(this.createScene());
         this.setFont(new Font("Open Sans", Font.BOLD, 20));
         this.setBorder(new TitledBorder(new EtchedBorder(1, null, null), "Biến Động Thu Chi Trong Tháng", TitledBorder.CENTER, TitledBorder.TOP, new Font("Open Sans", Font.PLAIN, 16), new java.awt.Color(0, 0, 0)));
     }
