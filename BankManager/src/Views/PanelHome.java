@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class PanelHome extends JPanel
 {
+    private Image avatar = new ImageIcon(PanelHome.class.getResource("/Res/avartar.png")).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
     public PanelHome()
     {
         this.setLayout(new BorderLayout(0,0));
@@ -30,12 +31,15 @@ public class PanelHome extends JPanel
 
 
 
-//        JPanel panelFooter = new LinearGradient(1);
-//        panelFooter.setBackground(Color.WHITE);
-//        panelFooter.setLayout(new FlowLayout(FlowLayout.RIGHT,0,10));
-//
-//
-//        this.add(panelFooter, "South");
+        JLabel lblIcon = new JLabel("");
+        lblIcon.setIcon(new ImageIcon(avatar));
+
+        JPanel panelFooter = new LinearGradient(1);
+        panelFooter.setBackground(Color.WHITE);
+        panelFooter.setPreferredSize(new Dimension(0,120));
+        panelFooter.setLayout(new FlowLayout());
+        panelFooter.add(lblIcon);
+        this.add(panelFooter, "South");
 
 
         JPanel panelCenterMain = new JPanel();

@@ -23,6 +23,15 @@ public class TradingsController
     {
         ResultSet resultSet;
         flag = 0;
+        if(type.equals("All"))
+            type = "Tất Cả";
+        else if(type.equals("Recharge"))
+            type = "Nạp tiền";
+        else if(type.equals("Withdraw"))
+            type = "Rút tiền";
+        else if(type.equals("Transfer"))
+            type = "Chuyển khoản";
+        else type = "Nhận chuyển khoản";
         if (type.equals("Tất Cả"))
         {
             uploadAllTradingData(table, accountNumber);
@@ -165,7 +174,7 @@ public class TradingsController
     {
         double result = 0;
         double spendingDay = 0;
-        ResultSet resultSet = TradingsData.getUsersSpendingAndReceivedPerDay(accountNumber, date);
+        ResultSet resultSet = TradingsData.getUsersSpendingAndReceivedPerDay(accountNumber);
         try
         {
             while (resultSet.next())
@@ -199,7 +208,7 @@ public class TradingsController
     {
         double result = 0;
         double receivedDay = 0;
-        ResultSet resultSet = TradingsData.getUsersSpendingAndReceivedPerDay(accountNumber, date);
+        ResultSet resultSet = TradingsData.getUsersSpendingAndReceivedPerDay(accountNumber);
         try
         {
             while (resultSet.next())
