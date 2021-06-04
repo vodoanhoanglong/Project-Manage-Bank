@@ -3,7 +3,7 @@
 - Install Intellij IDEA. 
 - Install JDK, JDBC.
 - Install SQL Server.
-- This is a drag-and-drop project!!!
+- This is not a drag and drop project!!!
 
 | Contact | Information |
 |---------|-------------|
