@@ -1,5 +1,5 @@
 # Project Manage Bank
-![Logo](https://www.beltandroad.news/wp-content/uploads/2019/07/Clip-Artof-Bank.jpg)
+![Logo](https://pbs.twimg.com/media/EbrAidsU8AE-pzi.jpg)
 - Install Intellij IDEA. 
 - Install JDK, JDBC.
 - Install SQL Server.
